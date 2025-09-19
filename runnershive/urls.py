@@ -17,8 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
+# URL Paths ordered alphabetically
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', include("events.urls")), 
+    path('summernote/', include('django_summernote.urls')),
 ]
