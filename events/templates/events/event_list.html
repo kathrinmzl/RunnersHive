@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Events</title>
+</head>
+<body>
+    <h1>Upcoming Events</h1>
+
+    {% if events %}
+        <ul>
+            {% for event in events %}
+                <li>
+                    <strong>{{ event.title }}</strong><br>
+                    {{ event.date }} at {{ event.start_time }}<br>
+                    {{ event.location }}<br>
+                    Organized by {{ event.organizer }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No upcoming events found.</p>
+    {% endif %}
+</body>
+</html>
