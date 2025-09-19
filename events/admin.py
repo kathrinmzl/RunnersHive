@@ -12,11 +12,11 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(SummernoteModelAdmin):
     # Columns displayed in the Posts list page
-    list_display = ('title', 'organizer', 'date', 'start_time', 'status')
+    list_display = ('title', 'organizer', 'date', 'start_time', 'is_past', 'cancelled')
     # Fields to enable fast search
     search_fields = ('title', 'organizer', 'location', 'description')
     # Sidebar filter for status
-    list_filter = ('status', 'date', 'difficulty', 'category')
+    list_filter = ('cancelled', 'date', 'difficulty', 'category')
     # Rich text only for description
     summernote_fields = ('description',)
     # hide slug from admin form because it's auto generated in the model

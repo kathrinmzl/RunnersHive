@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
+from datetime import date
 
 
 # Create your models here.
@@ -28,12 +29,6 @@ class Event(models.Model):
         ('ADVANCED', 'Advanced'),
     ]
 
-    STATUS_CHOICES = [
-        ('UPCOMING', 'Upcoming'),
-        ('PAST', 'Past'),
-        ('CANCELLED', 'Cancelled'),
-    ]
-
     title = models.CharField(max_length=200, unique=True)
     # allow blank so save() can populate the slug field
     slug = models.SlugField(unique=True, blank=True)
@@ -53,21 +48,24 @@ class Event(models.Model):
     location = models.CharField(max_length=200)
     link = models.URLField(blank=True, null=True)
     featured_image = CloudinaryField('image', default='placeholder')
+    cancelled = models.BooleanField(default=False)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="events"
         )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    status = models.CharField(
-        max_length=10, choices=STATUS_CHOICES, default='UPCOMING'
-        )
-
+    
     class Meta:
         ordering = ["date", "start_time"]
 
     def __str__(self):
         return f"{self.title} | Organized by {self.organizer}"
 
+    @property
+    def is_past(self):
+        """Returns True if the event date is in the past."""
+        return self.date < date.today()
+    
     # Automatically generate a slug for the model when you save it using a form
     def save(self, *args, **kwargs):
         if not self.slug:
