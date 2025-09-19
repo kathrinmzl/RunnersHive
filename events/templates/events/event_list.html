@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Events</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}RunnersHive | Upcoming Events{% endblock %}
+
+{% block content %}
     <h1>Upcoming Events</h1>
 
     {% if events %}
@@ -13,12 +12,17 @@
                     <strong>{{ event.title }}</strong><br>
                     {{ event.date }} at {{ event.start_time }}<br>
                     {{ event.location }}<br>
-                    Organized by {{ event.organizer }}
+                    Organized by {{ event.organizer }}<br>
+                    {{ event.difficulty }}<br>
+                    {% for category in event.category.all %}
+                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        No category assigned
+                    {% endfor %}
                 </li>
             {% endfor %}
         </ul>
     {% else %}
         <p>No upcoming events found.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}
