@@ -38,12 +38,20 @@ body {
     position: relative;
 }
 
-.image-flash {
+.image-badge-organizer {
     position: absolute;
     bottom: 5%;
     min-width: 30%;
     left: -2px;
-    background-color: #188181;
+    background-color: #6cb872;
+}
+
+.image-badge-cancelled {
+    position: absolute;
+    top: 5%;
+    min-width: 30%;
+    right: -2px;
+    background-color: #db3333;
 }
 
 .profile-image {
@@ -55,10 +63,15 @@ body {
     height: auto;
 }
 
-.author {
+.image-badge-text {
     color: white;
     margin: 4px;
     text-transform: uppercase;
+}
+
+.card-img-top {
+    height: 200px;      /* or any value you like */
+    object-fit: cover;  /* crop while keeping aspect ratio */
 }
 
 .masthead {

@@ -24,7 +24,7 @@ class Event(models.Model):
     Stores a single event entry related to :model:`auth.User`
     """
     DIFFICULTY_CHOICES = [
-        ('EASY', 'Easy'),
+        ('BEGINNER', 'Beginner friendly'),
         ('INTERMEDIATE', 'Intermediate'),
         ('ADVANCED', 'Advanced'),
     ]
