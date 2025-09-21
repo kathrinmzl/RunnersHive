@@ -32,6 +32,17 @@ body {
 .card {
     border: none;
     background-color: transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.03); /* slightly zoom in */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* stronger shadow for depth */
+    z-index: 10; /* bring it above other cards if overlapping */
+}
+
+.card:hover img {
+  filter: brightness(0.9);
 }
 
 .image-container {
@@ -67,6 +78,7 @@ body {
     color: white;
     margin: 4px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .card-img-top {
@@ -113,8 +125,7 @@ body {
     color: #445261;
 }
 
-.post-link:hover,
-.page-link {
+.post-link:hover {
     color: #E84610;
 }
 
@@ -127,6 +138,41 @@ body {
     margin-left: 5%;
     color: lightgray;
 }
+
+/* Pagination wrapper */
+.pagination {
+    margin-top: 2rem; /* spacing from cards */
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem; /* space between buttons */
+}
+
+.pagination .page-link {
+    padding: 0.5rem 1rem;
+    background-color: #fff; /* match card background */
+    border: 1px solid #ddd;
+    border-radius: 0.3rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: #333;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    margin: 0 0.25rem;
+}
+
+.pagination .page-link:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+
+.pagination .active .page-link {
+    background-color: #0d6efd; /* primary color */
+    color: white;
+    border-color: #0d6efd;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
 
 .btn-signup,
 .btn-edit {
