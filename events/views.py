@@ -51,6 +51,11 @@ class EventListView(ListView):
                 queryset = queryset.filter(date__range=[start_of_week, end_of_week])
             # 'all' -> no date filter
 
+            # Cancelled filter
+            exclude_cancelled = self.form.cleaned_data.get("cancelled")
+            if exclude_cancelled:
+                queryset = queryset.filter(cancelled=False)
+
         return queryset
 
     def get_context_data(self, **kwargs):

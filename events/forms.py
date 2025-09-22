@@ -27,3 +27,9 @@ class EventFilterForm(forms.Form):
         widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
         initial='all'  # Preselect "All"
     )
+
+    cancelled = forms.BooleanField(
+        required=False,
+        label="Don't Show Cancelled Events",
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'})
+    )
