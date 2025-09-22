@@ -22,11 +22,11 @@
                     {% else %}
                     <img class="card-img-top" src=" {{ event.featured_image.url }}" alt="{{ event.title }}">
                     {% endif %}
-                    <div class="image-badge-organizer">
+                    <div class="badge image-badge-organizer">
                         <p class="image-badge-text">{{ event.organizer }}</p>
                     </div>
                     {% if event.cancelled %}
-                    <div class="image-badge-cancelled">
+                    <div class="badge bg-danger image-badge-cancelled">
                         <p class="image-badge-text"> Cancelled </p>
                     </div>
                     {% endif %}
