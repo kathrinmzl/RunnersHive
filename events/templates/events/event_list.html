@@ -1,20 +1,44 @@
 {% extends "base.html" %}
-{% load static %}
-{% load crispy_forms_tags %}
+
+<!-- {% load widget_tweaks %} -->
 
 {% url 'events' as events_url %}
 
 {% block title %}Upcoming Events | RunnersHive{% endblock %}
 
 {% block content %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
 <div class="container my-4">
     <h1 class="mb-4 text-center">Upcoming Events</h1>
 
     <!-- Filter Form -->
     <form method="get" class="mb-4">
         {{ form|crispy }}
+        {% csrf_token %} 
+        <!-- <h5>Filter by Date</h5>
+        {% for value, label in form.date_filter.field.choices %}
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="{{ form.date_filter.name }}" value="{{ value }}"
+                {% if form.date_filter.value == value %}checked{% endif %}>
+            <label class="form-check-label">{{ label }}</label>
+        </div>
+        {% endfor %} -->
+        <!-- <h5>Filter by Category</h5>
+<div class="btn-group" role="group">
+    {% for checkbox in form.category %}
+        {{ checkbox.tag}}
+        {# Use label as the visible button #}
+        <label class="btn btn-outline-primary" for="{{ checkbox.id_for_label }}">
+            {{ checkbox.choice_label }}
+        </label>
+    {% endfor %}
+</div> -->
         <button type="submit" class="btn btn-primary mt-2">Apply Filters</button>
         <a href="{% url 'events' %}" class="btn btn-secondary mt-2">Reset</a>
+
     </form>
 
     <!-- Events list -->
@@ -46,7 +70,11 @@
 
                 <div class="card-body">
                     <!-- Title -->
-                    <h5 class="card-title">{{ event.title }}</h5>
+                    <!-- https://getbootstrap.com/docs/4.4/utilities/stretched-link/ -->
+                    <a href="{% url 'event_detail' event.slug %}" class="stretched-link event-link">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                    </a>
+                    
 
                     <!-- Date & Time -->
                     <p class="card-text">
@@ -55,9 +83,10 @@
                     </p>
 
                     <!-- Difficulty -->
-                    {% if event.difficulty %}
+                    
                     <p class="card-text">
                         <strong>Difficulty:</strong>
+                        {% if event.difficulty %}
                         <span class="badge 
                             {% if event.difficulty == 'BEGINNER' %} bg-success 
                             {% elif event.difficulty == 'INTERMEDIATE' %} bg-warning text-dark 
@@ -65,8 +94,11 @@
                             {% endif %}">
                             {{ event.get_difficulty_display }}
                         </span>
+                        {% else %}
+                        <span class="text-muted">No difficulty</span>
+                        {% endif %}
                     </p>
-                    {% endif %}
+                    
 
                     <!-- Categories -->
                     <p class="card-text">
@@ -77,6 +109,7 @@
                         <span class="text-muted">No category</span>
                         {% endfor %}
                     </p>
+                    
                 </div>
             </div>
         </div>
@@ -88,7 +121,8 @@
             {# Previous page button #}
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ query_string }}">&laquo; Prev</a>
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ query_string }}">&laquo;
+                    Prev</a>
             </li>
             {% endif %}
 
@@ -108,7 +142,7 @@
             {% endfor %}
 
             {% endif %}
-            
+
             {# Next page button #}
             {% if page_obj.has_next %}
             <li class="page-item">

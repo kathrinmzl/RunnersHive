@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from datetime import date, timedelta
 from urllib.parse import urlencode
@@ -6,6 +6,7 @@ from .models import Event, Category
 from .forms import EventFilterForm
 
 # https://bastakiss.com/blog/django-6/enhancing-django-listview-with-dynamic-filtering-a-step-by-step-guide-403
+
 
 class EventListView(ListView):
     model = Event
@@ -48,7 +49,9 @@ class EventListView(ListView):
                 # Assuming week starts on Monday
                 start_of_week = today - timedelta(days=today.weekday())
                 end_of_week = start_of_week + timedelta(days=6)
-                queryset = queryset.filter(date__range=[start_of_week, end_of_week])
+                queryset = queryset.filter(
+                    date__range=[start_of_week, end_of_week]
+                    )
             # 'all' -> no date filter
 
             # Cancelled filter
@@ -74,3 +77,32 @@ class EventListView(ListView):
 
         return context
 
+
+def event_detail(request, slug):
+    """
+    Display an individual :model:`events.Event`.
+
+    **Context**
+
+    ``event``
+        An instance of :model:`events.Event`.
+
+    **Template:**
+
+    :template:`events/event_detail.html`
+    """
+    queryset = queryset = Event.objects.filter(
+            date__gte=date.today()
+        )
+    # get one post returned with that unique slug or an error message if slug doesnt exist
+    event = get_object_or_404(queryset, slug=slug)
+
+    # print("About to render template")
+    return render(  # returns an HttpResponse
+        request,
+        "events/event_detail.html",
+        {
+            "event": event
+        },  # dict with the data -> available for use in the
+        # template as the DTL variable e.g. {{ event }}
+    )

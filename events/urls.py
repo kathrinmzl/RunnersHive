@@ -5,5 +5,6 @@ from django.urls import path
 urlpatterns = [
     # Urlpattern for EventListView class-based view named events.
     path('', views.EventListView.as_view(), name='events'),
+    path('<slug:slug>/', views.event_detail, name='event_detail'),
 
 ]
