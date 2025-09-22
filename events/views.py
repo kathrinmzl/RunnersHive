@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from datetime import date
+from urllib.parse import urlencode
 from .models import Event, Category
 from .forms import EventFilterForm
 
@@ -23,7 +24,7 @@ class EventListView(ListView):
         # Filtering
         # Instantiate the form with GET data
         self.form = EventFilterForm(self.request.GET or None)
-        
+
         if self.form.is_valid():
             categories = self.form.cleaned_data.get("category")
             difficulties = self.form.cleaned_data.get("difficulty")
@@ -41,5 +42,12 @@ class EventListView(ListView):
         """
         context = super().get_context_data(**kwargs)
         context["form"] = self.form
+
+        # Preserve filter params in pagination links
+        query_params = self.request.GET.copy()
+        if "page" in query_params:
+            query_params.pop("page")  # remove current page if exists
+        context["query_string"] = query_params.urlencode()
+
         return context
 
