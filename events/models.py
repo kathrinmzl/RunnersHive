@@ -23,11 +23,10 @@ class Event(models.Model):
     """
     Stores a single event entry related to :model:`auth.User`
     """
-    DIFFICULTY_CHOICES = [
-        ('BEGINNER', 'Beginner friendly'),
-        ('INTERMEDIATE', 'Intermediate'),
-        ('ADVANCED', 'Advanced'),
-    ]
+    class Difficulty(models.TextChoices):
+        BEGINNER = "BEGINNER", "Beginner friendly"
+        INTERMEDIATE = "INTERMEDIATE", "Intermediate"
+        ADVANCED = "ADVANCED", "Advanced"
 
     title = models.CharField(max_length=200, unique=True)
     # allow blank so save() can populate the slug field
@@ -43,7 +42,7 @@ class Event(models.Model):
         Category, blank=True, related_name="events"
         )
     difficulty = models.CharField(
-        max_length=20, choices=DIFFICULTY_CHOICES, blank=True, null=True
+        max_length=20, choices=Difficulty.choices, blank=True, null=True
         )
     location = models.CharField(max_length=200)
     link = models.URLField(blank=True, null=True)
