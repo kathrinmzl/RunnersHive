@@ -93,6 +93,8 @@
             {% endif %}
 
             {# Numbered page buttons #}
+            {% if paginator.page_range > 2 %}
+
             {% for num in paginator.page_range %}
             {% if page_obj.number == num %}
             <li class="page-item active" aria-current="page">
@@ -105,6 +107,8 @@
             {% endif %}
             {% endfor %}
 
+            {% endif %}
+            
             {# Next page button #}
             {% if page_obj.has_next %}
             <li class="page-item">
