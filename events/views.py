@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, CreateView
 from datetime import date, timedelta
 from urllib.parse import urlencode
 from .models import Event, Category
-from .forms import EventFilterForm
+from .forms import EventFilterForm, EventForm
 
 # https://bastakiss.com/blog/django-6/enhancing-django-listview-with-dynamic-filtering-a-step-by-step-guide-403
 
@@ -106,3 +108,14 @@ def event_detail(request, slug):
         },  # dict with the data -> available for use in the
         # template as the DTL variable e.g. {{ event }}
     )
+
+
+class EventCreateView(LoginRequiredMixin, CreateView):
+    model = Event
+    form_class = EventForm
+    template_name = "events/event_form.html"
+    success_url = reverse_lazy("events")
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user  # assign logged-in user as author
+        return super().form_valid(form)

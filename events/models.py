@@ -39,14 +39,15 @@ class Event(models.Model):
     # One event can have many categories, and a category can belong to 
     # many events
     category = models.ManyToManyField(
-        Category, blank=True, related_name="events"
+        Category, related_name="events"
         )
     difficulty = models.CharField(
-        max_length=20, choices=Difficulty.choices, blank=True, null=True
+        max_length=20, choices=Difficulty.choices, null=True
         )
     location = models.CharField(max_length=200)
+    # Link and featured_image can be left blank
     link = models.URLField(blank=True, null=True)
-    featured_image = CloudinaryField('image', default='placeholder')
+    featured_image = CloudinaryField('image', default='placeholder', blank=True, null=True)
     cancelled = models.BooleanField(default=False)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="events"
