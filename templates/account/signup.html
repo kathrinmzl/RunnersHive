@@ -1,21 +1,52 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
+{% load crispy_forms_tags %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock head_title %}
+{% block title %}{% trans "Sign Up" %} | RunnersHive {% endblock title %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+<div class="container d-flex justify-content-center align-items-center mb-4" style="min-height: 80vh;">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-lg border-0 rounded-3">
+      <div class="card-body p-4 p-md-5">
+        
+        <!-- Title -->
+        <!-- <h2 class="text-center mb-4">{% trans "Sign Up" %}</h2> -->
+        <h4 class="text-center mb-4">
+          Set up your account with Runners Hive to manage your own events!
+        </h4>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+        <!-- Login link -->
+        <p class="text-center text-muted mb-4">
+          {% blocktrans %}
+          Already have an account? Then please 
+          <a href="{{ login_url }}" class="fw-semibold link">log in</a>.
+          {% endblocktrans %}
+        </p>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+        <!-- Signup form -->
+        <form method="POST" action="{% url 'account_signup' %}" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            {{ form|crispy }}
+          </div>
 
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+          {% endif %}
+
+          <div class="d-grid">
+            <button class="btn btn-signup btn-lg" type="submit">
+              {% trans "Sign Up" %}
+            </button>
+          </div>
+        </form>
+        
+
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
+

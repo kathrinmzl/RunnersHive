@@ -1,21 +1,44 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Sign Out" %}{% endblock head_title %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Log Out" %} | RunnersHive {% endblock title %}
 
 {% block content %}
-<h1>{% trans "Sign Out" %}</h1>
+<div class="container d-flex justify-content-center align-items-center mb-4" style="min-height: 80vh;">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-lg border-0 rounded-3">
+      <div class="card-body p-4 p-md-5">
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+        <!-- Title -->
+        <h3 class="text-center mb-4">
+          You are leaving Runners Hive ...
+        </h3>
+        <p class="text-center mb-4">{% trans 'Are you sure you want to log out?' %}</p>
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
+        <!-- Log out form -->
+        <form method="POST" action="{% url 'account_logout' %}" novalidate>
+          {% csrf_token %}
+
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+          {% endif %}
+
+          <div class="d-flex justify-content-center gap-2 mt-3">
+            <button type="submit" class="btn btn-danger">
+              Yes, log me out
+            </button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">
+              No, let’s stay
+            </a>
+          </div>
+        </form>
 
 
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
