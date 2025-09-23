@@ -46,73 +46,8 @@
     <!-- One col on small screens, 3 cols on medium or larger screens -->
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for event in events %}
-        <div class="col">
-            <!-- h-100 to ensure all cards have the same height -->
-            <div class="card h-100 shadow-sm">
-                <!-- Featured Image + Organizer Badge-->
-                <div class="image-container">
-                    <!-- Post image -->
-                    {% if "placeholder" in event.featured_image.url %}
-                    <img class="card-img-top" src="{% static 'images/default_event_img.jpg' %}" alt="placeholder image">
-                    {% else %}
-                    <img class="card-img-top" src=" {{ event.featured_image.url }}" alt="{{ event.title }}">
-                    {% endif %}
-                    <div class="badge image-badge-organizer">
-                        <p class="image-badge-text">{{ event.organizer }}</p>
-                    </div>
-                    {% if event.cancelled %}
-                    <div class="badge bg-danger image-badge-cancelled">
-                        <p class="image-badge-text"> Cancelled </p>
-                    </div>
-                    {% endif %}
-
-                </div>
-
-                <div class="card-body">
-                    <!-- Title -->
-                    <!-- https://getbootstrap.com/docs/4.4/utilities/stretched-link/ -->
-                    <a href="{% url 'event_detail' event.slug %}" class="stretched-link event-link">
-                        <h5 class="card-title">{{ event.title }}</h5>
-                    </a>
-                    
-
-                    <!-- Date & Time -->
-                    <p class="card-text">
-                        <strong>Date:</strong> {{ event.date }} <br>
-                        <strong>Time:</strong> {{ event.start_time }} - {{ event.end_time }}
-                    </p>
-
-                    <!-- Difficulty -->
-                    
-                    <p class="card-text">
-                        <strong>Difficulty:</strong>
-                        {% if event.difficulty %}
-                        <span class="badge 
-                            {% if event.difficulty == 'BEGINNER' %} bg-success 
-                            {% elif event.difficulty == 'INTERMEDIATE' %} bg-warning text-dark 
-                            {% elif event.difficulty == 'ADVANCED' %} bg-danger 
-                            {% endif %}">
-                            {{ event.get_difficulty_display }}
-                        </span>
-                        {% else %}
-                        <span class="text-muted">No difficulty</span>
-                        {% endif %}
-                    </p>
-                    
-
-                    <!-- Categories -->
-                    <p class="card-text">
-                        <strong>Categories:</strong>
-                        {% for category in event.category.all %}
-                        <span class="badge bg-secondary">{{ category.name }}</span>
-                        {% empty %}
-                        <span class="text-muted">No category</span>
-                        {% endfor %}
-                    </p>
-                    
-                </div>
-            </div>
-        </div>
+        {% include "events/_event_card.html" %}
+        
         {% endfor %}
     </div>
     {% if is_paginated %}

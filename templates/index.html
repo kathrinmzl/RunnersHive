@@ -1,7 +1,34 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Home | RunnersHive{% endblock %}
 
+
 {% block content %}
-    <h1>Welcome to Runners Hive</h1>
+<!-- Hero Section -->
+<div class="hero position-relative text-white text-center">
+  <img src="{% static 'images/hero_img.jpg' %}" class="hero-image" alt="Hero Image">
+  <div class="hero-overlay">
+    <h1 class="display-3 fw-bold">Welcome to Runners Hive</h1>
+    <p class="lead">Find your next running adventure in Berlin</p>
+    <a href="{% url 'events' %}" class="btn btn-primary btn-lg mt-3">Browse Events</a>
+  </div>
+</div>
+
+<!-- Today's Events -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">Today's Events</h2>
+
+  {% if todays_events %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for event in todays_events %}
+      {% include "events/_event_card.html" %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-muted">No events today.</p>
+  {% endif %}
+</div>
+
 {% endblock %}
