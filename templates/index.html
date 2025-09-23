@@ -20,17 +20,21 @@
   <h2 class="text-center mb-4">Today's Events</h2>
 
   {% if todays_events %}
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      {% for event in todays_events %}
-      {% include "events/_event_card.html" %}
-      {% endfor %}
-    </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for event in todays_events %}
+    {% include "events/_event_card.html" %}
+    {% endfor %}
+  </div>
+  {% if is_paginated %}
+  {% include "events/_page_navigation.html" %}
+  {% endif %}
+
   {% else %}
-    <p class="text-center text-muted">No events today :(</p>
+  <p class="text-center text-muted">No events today :(</p>
   {% endif %}
   <div class="text-center mt-3">
     <a href="{% url 'events' %}" class="btn btn-primary btn-lg mt-3">Browse All Events</a>
-    </div>
+  </div>
 </div>
 
 {% endblock %}
