@@ -12,7 +12,6 @@
   <div class="hero-overlay">
     <h1 class="display-3 fw-bold">Welcome to Runners Hive</h1>
     <p class="lead">Find your next running adventure in Berlin</p>
-    <a href="{% url 'events' %}" class="btn btn-primary btn-lg mt-3">Browse Events</a>
   </div>
 </div>
 
@@ -27,8 +26,11 @@
       {% endfor %}
     </div>
   {% else %}
-    <p class="text-center text-muted">No events today.</p>
+    <p class="text-center text-muted">No events today :(</p>
   {% endif %}
+  <div class="text-center mt-3">
+    <a href="{% url 'events' %}" class="btn btn-primary btn-lg mt-3">Browse All Events</a>
+    </div>
 </div>
 
 {% endblock %}

@@ -10,6 +10,18 @@ from .forms import EventFilterForm, EventForm
 # https://bastakiss.com/blog/django-6/enhancing-django-listview-with-dynamic-filtering-a-step-by-step-guide-403
 
 
+class TodaysEventsListView(ListView):
+    model = Event
+    template_name = "index.html"
+    context_object_name = "todays_events"
+    paginate_by = 6
+
+    # Return only todays events, ordered by start_time
+    queryset = Event.objects.filter(
+        date=date.today()
+    ).order_by("start_time")
+
+
 class EventListView(ListView):
     model = Event
     template_name = "events/event_list.html"

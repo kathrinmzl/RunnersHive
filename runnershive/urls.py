@@ -14,9 +14,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from events import views
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
 
 # URL Paths ordered alphabetically
 urlpatterns = [
@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', include("events.urls")),
     path('summernote/', include('django_summernote.urls')),
-    path('', TemplateView.as_view(template_name="index.html"), name="home"),
+    path('', views.TodaysEventsListView.as_view(), name="home"),
 ]
