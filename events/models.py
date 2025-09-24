@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
-from datetime import date
+from datetime import datetime, date
+from django.utils import timezone
 
 
 # Create your models here.
@@ -63,8 +64,12 @@ class Event(models.Model):
 
     @property
     def is_past(self):
-        """Returns True if the event date is in the past."""
-        return self.date < date.today()
+        """Returns True if the event's date and start_time are in the past."""
+        # combine date + time
+        event_dt = datetime.combine(self.date, self.start_time)
+        # make it timezone-aware using Django's current timezone
+        event_dt = timezone.make_aware(event_dt, timezone.get_current_timezone())
+        return event_dt < timezone.localtime()
     
     # Automatically generate a slug for the model when you save it using a form
     def save(self, *args, **kwargs):

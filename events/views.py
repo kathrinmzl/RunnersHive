@@ -1,12 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.contrib import messages
-from django.views.generic import ListView, CreateView
-from datetime import date, timedelta
+from django.views.generic import ListView, CreateView, TemplateView
+from django.utils import timezone
+from datetime import date, timedelta, datetime
 from urllib.parse import urlencode
 from .models import Event, Category
 from .forms import EventFilterForm, EventForm
+
 
 # https://bastakiss.com/blog/django-6/enhancing-django-listview-with-dynamic-filtering-a-step-by-step-guide-403
 
@@ -106,9 +109,10 @@ def event_detail(request, slug):
 
     :template:`events/event_detail.html`
     """
-    queryset = queryset = Event.objects.filter(
-            date__gte=date.today()
-        )
+    queryset = queryset = Event.objects
+    # queryset = queryset = Event.objects.filter(
+    #         date__gte=date.today()
+    #     )
     # get one post returned with that unique slug or an error message if slug doesnt exist
     event = get_object_or_404(queryset, slug=slug)
 
@@ -137,3 +141,31 @@ class EventCreateView(LoginRequiredMixin, CreateView):
             'Event created successfully'
         )
         return super().form_valid(form)
+
+
+class ProfileView(LoginRequiredMixin, ListView):
+    template_name = "events/profile.html"
+    paginate_by = 9
+    context_object_name = 'upcoming_events'  # template will use this
+
+    def get_queryset(self):
+        # Fetch all events of the user
+        all_events = Event.objects.filter(author=self.request.user)
+        # Filter using the is_past property
+        upcoming = [e for e in all_events if not e.is_past]
+        # Sort by date + start_time
+        upcoming.sort(key=lambda e: datetime.combine(e.date, e.start_time))
+        return upcoming
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Fetch past events for display (no pagination)
+        all_events = Event.objects.filter(author=self.request.user)
+        past_events = [e for e in all_events if e.is_past]
+        past_events.sort(key=lambda e: 
+                         datetime.combine(e.date, e.start_time), reverse=True)
+        context['past_events'] = past_events
+
+        return context
+

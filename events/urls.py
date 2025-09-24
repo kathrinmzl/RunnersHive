@@ -6,5 +6,6 @@ urlpatterns = [
     # Keep slug URLs at the end of the list
     path('', views.EventListView.as_view(), name='events'),
     path('create/', views.EventCreateView.as_view(), name='event_create'),
+    path('profile/', views.ProfileView.as_view(), name="profile"),
     path('<slug:slug>/', views.event_detail, name='event_detail')
 ]
