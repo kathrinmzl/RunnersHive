@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from datetime import date, timedelta, datetime
 from .models import Event
 from .forms import EventFilterForm, EventForm
@@ -184,3 +184,17 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         # Redirect to event detail page
         return reverse("profile")
+
+
+class EventDeleteView(LoginRequiredMixin, DeleteView):
+    model = Event
+    success_url = reverse_lazy("profile")  # redirect to profile
+    context_object_name = "event"
+
+    def get_queryset(self):
+        # Users can only delete their own events
+        return Event.objects.filter(author=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "Event deleted successfully!")
+        return super().delete(request, *args, **kwargs)
