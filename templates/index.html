@@ -37,4 +37,41 @@
   </div>
 </div>
 
+<!-- HTML -->
+<section class="create-event-section m-4">
+  <div class="container">
+    <!-- row-cols keep the 1/2 layout; align-items-stretch makes columns equal height -->
+    <div class="row row-cols-1 row-cols-md-2 align-items-stretch g-3">
+
+      <!-- Image column -->
+      <div class="create-event-img col position-relative overflow-hidden rounded">
+        <img src="{% static 'images/create_event_img.jpg' %}"
+             alt="Create Event"
+             class="img-fluid w-100 h-100">
+      </div>
+
+      <!-- Text column -->
+      <div class="create-event-text col d-flex align-items-center position-relative">
+        <div class="promo-inner p-3 p-md-4">
+          <h2 class="fw-bold mb-2">Share Your Event</h2>
+          <p class="mb-3">
+            Are you organizing a running event? Create your event and reach
+            thousands of runners eager to join! Add all the details and it will
+            appear in the upcoming events list.
+          </p>
+          <a href="{% url 'event_create' %}" class="btn btn-primary btn-lg">Create Event</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
 {% endblock %}
