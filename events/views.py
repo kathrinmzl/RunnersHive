@@ -1,13 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.paginator import Paginator
 from django.contrib import messages
-from django.views.generic import ListView, CreateView, TemplateView
-from django.utils import timezone
+from django.views.generic import ListView, CreateView, UpdateView
 from datetime import date, timedelta, datetime
-from urllib.parse import urlencode
-from .models import Event, Category
+from .models import Event
 from .forms import EventFilterForm, EventForm
 
 
@@ -169,3 +166,21 @@ class ProfileView(LoginRequiredMixin, ListView):
 
         return context
 
+
+class EventUpdateView(LoginRequiredMixin, UpdateView):
+    model = Event
+    form_class = EventForm
+    template_name = "events/event_form.html"  # same as create
+    context_object_name = "event"
+
+    def get_queryset(self):
+        # Only allow editing of events the user owns
+        return Event.objects.filter(author=self.request.user)
+
+    def form_valid(self, form):
+        messages.success(self.request, "Event updated successfully!")
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Redirect to event detail page
+        return reverse("profile")

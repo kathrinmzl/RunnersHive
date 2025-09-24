@@ -18,7 +18,7 @@
         <div>
             {% include "events/_event_card.html" %}
             <div class="mt-2 text-end">
-                <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'event_edit' event.slug %}" class="btn btn-sm btn-warning">Edit</a>
                 <a href="#" class="btn btn-sm btn-secondary">Cancel</a>
                 <a href="#" class="btn btn-sm btn-danger">Delete</a>
             </div>
