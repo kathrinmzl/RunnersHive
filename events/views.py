@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.views.generic import ListView, CreateView
 from datetime import date, timedelta
 from urllib.parse import urlencode
@@ -130,4 +131,9 @@ class EventCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user  # assign logged-in user as author
+        # Success message
+        messages.add_message(
+            self.request, messages.SUCCESS,
+            'Event created successfully'
+        )
         return super().form_valid(form)
