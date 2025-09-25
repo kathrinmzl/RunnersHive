@@ -16,10 +16,21 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for event in upcoming_events %}
         <div>
+            <!-- Event card -->
             {% include "events/_event_card.html" %}
             <div class="mt-2 text-end">
+                <!-- Edit -->
                 <a href="{% url 'event_edit' event.slug %}" class="btn btn-sm btn-warning">Edit</a>
-                <a href="#" class="btn btn-sm btn-secondary">Cancel</a>
+                <!-- Cancel -->
+                <form method="post" action="{% url 'event_cancel' event.slug %}" class="d-inline">
+                    {% csrf_token %}
+                    {% if event.cancelled %}
+                    <button type="submit" class="btn btn-sm btn-success">Uncancel</button>
+                    {% else %}
+                    <button type="submit" class="btn btn-sm btn-secondary">Cancel</button>
+                    {% endif %}
+                </form>
+                <!-- Delete -->
                 <button type="button" class="btn btn-sm btn-danger delete-btn" data-event-title="{{ event.title }}"
                     data-delete-url="{% url 'event_delete' event.slug %}" data-bs-toggle="modal"
                     data-bs-target="#deleteModal">
@@ -52,9 +63,8 @@
             </div>
             <div>
                 <button type="button" class="btn btn-sm btn-danger delete-btn" data-event-title="{{ event.title }}"
-                    data-event-date="{{ event.date }}"
-                    data-delete-url="{% url 'event_delete' event.slug %}" data-bs-toggle="modal"
-                    data-bs-target="#deleteModal">
+                    data-event-date="{{ event.date }}" data-delete-url="{% url 'event_delete' event.slug %}"
+                    data-bs-toggle="modal" data-bs-target="#deleteModal">
                     Delete
                 </button>
             </div>
@@ -68,25 +78,26 @@
 
 <!-- Delete confirmation modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Delete Event?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete "<span id="modalEventTitle"></span>" on <span id="modalEventDate"></span>?
-        This action cannot be undone.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <form id="deleteForm" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Event?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete "<span id="modalEventTitle"></span>" on <span
+                    id="modalEventDate"></span>?
+                This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteForm" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 {% endblock %}

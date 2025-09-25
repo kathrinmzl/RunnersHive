@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
-from datetime import datetime, date
+from datetime import datetime
 from django.utils import timezone
 
 

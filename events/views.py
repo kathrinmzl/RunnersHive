@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from datetime import date, timedelta, datetime
@@ -131,7 +132,8 @@ class EventCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("events")
 
     def form_valid(self, form):
-        form.instance.author = self.request.user  # assign logged-in user as author
+        # assign logged-in user as author
+        form.instance.author = self.request.user
         # Success message
         messages.add_message(
             self.request, messages.SUCCESS,
@@ -143,7 +145,7 @@ class EventCreateView(LoginRequiredMixin, CreateView):
 class ProfileView(LoginRequiredMixin, ListView):
     template_name = "events/profile.html"
     paginate_by = 9
-    context_object_name = 'upcoming_events'  # template will use this
+    context_object_name = 'upcoming_events'
 
     def get_queryset(self):
         # Fetch all events of the user
@@ -198,3 +200,26 @@ class EventDeleteView(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, "Event deleted successfully!")
         return super().delete(request, *args, **kwargs)
+
+
+@login_required
+def toggle_event_cancel(request, slug):
+    # Fetch the event belonging to the logged-in user
+    event = get_object_or_404(Event, slug=slug, author=request.user)
+
+    # Only allow this action if its a POST request
+    if request.method == "POST":
+        # Toggle the current "cancelled" state
+        event.cancelled = not event.cancelled
+        event.save()
+
+        # Success message depending on new status
+        if event.cancelled:
+            messages.warning(request,
+                             f"Event '{event.title}' has been cancelled.")
+        else:
+            messages.success(request,
+                             f"Event '{event.title}' is active again.")
+
+    # Redirect user back to profile
+    return redirect("profile")
