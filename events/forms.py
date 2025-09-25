@@ -64,6 +64,7 @@ class EventForm(forms.ModelForm):
         cleaned_data = super().clean()
         date = cleaned_data.get("date")
         start_time = cleaned_data.get("start_time")
+        end_time = cleaned_data.get("end_time")
 
         # make sure you cannot submit an event that starts in the past
         if date and start_time:
@@ -77,6 +78,14 @@ class EventForm(forms.ModelForm):
                 raise forms.ValidationError(
                     "An event cannot start in the past.\
                         Please check your chosen date and start time."
+                )
+        
+        # make sure the start time is before the end time
+        if start_time and end_time:
+            if start_time > end_time:
+                raise forms.ValidationError(
+                    "The end time of the event has to be after the start time.\
+                        Please check your chosen times."
                 )
 
         return cleaned_data
