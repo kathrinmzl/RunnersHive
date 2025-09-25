@@ -1,4 +1,6 @@
 from django import forms
+from django.utils import timezone
+from datetime import datetime
 from .models import Category, Event
 
 
@@ -45,12 +47,36 @@ class EventForm(forms.ModelForm):
             "location", "link", "featured_image"
         ]
         widgets = {
-            "description": forms.Textarea(attrs={"rows": 6, "class": "form-control"}),
-            "date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
-            "start_time": forms.TimeInput(attrs={"type": "time", "class": "form-control"}),
-            "end_time": forms.TimeInput(attrs={"type": "time", "class": "form-control"}),
+            "description": forms.Textarea(attrs={
+                "rows": 6, "class": "form-control"}),
+            "date": forms.DateInput(attrs={
+                "type": "date", "class": "form-control"}),
+            "start_time": forms.TimeInput(attrs={
+                "type": "time", "class": "form-control"}),
+            "end_time": forms.TimeInput(attrs={
+                "type": "time", "class": "form-control"}),
             "category": forms.CheckboxSelectMultiple(),
-            # 🔹 Featured image = File input
-            "featured_image": forms.ClearableFileInput(attrs={"class": "form-control"}),
+            "featured_image": forms.ClearableFileInput(attrs={
+                "class": "form-control"}),
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+        date = cleaned_data.get("date")
+        start_time = cleaned_data.get("start_time")
+
+        # make sure you cannot submit an event that starts in the past
+        if date and start_time:
+            # combine date and time into one datetime
+            event_dt = datetime.combine(date, start_time)
+            # make timezone aware
+            event_dt = timezone.make_aware(
+                event_dt, timezone.get_current_timezone())
+
+            if event_dt < timezone.localtime():
+                raise forms.ValidationError(
+                    "An event cannot start in the past.\
+                        Please check your chosen date and start time."
+                )
+
+        return cleaned_data

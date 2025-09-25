@@ -134,12 +134,14 @@ class EventCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         # assign logged-in user as author
         form.instance.author = self.request.user
+
+        # call parent first to ensure validation runs
+        response = super().form_valid(form)
+
         # Success message
-        messages.add_message(
-            self.request, messages.SUCCESS,
-            'Event created successfully'
-        )
-        return super().form_valid(form)
+        messages.success(self.request, "Event created successfully!")
+
+        return response
 
 
 class ProfileView(LoginRequiredMixin, ListView):
@@ -180,8 +182,13 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
         return Event.objects.filter(author=self.request.user)
 
     def form_valid(self, form):
+        # call parent to ensure validation and saving
+        response = super().form_valid(form)
+
+        # Show success message
         messages.success(self.request, "Event updated successfully!")
-        return super().form_valid(form)
+
+        return response
 
     def get_success_url(self):
         # Redirect to event detail page
