@@ -80,23 +80,28 @@
                 </div>
             </div>
         </nav>
-
-        <!-- displaying Django success messages and form errors -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    {% for message in messages %}
-                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
-                        {{ message | safe }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
     </header>
 
     <main class="flex-shrink-0 main-bg">
+        <!-- displaying Django success messages and form errors -->
+        <!-- https://getbootstrap.com/docs/5.0/components/toasts/ -->
+        {% for message in messages %}
+        <div class="toast alert-toast" role="alert" aria-live="assertive" aria-atomic="true"
+            data-bs-autohide="{% if message.tags == 'success' %}true{% else %}false{% endif %}" data-bs-delay="3000">
+            <div class="d-flex alert 
+                {% if message.tags == 'success' %}alert-success
+                {% elif message.tags == 'error' %}alert-danger
+                {% else %}alert-info{% endif %} mb-0">
+                <div class="toast-body">
+                    {{ message|safe }}
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
         {% if user.is_authenticated %}
         <p class="text-end m-3">You are logged in as {{user}}</p>
         {% endif %}
@@ -117,7 +122,8 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
 
-    <!-- Load JS Script -->
+    <!-- Load JS Scripts -->
+    <script src="{% static 'js/toasts.js' %}"></script>
     {% block extras %}
     {% endblock %}
 </body>
