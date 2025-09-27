@@ -10,7 +10,7 @@
 <div class="hero position-relative text-white text-center">
   <img src="{% static 'images/hero_img_2.jpg' %}" class="hero-image" alt="Hero Image">
   <div class="hero-overlay">
-    <h1 class="display-3 fw-bold">Welcome to Runners Hive</h1>
+    <h1 class="display-3">Welcome to Runners Hive</h1>
     <p class="lead">Find your next running adventure in Berlin</p>
   </div>
 </div>
@@ -33,9 +33,10 @@
   <p class="text-center text-muted">No events today :(</p>
   {% endif %}
   <div class="text-center mt-3">
-    <a href="{% url 'events' %}" class="btn btn-primary btn-lg mt-3">Browse All Events</a>
+    <a href="{% url 'events' %}" class="btn btn-primary mt-5">Browse All Events</a>
   </div>
 </div>
+
 
 <!-- Create Event Section -->
 <section class="create-event-section m-4">

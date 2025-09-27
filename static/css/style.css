@@ -3,25 +3,33 @@
 
 /* CSS Variables */
 :root {
-    --primary-font: "Nunito Sans", sans-serif;
-    --secondary-font: "Alfa Slab One", serif;
+  --primary-font: "Nunito Sans", sans-serif;
+  --secondary-font: "Alfa Slab One", serif;
 
-    --background-color-primary: #FFC700; /*  */
-    --background-color-secondary: #000000; /*  */
-    --background-color-secondary-transparent: rgba(0, 0, 0, 0.75); /*  */
-    --background-color-tertiary: #DFD8D8; /*  */
-    --text-color-primary: #000000; /* dark text color for lighter background */
-    --text-color-secondary: #FFC700; /* light text color for darker background */
+  --background-color-primary: #FFC700;
+  /*  */
+  --background-color-secondary: #000000;
+  /*  */
+  --background-color-secondary-transparent: rgba(0, 0, 0, 0.75);
+  /*  */
+  --background-color-forms: #EAE8E2;
+  /*  */
+  --background-color-cards: rgba(0, 0, 0, 0.75);
+  /*  */
+  --text-color-primary: #000000;
+  /* dark text color for lighter background */
+  --text-color-secondary: #FFFFFF;
+  /* light text color for darker background */
 
-    --highlight-color: #FAD536;
-    --highlight-color-dark: #FFB40C;
+  --highlight-color: #FAD536;
+  --highlight-color-dark: #FFB40C;
 }
 
 /* General Styles */
 body {
-    font-family: var(--primary-font);
-    background-color: var(--background-color-primary);
-    color: var(--text-color-primary);
+  font-family: var(--primary-font);
+  background-color: var(--background-color-primary);
+  color: var(--text-color-primary);
 }
 
 .btn-primary {
@@ -37,59 +45,69 @@ body {
   border: var(--background-color-secondary-transparent);
 }
 
+h1,
+h2 {
+  font-family: var(--secondary-font);
+  line-height: 1.5em;
+}
+
 /* ------------------ base.hmtl ------------------ */
 
 /* Navbar */
 .navbar-brand {
-    font-family: var(--secondary-font);
-    font-size: 1.5rem;
+  font-family: var(--secondary-font);
+  font-size: 1.5rem;
 }
 
 /* Small screens and up: larger Brandtext */
 @media (min-width: 375px) {
-    .navbar-brand {
+  .navbar-brand {
     font-size: 1.8rem;
-}
+  }
 }
 
 .navbar-brand .logo {
-    display: block;
+  display: block;
 }
 
 .navbar-nav {
-    font-size: 1.3rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center; /* vertically center links + button */
-    gap: 0.5rem; /* spacing between nav items */
+  font-size: 1.3rem;
+  font-weight: 600;
+  display: flex;
+  /* vertically center links + button */
+  align-items: center;
+  /* spacing between nav items */
+  gap: 0.5rem;
 }
 
 /* Create Event button aligned with nav links */
 .navbar-nav .create-event-btn {
-    font-size: 1.3rem; /* match nav links */
-    line-height: 1.5;
+  font-size: 1.3rem;
+  /* match nav links */
+  line-height: 1.5;
 }
-
 
 /* Toasts */
 .alert-toast {
-    position: fixed;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%); /* centers it */
-    z-index: 2000;
-    width: calc(100% - 20px); /* 10px margin each side */
-    max-width: 500px; 
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* centers it */
+  z-index: 2000;
+  width: calc(100% - 20px);
+  /* 10px margin each side */
+  max-width: 500px;
 }
 
 /* Medium screens and up: stick to the right */
 @media (min-width: 768px) {
-    .alert-toast {
-        left: auto;
-        right: 20px;
-        transform: none;
-        width: auto;
-    }
+  .alert-toast {
+    left: auto;
+    right: 20px;
+    transform: none;
+    width: auto;
+  }
 }
 
 /* Footer */
@@ -107,50 +125,40 @@ body {
 
 .hero-overlay {
   position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* black overlay, 40% opacity */
+  background-color: rgba(0, 0, 0, 0.4);
 
-    background-color: rgba(0, 0, 0, 0.4); /* black overlay, 40% opacity */
-
-    color: white;
-    text-align: center;
-    padding: 20px;
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
 
 /* Responsive font and button sizes */
 .hero-overlay h1 {
-  font-size: 3rem; /* default for medium+ screens */
+  font-size: 3rem;
 }
 
 .hero-overlay p {
   font-size: 1.75rem;
 }
 
-.hero-overlay .btn {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.25rem;
-}
-
 /* Smaller screens */
 @media (max-width: 768px) {
   .hero-overlay h1 {
-    font-size: 1.75rem; /* smaller heading */
+    font-size: 1.75rem;
   }
 
   .hero-overlay p {
     font-size: 1rem;
-  }
-
-  .hero-overlay .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
   }
 }
 
@@ -163,29 +171,26 @@ body {
   .hero-overlay p {
     font-size: 0.9rem;
   }
-
-  .hero-overlay .btn {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
-  }
 }
 
+/* Create Event Section */
+.create-event-img {
+  min-height: 260px;
+}
 
-/* Make image fill its column height and keep nice cropping */
-.create-event-img { min-height: 260px; /* optional: choose a sensible starting height */ }
 .create-event-img img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;  /* important: fills the column height cleanly */
-  border-radius: .5rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
 }
 
 .create-event-text .promo-inner {
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  border-radius: 0.8rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
   max-width: 420px;
   width: 100%;
 
@@ -199,21 +204,30 @@ body {
 /* Small screens: overlap image, let box grow naturally */
 @media (max-width: 767.98px) {
   .create-event-text {
-    transform: translateY(-25%); /* adjust overlap */
+    transform: translateY(-25%);
+    /* adjust overlap */
     z-index: 2;
   }
+
   .create-event-text .promo-inner {
     width: 90%;
     margin: 0 auto;
-    max-height: none;   /* remove restriction */
-    overflow: visible;  /* no scrolling */
+    max-height: none;
+    /* remove restriction */
+    overflow: visible;
+    /* no scrolling */
   }
 }
 
 /* Optional: avoid the card touching footer by reducing overlap on very small viewports */
 @media (max-width: 420px) {
-  .create-event-text { transform: translateY(-12%); }
-  .create-event-img { min-height: 220px; }
+  .create-event-text {
+    transform: translateY(-12%);
+  }
+
+  .create-event-img {
+    min-height: 220px;
+  }
 }
 
 
@@ -230,147 +244,171 @@ body {
     background-color: #F9FAFC;
 } */
 
-/* Event cards */
+/* ------------------ _event-card.hmtl ------------------ */
+/* General styles */
 .card {
-    border: none;
-    background-color: transparent;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  background-color: var(--background-color-cards);
+  color: var(--text-color-secondary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0.8rem;
 }
 
 .card:hover {
-    transform: scale(1.03); /* slightly zoom in */
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* stronger shadow for depth */
-    z-index: 10; /* bring it above other cards if overlapping */
+  /* Zoom in */
+  transform: scale(1.03);
+  /* Shadow for depth */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+  /* Show above other cards if overlapping */
+  z-index: 10;
 }
 
 .card:hover img {
+  /* Dim the image */
   filter: brightness(0.9);
 }
 
-
-.image-badge-text {
-    color: white;
-    margin: 4px;
-    text-transform: uppercase;
-    text-align: center;
+/* Image */
+.image-container {
+  position: relative;
 }
 
 .card-img-top {
-    height: 200px;      /* or any value you like */
-    object-fit: cover;  /* crop while keeping aspect ratio */
-}
-.image-container {
-    position: relative;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.8rem 0.8rem 0 0; /* top corners only */
 }
 
+/* Badges */
+.image-badge-text {
+  color: var(--text-color-secondary);
+  margin: 4px;
+  text-transform: uppercase;
+  text-align: center;
+}
 .image-badge-organizer {
-    position: absolute;
-    bottom: 5%;
-    min-width: 30%;
-    left: -2px;
-    background-color: #6cb872;
+  position: absolute;
+  bottom: 5%;
+  min-width: 30%;
+  left: -2px;
+  background-color: #6cb872;
 }
 
 .image-badge-cancelled {
-    position: absolute;
-    top: 5%;
-    min-width: 30%;
-    right: -2px;
+  position: absolute;
+  top: 5%;
+  min-width: 30%;
+  right: -2px;
 }
 
-/* Event details */
-.event-detail-img-wrapper {
-    position: relative;
-    width: 100%;
-    height: 400px;  /* fixed height */
-    overflow: hidden; /* crop overflow */
-}
-
-.event-detail-cancelled-badge {
-    position: absolute;
-    top: 10px;    /* distance from top */
-    right: 10px;  /* distance from right */
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-}
-
-.event-detail-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* scales and crops while filling the box */
-    display: block;
-}
-
-.event-info-card {
-    border-left: 5px solid #172f55; /* accent stripe */
-    background: #f8f9fa; /* light gray background */
-    border-radius: 1rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Events general */
+/* Card Body */
 .event-link {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: var(--text-color-secondary);
 }
 
 .event-link:hover {
-    color: black;
+  color: var(--text-color-secondary);
 }
 
+
+/* Event details */
+.event-detail-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  /* fixed height */
+  overflow: hidden;
+  /* crop overflow */
+}
+
+.event-detail-cancelled-badge {
+  position: absolute;
+  top: 10px;
+  /* distance from top */
+  right: 10px;
+  /* distance from right */
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.event-detail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* scales and crops while filling the box */
+  display: block;
+}
+
+.event-info-card {
+  border-left: 5px solid #172f55;
+  /* accent stripe */
+  background: #f8f9fa;
+  /* light gray background */
+  border-radius: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Events general */
+
+
 .post-title {
-    margin-top: 10%;
-    margin-left: 5%;
+  margin-top: 10%;
+  margin-left: 5%;
 }
 
 .post-subtitle {
-    margin-left: 5%;
-    color: lightgray;
+  margin-left: 5%;
+  color: lightgray;
 }
 
 /* Pagination wrapper */
 .pagination {
-    margin-top: 2rem; /* spacing from cards */
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem; /* space between buttons */
+  margin-top: 2rem;
+  /* spacing from cards */
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  /* space between buttons */
 }
 
 .pagination .page-link {
-    padding: 0.5rem 1rem;
-    background-color: #fff; /* match card background */
-    border: 1px solid #ddd;
-    border-radius: 0.3rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    color: #333;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-    margin: 0 0.25rem;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  /* match card background */
+  border: 1px solid #ddd;
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  margin: 0 0.25rem;
 }
 
 .pagination .page-link:hover {
-    background-color: #f8f9fa;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    text-decoration: none;
+  background-color: #f8f9fa;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
 }
 
 .pagination .active .page-link {
-    background-color: #0d6efd; /* primary color */
-    color: white;
-    border-color: #0d6efd;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: #0d6efd;
+  /* primary color */
+  color: white;
+  border-color: #0d6efd;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Login/Signup */
 .btn-signup,
 .btn-edit {
-    background-color: #188181;
-    color: #fff;
+  background-color: #188181;
+  color: #fff;
 }
 
 .btn-signup:hover,
 .btn-signup:active {
-    background-color: #fff;
-    color: #23BBBB;
+  background-color: #fff;
+  color: #23BBBB;
 }
