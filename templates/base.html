@@ -61,7 +61,7 @@
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == profile_url %}active"
-                                aria-current="page {% endif %}" href="{% url 'profile' %}">My Events</a>
+                                aria-current="page {% endif %}" href="{% url 'profile' %}">My Events | {{user}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == logout_url %}active"
@@ -83,7 +83,7 @@
     </header>
 
     <main class="flex-shrink-0 main-bg">
-        <!-- displaying Django success messages and form errors -->
+        <!-- displaying Django success messages -->
         <!-- https://getbootstrap.com/docs/5.0/components/toasts/ -->
         {% for message in messages %}
         <div class="toast alert-toast" role="alert" aria-live="assertive" aria-atomic="true"
@@ -99,12 +99,6 @@
             </div>
         </div>
         {% endfor %}
-
-
-
-        {% if user.is_authenticated %}
-        <p class="text-end m-3">You are logged in as {{user}}</p>
-        {% endif %}
 
         {% block content %}
         <!-- Page-specific content will go here -->
