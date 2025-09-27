@@ -307,9 +307,21 @@ body {
 .alert-toast {
     position: fixed;
     top: 70px;
-    right: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* centers it */
     z-index: 2000;
-    min-width: 300px;
+    width: calc(100% - 20px); /* 10px margin each side */
+    max-width: 500px; 
+}
+
+/* Medium screens and up: stick to the right */
+@media (min-width: 768px) {
+    .alert-toast {
+        left: auto;
+        right: 20px;
+        transform: none;
+        width: auto;
+    }
 }
 
 .post-title {
