@@ -1,9 +1,46 @@
 
 
-
+/* General Styles */
 body {
     background-color: #F9FAFC;
 }
+
+/* ------------------ base.hmtl ------------------ */
+
+/* Navbar */
+.brand {
+    font-family: Lato, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4A4A4F;
+}
+
+/* Toast */
+.alert-toast {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%); /* centers it */
+    z-index: 2000;
+    width: calc(100% - 20px); /* 10px margin each side */
+    max-width: 500px; 
+}
+
+/* Medium screens and up: stick to the right */
+@media (min-width: 768px) {
+    .alert-toast {
+        left: auto;
+        right: 20px;
+        transform: none;
+        width: auto;
+    }
+}
+
+/* Footer */
+
+
+
+/* ------------------ index.hmtl ------------------ */
 
 /* Hero section */
 .hero-image {
@@ -78,10 +115,6 @@ body {
 }
 
 
-/* .create-event-section {
-    background-color: rgb(242, 223, 10);
-} */
-
 /* Make image fill its column height and keep nice cropping */
 .create-event-img { min-height: 260px; /* optional: choose a sensible starting height */ }
 .create-event-img img {
@@ -121,14 +154,6 @@ body {
   }
 }
 
-/* Medium+ screens: overlap right side
-@media (min-width: 768px) {
-  .create-event-text .promo-inner {
-    margin-left: -56px; /* card intrudes into the image 
-  }
-} */
-
-
 /* Optional: avoid the card touching footer by reducing overlap on very small viewports */
 @media (max-width: 420px) {
   .create-event-text { transform: translateY(-12%); }
@@ -136,24 +161,7 @@ body {
 }
 
 
-
-
-
-.brand {
-    font-family: Lato, sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #4A4A4F;
-}
-
-.red-o {
-    color: #E84610;
-}
-
-.thin {
-    font-weight: 300;
-}
-
+/* Use ?? */
 .light-bg {
     background-color: #fff;
 }
@@ -166,6 +174,7 @@ body {
     background-color: #F9FAFC;
 }
 
+/* Event cards */
 .card {
     border: none;
     background-color: transparent;
@@ -182,6 +191,18 @@ body {
   filter: brightness(0.9);
 }
 
+
+.image-badge-text {
+    color: white;
+    margin: 4px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.card-img-top {
+    height: 200px;      /* or any value you like */
+    object-fit: cover;  /* crop while keeping aspect ratio */
+}
 .image-container {
     position: relative;
 }
@@ -201,6 +222,7 @@ body {
     right: -2px;
 }
 
+/* Event details */
 .event-detail-img-wrapper {
     position: relative;
     width: 100%;
@@ -230,70 +252,7 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.profile-image {
-    width: 75%;
-}
-
-.scale {
-    width: 100%;
-    height: auto;
-}
-
-.image-badge-text {
-    color: white;
-    margin: 4px;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-/* 
-.btn-check:checked + .btn-outline-primary {
-    background-color: #f30a44; /* change to your primary color 
-    color: white;
-} 
-*/
-
-.card-img-top {
-    height: 200px;      /* or any value you like */
-    object-fit: cover;  /* crop while keeping aspect ratio */
-}
-
-
-
-.masthead {
-    margin-top: 10px;
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    height: 33vh;
-    width: 100%;
-}
-
-.masthead-text {
-    background-color: #445261;
-    color: white;
-    position: relative;
-}
-
-.masthead-image {
-    position: relative;
-    overflow: hidden;
-}
-
-.masthead-image:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 90%;
-    height: 100%;
-    width: 150%;
-    background: #445261;
-    -webkit-transform: skew(15deg);
-    -moz-transform: skew(15deg);
-    transform: skew(15deg);
-    z-index: 100;
-}
-
+/* Events general */
 .event-link {
     text-decoration: none;
     color: black;
@@ -301,27 +260,6 @@ body {
 
 .event-link:hover {
     color: black;
-}
-
-/* Toast positioning */
-.alert-toast {
-    position: fixed;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%); /* centers it */
-    z-index: 2000;
-    width: calc(100% - 20px); /* 10px margin each side */
-    max-width: 500px; 
-}
-
-/* Medium screens and up: stick to the right */
-@media (min-width: 768px) {
-    .alert-toast {
-        left: auto;
-        right: 20px;
-        transform: none;
-        width: auto;
-    }
 }
 
 .post-title {
@@ -368,7 +306,7 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-
+/* Login/Signup */
 .btn-signup,
 .btn-edit {
     background-color: #188181;
@@ -379,41 +317,4 @@ body {
 .btn-signup:active {
     background-color: #fff;
     color: #23BBBB;
-}
-
-.link {
-    color: #23BBBB;
-    text-decoration: none;
-}
-
-.link:hover,
-.link:active {
-    color: #445261;
-    text-decoration: underline;
-}
-
-.btn-like {
-    color: #E84610;
-    border: none;
-    background: transparent;
-}
-
-.btn-delete {
-    color: #fff;
-    background: #E84610;
-}
-
-.btn-like:hover,
-.btn-like:active {
-    color: #E84610;
-    background: transparent;
-    border: none;
-}
-
-.faded {
-    color: rgb(172, 175, 175);
-}
-
-.approval {
-    color: rgb(222, 146, 168);
 }
