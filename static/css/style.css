@@ -1,21 +1,77 @@
+/* Google fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
+/* CSS Variables */
+:root {
+    --primary-font: "Nunito Sans", sans-serif;
+    --secondary-font: "Alfa Slab One", serif;
+
+    --background-color-primary: #FFC700; /*  */
+    --background-color-secondary: #000000; /*  */
+    --background-color-secondary-transparent: rgba(0, 0, 0, 0.75); /*  */
+    --background-color-tertiary: #DFD8D8; /*  */
+    --text-color-primary: #000000; /* dark text color for lighter background */
+    --text-color-secondary: #FFC700; /* light text color for darker background */
+
+    --highlight-color: #FAD536;
+    --highlight-color-dark: #FFB40C;
+}
 
 /* General Styles */
 body {
-    background-color: #F9FAFC;
+    font-family: var(--primary-font);
+    background-color: var(--background-color-primary);
+    color: var(--text-color-primary);
+}
+
+.btn-primary {
+  background-color: var(--background-color-secondary);
+  border: var(--background-color-secondary);
+  border-radius: 1.8rem;
+  padding: 12px;
+  margin: 10px;
+}
+
+.btn-primary:hover {
+  background-color: var(--background-color-secondary-transparent);
+  border: var(--background-color-secondary-transparent);
 }
 
 /* ------------------ base.hmtl ------------------ */
 
 /* Navbar */
-.brand {
-    font-family: Lato, sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #4A4A4F;
+.navbar-brand {
+    font-family: var(--secondary-font);
+    font-size: 1.5rem;
 }
 
-/* Toast */
+/* Small screens and up: larger Brandtext */
+@media (min-width: 375px) {
+    .navbar-brand {
+    font-size: 1.8rem;
+}
+}
+
+.navbar-brand .logo {
+    display: block;
+}
+
+.navbar-nav {
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center; /* vertically center links + button */
+    gap: 0.5rem; /* spacing between nav items */
+}
+
+/* Create Event button aligned with nav links */
+.navbar-nav .create-event-btn {
+    font-size: 1.3rem; /* match nav links */
+    line-height: 1.5;
+}
+
+
+/* Toasts */
 .alert-toast {
     position: fixed;
     top: 70px;
@@ -162,7 +218,7 @@ body {
 
 
 /* Use ?? */
-.light-bg {
+/* .light-bg {
     background-color: #fff;
 }
 
@@ -172,7 +228,7 @@ body {
 
 .main-bg {
     background-color: #F9FAFC;
-}
+} */
 
 /* Event cards */
 .card {
