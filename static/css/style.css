@@ -26,6 +26,10 @@
 }
 
 /* General Styles */
+/* * {
+  margin: 0;
+  padding: 0;
+} */
 body {
   font-family: var(--primary-font);
   background-color: var(--background-color-primary);
@@ -35,7 +39,7 @@ body {
 .btn-primary {
   background-color: var(--background-color-secondary);
   border: var(--background-color-secondary);
-  border-radius: 1.8rem;
+  border-radius: 100px;
   padding: 12px;
   margin: 10px;
 }
@@ -50,6 +54,45 @@ h2 {
   font-family: var(--secondary-font);
   line-height: 1.5em;
 }
+
+/* Page seperator wave */
+/* https://www.shapedivider.app/ */
+/* https://www.youtube.com/watch?v=0QTzTOJCzLY */
+.custom-shape-divider-top-1759053598 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1759053598 svg {
+    position: relative;
+    display: block;
+    width: calc(137% + 1.3px);
+    height: 50px;
+}
+
+.custom-shape-divider-top-1759053598 .shape-fill {
+    fill: var(--background-color-primary);
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+    .custom-shape-divider-top-1759053598 svg {
+        width: calc(100% + 1.3px);
+        height: 41px;
+    }
+}
+
+.shapedivider {
+  position: relative;
+  background-color: var(--background-color-secondary); 
+  min-height: 400px;
+  margin-bottom: 0;
+}
+
 
 /* ------------------ base.hmtl ------------------ */
 
@@ -174,6 +217,11 @@ h2 {
 }
 
 /* Create Event Section */
+.create-event-section .container {
+  padding-top: 70px;
+  padding-bottom: 35px;
+}
+
 .create-event-img {
   min-height: 260px;
 }
@@ -310,6 +358,7 @@ h2 {
 .event-link:hover {
   color: var(--text-color-secondary);
 }
+
 
 
 /* Event details */

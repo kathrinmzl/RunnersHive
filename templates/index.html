@@ -38,41 +38,46 @@
 </div>
 
 
-<!-- Create Event Section -->
-<section class="create-event-section m-4">
-  <div class="container">
-    <!-- row-cols keep the 1/2 layout; align-items-stretch makes columns equal height -->
-    <div class="row row-cols-1 row-cols-md-2 align-items-stretch g-3">
-
-      <!-- Image column -->
-      <div class="create-event-img col position-relative overflow-hidden rounded">
-        <img src="{% static 'images/create_event_img.jpg' %}"
-             alt="Create Event"
-             class="img-fluid w-100 h-100">
-      </div>
-
-      <!-- Text column -->
-      <div class="create-event-text col d-flex align-items-center position-relative">
-        <div class="promo-inner p-3 p-md-4">
-          <h2 class="fw-bold mb-2">Share Your Event</h2>
-          <p class="mb-3">
-            Are you organizing a running event? Create your event and reach
-            thousands of runners eager to join! Add all the details and it will
-            appear in the upcoming events list.
-          </p>
-          <a href="{% url 'event_create' %}" class="btn btn-primary btn-lg">Create Event</a>
-        </div>
-      </div>
-
-    </div>
+<div class="shapedivider">
+  <!-- https://www.shapedivider.app/ -->
+  <!-- https://www.youtube.com/watch?v=0QTzTOJCzLY -->
+  <div class="custom-shape-divider-top-1759053598">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        class="shape-fill"></path>
+    </svg>
   </div>
-</section>
 
+  <!-- Create Event Section -->
+  <section class="create-event-section m-3">
+    <div class="container">
+      <!-- row-cols keep the 1/2 layout; align-items-stretch makes columns equal height -->
+      <div class="row row-cols-1 row-cols-md-2 align-items-stretch g-3">
 
+        <!-- Image column -->
+        <div class="create-event-img col position-relative overflow-hidden rounded">
+          <img src="{% static 'images/create_event_img.jpg' %}" alt="Create Event" class="img-fluid w-100 h-100">
+        </div>
 
+        <!-- Text column -->
+        <div class="create-event-text col d-flex align-items-center position-relative">
+          <div class="promo-inner p-3 p-md-4">
+            <h2 class="fw-bold mb-2">Share Your Event</h2>
+            <p class="mb-3">
+              Are you organizing a running event? Create your event and reach
+              thousands of runners eager to join! Add all the details and it will
+              appear in the upcoming events list.
+            </p>
+            <a href="{% url 'event_create' %}" class="btn btn-primary btn-lg">Create Event</a>
+          </div>
+        </div>
 
+      </div>
+    </div>
+  </section>
 
-
+</div>
 
 
 {% endblock %}
