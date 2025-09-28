@@ -15,31 +15,36 @@
     <h1 class="mb-4 text-center">Upcoming Events</h1>
 
     <!-- Filter Form -->
-    <form method="get" class="mb-4">
-        {{ form|crispy }}
-        {% csrf_token %}
-        <!-- <h5>Filter by Date</h5>
-        {% for value, label in form.date_filter.field.choices %}
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="{{ form.date_filter.name }}" value="{{ value }}"
-                {% if form.date_filter.value == value %}checked{% endif %}>
-            <label class="form-check-label">{{ label }}</label>
-        </div>
-        {% endfor %} -->
-        <!-- <h5>Filter by Category</h5>
-<div class="btn-group" role="group">
-    {% for checkbox in form.category %}
-        {{ checkbox.tag}}
-        {# Use label as the visible button #}
-        <label class="btn btn-outline-primary" for="{{ checkbox.id_for_label }}">
-            {{ checkbox.choice_label }}
-        </label>
-    {% endfor %}
-</div> -->
-        <button type="submit" class="btn btn-primary mt-2">Apply Filters</button>
-        <a href="{% url 'events' %}" class="btn btn-secondary mt-2">Reset</a>
+    <!-- https://getbootstrap.com/docs/5.0/components/collapse/ -->
 
+    <!-- Toggle Button -->
+<button class="btn btn-dark-outline mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#eventFilters" aria-expanded="false" aria-controls="eventFilters">
+    Filter Events ▾
+</button>
+
+<!-- Collapsible Area -->
+<div class="collapse" id="eventFilters">
+    <form method="get" class="mb-4 event-filter-form">
+        <div class="filter-group">
+            {{ form.category|as_crispy_field }}
+        </div>
+        <div class="filter-group">
+            {{ form.difficulty|as_crispy_field }}
+        </div>
+        <div class="filter-group">
+            {{ form.date_filter|as_crispy_field }}
+        </div>
+        <div class="filter-group inline-boolean">
+            {{ form.cancelled|as_crispy_field }}
+        </div>
+
+        <div class="filter-actions">
+            <button type="submit" class="btn btn-dark mt-2">Apply Filters</button>
+            <a href="{% url 'events' %}" class="btn btn-light mt-2">Reset</a>
+        </div>
     </form>
+</div>
+
 
     <!-- Events list -->
     {% if events %}
@@ -54,7 +59,7 @@
     {% endif %}
 
     {% else %}
-    <p class="text-center">No upcoming events found.</p>
+    <p class="text-center lead">No upcoming events found.</p>
     {% endif %}
 </div>
 {% endblock %}
