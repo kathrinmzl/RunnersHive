@@ -11,6 +11,10 @@
   --background-color-secondary: #000000;
   /*  */
   --background-color-secondary-transparent: rgba(0, 0, 0, 0.75);
+
+  --background-color-light: #FFFFFF;
+  /*  */
+  --background-color-light-transparent: rgba(255, 255, 255, 0.75);
   /*  */
   --background-color-forms: #EAE8E2;
   /*  */
@@ -36,24 +40,42 @@ body {
   color: var(--text-color-primary);
 }
 
-.btn-primary {
-  background-color: var(--background-color-secondary);
-  border: var(--background-color-secondary);
-  border-radius: 100px;
-  padding: 12px;
-  margin: 10px;
-}
-
-.btn-primary:hover {
-  background-color: var(--background-color-secondary-transparent);
-  border: var(--background-color-secondary-transparent);
-}
-
 h1,
 h2 {
   font-family: var(--secondary-font);
   line-height: 1.5em;
 }
+
+.btn-dark {
+  background-color: var(--background-color-secondary);
+  border: var(--background-color-secondary);
+  color: var(--text-color-secondary);
+  font-size: 1.3rem;
+  border-radius: 100px;
+  padding: 12px;
+  margin: 10px;
+}
+
+.btn-dark:hover {
+  background-color: var(--background-color-secondary-transparent);
+  border: var(--background-color-secondary-transparent);
+}
+
+.btn-light {
+  background-color: var(--background-color-light);
+  border: var(--background-color-light);
+  color: var(--text-color-primary);
+  font-size: 1.3rem;
+  border-radius: 100px;
+  padding: 12px;
+  margin: 10px;
+}
+
+.btn-light:hover {
+  background-color: var(--background-color-light-transparent);
+  border: var(--background-color-light-transparent);
+}
+
 
 /* Page seperator wave */
 /* https://www.shapedivider.app/ */
@@ -121,13 +143,6 @@ h2 {
   align-items: center;
   /* spacing between nav items */
   gap: 0.5rem;
-}
-
-/* Create Event button aligned with nav links */
-.navbar-nav .create-event-btn {
-  font-size: 1.3rem;
-  /* match nav links */
-  line-height: 1.5;
 }
 
 /* Toasts */
@@ -235,13 +250,9 @@ h2 {
 }
 
 .create-event-text .promo-inner {
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 0.8rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  color: var(--text-color-secondary);
   max-width: 420px;
   width: 100%;
-
   /* vertical centering of content */
   display: flex;
   flex-direction: column;
@@ -249,26 +260,9 @@ h2 {
   padding: 1rem 1.5rem;
 }
 
-/* Small screens: overlap image, let box grow naturally */
-@media (max-width: 767.98px) {
-  .create-event-text {
-    transform: translateY(-25%);
-    /* adjust overlap */
-    z-index: 2;
-  }
-
-  .create-event-text .promo-inner {
-    width: 90%;
-    margin: 0 auto;
-    max-height: none;
-    /* remove restriction */
-    overflow: visible;
-    /* no scrolling */
-  }
-}
 
 /* Optional: avoid the card touching footer by reducing overlap on very small viewports */
-@media (max-width: 420px) {
+/* @media (max-width: 420px) {
   .create-event-text {
     transform: translateY(-12%);
   }
@@ -276,7 +270,7 @@ h2 {
   .create-event-img {
     min-height: 220px;
   }
-}
+} */
 
 
 /* Use ?? */
