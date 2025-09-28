@@ -47,7 +47,7 @@ h2 {
 }
 
 /* Buttons */
-.btn-dark {
+.btn-dark-big {
   background-color: var(--background-color-secondary);
   color: var(--text-color-secondary);
   font-size: 1.3rem;
@@ -56,24 +56,25 @@ h2 {
   margin: 10px;
 }
 
-.btn-dark:hover {
+.btn-dark-big:hover {
   background-color: var(--background-color-secondary-transparent);
+  color: var(--text-color-secondary);
 }
 
-.btn-dark-outline {
+.btn-dark-big-outline {
   border: solid, var(--background-color-secondary);
   color: var(--text-color-primary);
   border-radius: 0.8rem;
   padding: 10px;
 }
 
-.btn-dark-outline:hover {
+.btn-dark-big-outline:hover {
   background-color: var(--background-color-secondary);
   border: solid, var(--background-color-secondary);
   color: var(--text-color-secondary);
 }
 
-.btn-light {
+.btn-light-big {
   background-color: var(--background-color-light);
   color: var(--text-color-primary);
   font-size: 1.3rem;
@@ -82,8 +83,14 @@ h2 {
   margin: 10px;
 }
 
-.btn-light:hover {
+.btn-light-big:hover {
   background-color: var(--background-color-light-transparent);
+  color: var(--text-color-primary);
+}
+
+.btn-dark:hover {
+  background-color: var(--background-color-secondary-transparent);
+  color: var(--text-color-secondary);
 }
 
 
@@ -418,6 +425,9 @@ h2 {
 
 
 
+
+
+
 /* Event details */
 .event-detail-img-wrapper {
   position: relative;
@@ -505,6 +515,11 @@ h2 {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
+
+/* ------------------ profile.hmtl ------------------ */ 
+
+
+
 
 /* Login/Signup */
 .btn-signup,

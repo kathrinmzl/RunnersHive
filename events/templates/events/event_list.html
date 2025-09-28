@@ -13,12 +13,14 @@
 
 <div class="container my-4">
     <h1 class="mb-4 text-center">Upcoming Events</h1>
+    <p class="mb-4 text-center lead">Browse upcoming events and join our local running communities!</p>
+
 
     <!-- Filter Form -->
     <!-- https://getbootstrap.com/docs/5.0/components/collapse/ -->
 
     <!-- Toggle Button -->
-    <button class="btn btn-dark-outline mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#eventFilters"
+    <button class="btn btn-dark-big-outline mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#eventFilters"
         aria-expanded="false" aria-controls="eventFilters">
         Filter Events ▾
     </button>
@@ -40,8 +42,8 @@
             </div>
 
             <div class="filter-actions">
-                <button type="submit" class="btn btn-dark mt-2">Apply Filters</button>
-                <a href="{% url 'events' %}" class="btn btn-light mt-2">Reset Filters</a>
+                <button type="submit" class="btn btn-dark-big mt-2">Apply Filters</button>
+                <a href="{% url 'events' %}" class="btn btn-light-big mt-2">Reset Filters</a>
             </div>
         </form>
     </div>

@@ -79,7 +79,7 @@
                         </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="btn btn-primary create-event-btn" href="{% url 'event_create' %}">Create Event</a>
+                            <a class="btn btn-dark-big" href="{% url 'event_create' %}">Create Event</a>
                         </li>
                     </ul>
                 </div>
@@ -89,7 +89,7 @@
     </header>
 
     <!-- Main -->
-    <main class="flex-shrink-0 main-bg">
+    <main class="flex-shrink-0">
         <!-- Display Django success messages using Bootstrap Toasts -->
         <!-- https://getbootstrap.com/docs/5.0/components/toasts/ -->
         {% for message in messages %}
