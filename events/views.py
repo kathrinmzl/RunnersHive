@@ -36,8 +36,11 @@ class EventListView(ListView):
         Return only future events (date >= today), ordered by date and
         start_time, filtered by category and difficulty if selected.
         """
+        # timezone-aware "today"
+        today = timezone.localdate()
+
         queryset = Event.objects.filter(
-            date__gte=date.today()
+            date__gte=today
         ).order_by("date", "start_time")
 
         # Filtering
@@ -57,7 +60,6 @@ class EventListView(ListView):
 
             # Date
             date_filter = self.form.cleaned_data.get('date_filter')
-            today = date.today()
             if date_filter == 'today':
                 queryset = queryset.filter(date=today)
             elif date_filter == 'tomorrow':
