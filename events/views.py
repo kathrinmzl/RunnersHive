@@ -148,9 +148,23 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         response = super().form_valid(form)
 
         # Success message
-        messages.success(self.request, "Event created successfully!")
+        messages.success(self.request, 
+                         f"Event '{form.instance.title}' created successfully!"
+                         )
 
         return response
+
+    def form_invalid(self, form):
+        # Get the title from form data
+        title = form.cleaned_data.get('title') if 'title' in form.cleaned_data else 'Untitled Event'
+        # Show error message if validation fails
+        messages.error(
+            self.request,
+            f"Could not create event '{title}'.\
+                Please check your input."
+        )
+        # Call parent to re-render the form with errors
+        return super().form_invalid(form)
 
 
 class ProfileView(LoginRequiredMixin, ListView):
@@ -173,7 +187,7 @@ class ProfileView(LoginRequiredMixin, ListView):
         # Fetch past events for display (no pagination)
         all_events = Event.objects.filter(author=self.request.user)
         past_events = [e for e in all_events if e.is_past]
-        past_events.sort(key=lambda e: 
+        past_events.sort(key=lambda e:
                          datetime.combine(e.date, e.start_time), reverse=True)
         context['past_events'] = past_events
 
@@ -195,9 +209,23 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
         response = super().form_valid(form)
 
         # Show success message
-        messages.success(self.request, "Event updated successfully!")
+        messages.success(self.request, 
+                         f"Event '{form.instance.title}' updated successfully!"
+                         )
 
         return response
+
+    def form_invalid(self, form):
+        # Safely get the title from form data
+        title = form.cleaned_data.get('title') if 'title' in form.cleaned_data else 'Untitled Event'
+        # Show error message if validation fails
+        messages.error(
+            self.request,
+            f"Could not update event '{title}'.\
+                Please check your input."
+        )
+        # Call parent to re-render the form with errors
+        return super().form_invalid(form)
 
     def get_success_url(self):
         # Redirect to event detail page
@@ -214,11 +242,16 @@ def event_delete(request, slug):
 
     if request.method == "POST":
         event.delete()
-        messages.success(request, f"Event '{event.title}' deleted successfully!")
+        messages.success(request,
+                         f"Event '{event.title}' deleted successfully!"
+                         )
         return redirect("profile")  # redirect back to profile after deletion
 
     # Redirect to profile if GET request or any other method
-    messages.error(request, "Invalid request method. Event not deleted.")
+    messages.error(request,
+                   f"Event '{event.title}' could not be deleted.\
+                    Invalid request method."
+                   )
     return redirect("profile")
 
 
@@ -240,6 +273,11 @@ def toggle_event_cancel(request, slug):
         else:
             messages.success(request,
                              f"Event '{event.title}' is active again.")
+        return redirect("profile")
 
     # Redirect user back to profile
+    messages.error(request, 
+                   f"Cancellation status of event '{event.title}' could not be\
+                    changed. Invalid request method."
+                   )
     return redirect("profile")
