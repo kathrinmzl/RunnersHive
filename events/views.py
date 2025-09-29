@@ -84,6 +84,9 @@ class EventListView(ListView):
             if exclude_cancelled:
                 queryset = queryset.filter(cancelled=False)
 
+        # Filter out events that are past using the is_past property
+        queryset = [e for e in queryset if not e.is_past]
+
         return queryset
 
     def get_context_data(self, **kwargs):
