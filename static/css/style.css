@@ -16,7 +16,7 @@
   /*  */
   --background-color-light-transparent: rgba(255, 255, 255, 0.75);
   /*  */
-  --background-color-forms: #EAE8E2;
+  --background-color-modal: #EAE8E2;
   /*  */
   --background-color-cards: rgba(255, 255, 255, 0.2);
   /*  */
@@ -325,19 +325,6 @@ h2 {
 } */
 
 
-/* Use ?? */
-/* .light-bg {
-    background-color: #fff;
-}
-
-.dark-bg {
-    background-color: #445261;
-}
-
-.main-bg {
-    background-color: #F9FAFC;
-} */
-
 /* ------------------ _event_card.hmtl ------------------ */
 /* General styles */
 .card {
@@ -503,6 +490,10 @@ h2 {
 
 #past-events-profile .event-link:hover {
   color: var(--text-color-secondary);
+}
+
+.modal-content {
+  background-color: var(--background-color-modal);
 }
 
 /* Login/Signup */
