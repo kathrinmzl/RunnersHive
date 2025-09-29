@@ -200,7 +200,7 @@ h2 {
 /* Toasts */
 .alert-toast {
   position: fixed;
-  top: 70px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
   /* centers it */
@@ -283,8 +283,16 @@ h2 {
   }
 }
 
+/*  Todays Events Section */
+@media (max-width: 768px) {
+  #todays-events .btn-dark-big {
+    font-size: 1.1rem;
+  }
+
+
+}
 /* Create Event Section */
-.create-event-section .container {
+#create-event-section .container {
   padding-top: 70px;
   padding-bottom: 35px;
 }
@@ -310,6 +318,12 @@ h2 {
   flex-direction: column;
   justify-content: center;
   padding: 1rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+  #create-event-section .btn-light-big {
+    font-size: 1.1rem;
+  }
 }
 
 
@@ -437,15 +451,21 @@ h2 {
     font-size: 1.1rem;
 }
 
-/* ------------------ event_detail.hmtl ------------------ */
+/* ------------------ event_detail.html ------------------ */
 /* Image */
 .event-detail-img-wrapper {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 300px; 
   /* fixed height */
   overflow: hidden;
   /* crop overflow */
+}
+
+@media (min-width: 768px) {
+  .event-detail-img-wrapper {
+    height: 400px;
+  }
 }
 
 .event-detail-cancelled-badge {
@@ -511,3 +531,4 @@ h2 {
   background-color: var(--background-color-secondary-transparent);
   color: var(--text-color-secondary);
 }
+

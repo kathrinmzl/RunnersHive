@@ -16,6 +16,7 @@
 </div>
 
 <!-- Today's Events -->
+ <section id="todays-events">
 <div class="container my-5">
   <h2 class="text-center mb-4">Today's Events</h2>
 
@@ -30,12 +31,14 @@
   {% endif %}
 
   {% else %}
-  <p class="text-center lead">No events today :(</p>
+  <p class="text-center lead">No upcoming events today :(</p>
   {% endif %}
   <div class="text-center mt-3">
     <a href="{% url 'events' %}" class="btn btn-dark-big mt-5">Browse All Events</a>
   </div>
 </div>
+ </section>
+
 
 
 <div class="shapedivider">
@@ -50,7 +53,7 @@
   </div>
 
   <!-- Create Event Section -->
-  <section class="create-event-section mt-3">
+  <section id = "create-event-section" class="mt-3">
     <div class="container">
       <!-- row-cols keep the 1/2 layout; align-items-stretch makes columns equal height -->
       <div class="row row-cols-1 row-cols-md-2 align-items-stretch g-3">
@@ -65,9 +68,10 @@
           <div class="promo-inner p-3 p-md-4">
             <h2 class="mb-2">Share Your Event</h2>
             <p class="mb-4">
-              Are you organizing a running event? Create your event and reach
-              thousands of runners eager to join! Add all the details and it will
-              appear in the upcoming events list.
+              Are you organizing a running event? <br> 
+              Sign up and let Runners Hive help you spread 
+              the word! Reach passionate runners, grow your event and bring the community together 
+              for an unforgettable experience.
             </p>
             <a href="{% url 'event_create' %}" class="btn btn-light-big">Create Event</a>
           </div>
