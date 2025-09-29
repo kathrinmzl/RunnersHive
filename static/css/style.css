@@ -93,7 +93,6 @@ h2 {
   color: var(--text-color-secondary);
 }
 
-
 /* Page seperator wave */
 /* https://www.shapedivider.app/ */
 /* https://www.youtube.com/watch?v=0QTzTOJCzLY */
@@ -539,14 +538,17 @@ h2 {
 
 
 /* Login/Signup */
-.btn-signup,
-.btn-edit {
-  background-color: #188181;
-  color: #fff;
+.link {
+  color: var(--text-color-primary);
+}
+
+.btn-signup {
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-secondary);
 }
 
 .btn-signup:hover,
 .btn-signup:active {
-  background-color: #fff;
-  color: #23BBBB;
+  background-color: var(--background-color-secondary-transparent);
+  color: var(--text-color-secondary);
 }
