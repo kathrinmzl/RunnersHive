@@ -40,7 +40,6 @@
                     
                     <p class="card-text">
                         <strong>Difficulty:</strong>
-                        {% if event.difficulty %}
                         <span class="badge 
                             {% if event.difficulty == 'BEGINNER' %} bg-success 
                             {% elif event.difficulty == 'INTERMEDIATE' %} bg-warning text-dark 
@@ -48,9 +47,6 @@
                             {% endif %}">
                             {{ event.get_difficulty_display }}
                         </span>
-                        {% else %}
-                        <span class="text-muted">No difficulty</span>
-                        {% endif %}
                     </p>
                     
 

@@ -29,17 +29,6 @@
 
             <h1 class="fw-bold">{{ event.title }}</h1>
             <p class="text-muted">Organized by {{ event.organizer }}</p>
-
-            <!-- Difficulty -->
-            {% if event.difficulty %}
-            <span class="badge 
-                    {% if event.difficulty == 'BEGINNER' %} bg-success 
-                    {% elif event.difficulty == 'INTERMEDIATE' %} bg-warning text-dark
-                    {% elif event.difficulty == 'ADVANCED' %} bg-danger 
-                    {% endif %}">
-                {{ event.get_difficulty_display }}
-            </span>
-            {% endif %}
         </div>
     </div>
 
@@ -55,6 +44,7 @@
         <div class="col-md-4">
             <div class="card event-info-card shadow-lg">
                 <div class="card-body">
+                    
                     <h5 class="card-title mb-3">Event Details</h5>
                     <ul class="list-unstyled">
                         <li><strong>Date:</strong> {{ event.date }}</li>
@@ -62,13 +52,28 @@
                         <li><strong>Location:</strong> {{ event.location }}</li>
                     </ul>
 
+                    <!-- Difficulty -->
+                    <p class="card-text">
+                        <strong>Difficulty:</strong>
+                        <span class="badge 
+                            {% if event.difficulty == 'BEGINNER' %} bg-success 
+                            {% elif event.difficulty == 'INTERMEDIATE' %} bg-warning text-dark 
+                            {% elif event.difficulty == 'ADVANCED' %} bg-danger 
+                            {% endif %}">
+                            {{ event.get_difficulty_display }}
+                        </span>
+                    </p>
+
                     <!-- Categories -->
-                    <h6>Categories</h6>
-                    {% for category in event.category.all %}
-                    <span class="badge bg-secondary">{{ category.name }}</span>
-                    {% empty %}
-                    <span class="text-muted">No category</span>
-                    {% endfor %}
+                    <p class="card-text">
+                        <strong>Categories:</strong> <br>
+                        {% for category in event.category.all %}
+                        <span class="badge bg-secondary">{{ category.name }}</span>
+                        {% empty %}
+                        <span class="text-muted">No category</span>
+                        {% endfor %}
+                    </p>
+
 
                     <!-- External Link -->
                     {% if event.link %}
