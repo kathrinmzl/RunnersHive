@@ -11,7 +11,7 @@
         {% csrf_token %}
         {{ form|crispy }}
         <!-- event exists for UpdateView, event is None for CreateView -->
-        <button type="submit" class="btn btn-primary mt-3">
+        <button type="submit" class="btn btn-dark mt-3">
           {% if event %}Update Event{% else %}Create Event{% endif %}
         </button>
         <a href="{% url 'events' %}" class="btn btn-secondary mt-3">Cancel</a>
