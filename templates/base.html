@@ -53,6 +53,11 @@
                 <!-- Menu -->
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link d-flex align-items-center" href="https://www.instagram.com/" target="_blank">
+                                <i class="fab fa-instagram fa-lg"></i>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == home_url %}active{% endif %}"
                                 href="{% url 'home' %}">Home</a>
@@ -114,17 +119,18 @@
     </main>
 
     <!-- Footer -->
-     <footer class="footer mt-auto py-4">
-    <div class="container d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center text-center text-md-start">
-        <!-- Copyright -->
-        <span class="text-dark mb-2 mb-md-0">&copy; {% now "Y" %} RunnersHive. All rights reserved.</span>
+    <footer class="footer mt-auto py-4">
+        <div
+            class="container d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center text-center text-md-start">
+            <!-- Copyright -->
+            <span class="text-dark mb-2 mb-md-0">&copy; {% now "Y" %} RunnersHive. All rights reserved.</span>
 
-        <!-- GitHub-->
-        <a href="https://github.com/kathrinmzl/RunnersHive" target="_blank" class="text-dark text-decoration-none">
-            Developed by kathrinmzl <i class="fab fa-github fa-lg ms-2"></i>
-        </a>
-    </div>
-</footer>
+            <!-- GitHub-->
+            <a href="https://github.com/kathrinmzl/RunnersHive" target="_blank" class="text-dark text-decoration-none">
+                Developed by kathrinmzl <i class="fab fa-github fa-lg ms-2"></i>
+            </a>
+        </div>
+    </footer>
 
 
     <!-- Load Bootstrap -->
