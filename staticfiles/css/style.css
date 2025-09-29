@@ -1,9 +1,230 @@
+/* Google fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
+/* CSS Variables */
+:root {
+  --primary-font: "Nunito Sans", sans-serif;
+  --secondary-font: "Alfa Slab One", serif;
 
+  --background-color-primary: #FFC700;
+  /*  */
+  --background-color-secondary: #000000;
+  /*  */
+  --background-color-secondary-transparent: rgba(0, 0, 0, 0.75);
 
-body {
-    background-color: #F9FAFC;
+  --background-color-light: #FFFFFF;
+  /*  */
+  --background-color-light-transparent: rgba(255, 255, 255, 0.75);
+  /*  */
+  --background-color-forms: #EAE8E2;
+  /*  */
+  --background-color-cards: rgba(255, 255, 255, 0.2);
+  /*  */
+  --text-color-primary: #000000;
+  /* dark text color for lighter background */
+  --text-color-secondary: #FFFFFF;
+  /* light text color for darker background */
+
+  --highlight-color: #FAD536;
+  --highlight-color-dark: #FFB40C;
 }
+
+/* General Styles */
+/* * {
+  margin: 0;
+  padding: 0;
+} */
+body {
+  font-family: var(--primary-font);
+  background-color: var(--background-color-primary);
+  color: var(--text-color-primary);
+}
+
+h1,
+h2 {
+  font-family: var(--secondary-font);
+  line-height: 1.5em;
+}
+
+/* Buttons */
+.btn-dark-big {
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-secondary);
+  font-size: 1.3rem;
+  border-radius: 100px;
+  padding: 12px;
+  margin: 10px;
+}
+
+.btn-dark-big:hover {
+  background-color: var(--background-color-secondary-transparent);
+  color: var(--text-color-secondary);
+}
+
+.btn-dark-big-outline {
+  border: solid, var(--background-color-secondary);
+  color: var(--text-color-primary);
+  border-radius: 0.8rem;
+  padding: 10px;
+}
+
+.btn-dark-big-outline:hover {
+  background-color: var(--background-color-secondary);
+  border: solid, var(--background-color-secondary);
+  color: var(--text-color-secondary);
+}
+
+.btn-light-big {
+  background-color: var(--background-color-light);
+  color: var(--text-color-primary);
+  font-size: 1.3rem;
+  border-radius: 100px;
+  padding: 12px;
+  margin: 10px;
+}
+
+.btn-light-big:hover {
+  background-color: var(--background-color-light-transparent);
+  color: var(--text-color-primary);
+}
+
+.btn-dark:hover {
+  background-color: var(--background-color-secondary-transparent);
+  color: var(--text-color-secondary);
+}
+
+/* Page seperator wave */
+/* https://www.shapedivider.app/ */
+/* https://www.youtube.com/watch?v=0QTzTOJCzLY */
+.custom-shape-divider-top-1759053598 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1759053598 svg {
+  position: relative;
+  display: block;
+  width: calc(137% + 1.3px);
+  height: 50px;
+}
+
+.custom-shape-divider-top-1759053598 .shape-fill {
+  fill: var(--background-color-primary);
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+  .custom-shape-divider-top-1759053598 svg {
+    width: calc(100% + 1.3px);
+    height: 41px;
+  }
+}
+
+.shapedivider {
+  position: relative;
+  background-color: var(--background-color-secondary);
+  min-height: 400px;
+  margin-bottom: 0;
+}
+
+/* Pagination of event lists */
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pagination .page-link {
+  padding: 0.5rem 1rem;
+  background-color: var(--background-color-secondary);
+  border: 1px solid var(--background-color-secondary);
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: var(--text-color-secondary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  margin: 0 0.25rem;
+}
+
+.pagination .page-link:hover {
+  background-color: transparent;
+  color: var(--text-color-primary);
+  border-color: var(--text-color-primary);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.pagination .active .page-link {
+  background-color: transparent;
+  color: var(--text-color-primary);
+  border-color: var(--text-color-primary);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ------------------ base.hmtl ------------------ */
+
+/* Navbar */
+.navbar-brand {
+  font-family: var(--secondary-font);
+  font-size: 1.5rem;
+}
+
+/* Small screens and up: larger Brandtext */
+@media (min-width: 375px) {
+  .navbar-brand {
+    font-size: 1.8rem;
+  }
+}
+
+.navbar-brand .logo {
+  display: block;
+}
+
+.navbar-nav {
+  font-size: 1.3rem;
+  font-weight: 600;
+  display: flex;
+  /* vertically center links + button */
+  align-items: center;
+  /* spacing between nav items */
+  gap: 0.5rem;
+}
+
+/* Toasts */
+.alert-toast {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* centers it */
+  z-index: 2000;
+  width: calc(100% - 20px);
+  /* 10px margin each side */
+  max-width: 500px;
+}
+
+/* Medium screens and up: stick to the right */
+@media (min-width: 768px) {
+  .alert-toast {
+    left: auto;
+    right: 20px;
+    transform: none;
+    width: auto;
+  }
+}
+
+/* Footer */
+
+
+
+/* ------------------ index.hmtl ------------------ */
 
 /* Hero section */
 .hero-image {
@@ -14,50 +235,40 @@ body {
 
 .hero-overlay {
   position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* black overlay, 40% opacity */
+  background-color: rgba(0, 0, 0, 0.4);
 
-    background-color: rgba(0, 0, 0, 0.4); /* black overlay, 40% opacity */
-
-    color: white;
-    text-align: center;
-    padding: 20px;
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
 
 /* Responsive font and button sizes */
 .hero-overlay h1 {
-  font-size: 3rem; /* default for medium+ screens */
+  font-size: 3rem;
 }
 
 .hero-overlay p {
   font-size: 1.75rem;
 }
 
-.hero-overlay .btn {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.25rem;
-}
-
 /* Smaller screens */
 @media (max-width: 768px) {
   .hero-overlay h1 {
-    font-size: 1.75rem; /* smaller heading */
+    font-size: 1.75rem;
   }
 
   .hero-overlay p {
     font-size: 1rem;
-  }
-
-  .hero-overlay .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
   }
 }
 
@@ -70,36 +281,30 @@ body {
   .hero-overlay p {
     font-size: 0.9rem;
   }
-
-  .hero-overlay .btn {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
-  }
 }
 
+/* Create Event Section */
+.create-event-section .container {
+  padding-top: 70px;
+  padding-bottom: 35px;
+}
 
-/* .create-event-section {
-    background-color: rgb(242, 223, 10);
-} */
+.create-event-img {
+  min-height: 260px;
+}
 
-/* Make image fill its column height and keep nice cropping */
-.create-event-img { min-height: 260px; /* optional: choose a sensible starting height */ }
 .create-event-img img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;  /* important: fills the column height cleanly */
-  border-radius: .5rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
 }
 
 .create-event-text .promo-inner {
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  color: var(--text-color-secondary);
   max-width: 420px;
   width: 100%;
-
   /* vertical centering of content */
   display: flex;
   flex-direction: column;
@@ -107,54 +312,21 @@ body {
   padding: 1rem 1.5rem;
 }
 
-/* Small screens: overlap image, let box grow naturally */
-@media (max-width: 767.98px) {
-  .create-event-text {
-    transform: translateY(-25%); /* adjust overlap */
-    z-index: 2;
-  }
-  .create-event-text .promo-inner {
-    width: 90%;
-    margin: 0 auto;
-    max-height: none;   /* remove restriction */
-    overflow: visible;  /* no scrolling */
-  }
-}
 
-/* Medium+ screens: overlap right side
-@media (min-width: 768px) {
-  .create-event-text .promo-inner {
-    margin-left: -56px; /* card intrudes into the image 
+/* Optional: avoid the card touching footer by reducing overlap on very small viewports */
+/* @media (max-width: 420px) {
+  .create-event-text {
+    transform: translateY(-12%);
+  }
+
+  .create-event-img {
+    min-height: 220px;
   }
 } */
 
 
-/* Optional: avoid the card touching footer by reducing overlap on very small viewports */
-@media (max-width: 420px) {
-  .create-event-text { transform: translateY(-12%); }
-  .create-event-img { min-height: 220px; }
-}
-
-
-
-
-
-.brand {
-    font-family: Lato, sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #4A4A4F;
-}
-
-.red-o {
-    color: #E84610;
-}
-
-.thin {
-    font-weight: 300;
-}
-
-.light-bg {
+/* Use ?? */
+/* .light-bg {
     background-color: #fff;
 }
 
@@ -164,244 +336,187 @@ body {
 
 .main-bg {
     background-color: #F9FAFC;
-}
+} */
 
+/* ------------------ _event_card.hmtl ------------------ */
+/* General styles */
 .card {
-    border: none;
-    background-color: transparent;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  background-color: var(--background-color-cards);
+  color: var(--text-color-primary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0.8rem;
 }
 
 .card:hover {
-    transform: scale(1.03); /* slightly zoom in */
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* stronger shadow for depth */
-    z-index: 10; /* bring it above other cards if overlapping */
+  /* Zoom in */
+  transform: scale(1.03);
+  /* Shadow for depth */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+  /* Show above other cards if overlapping */
+  z-index: 10;
 }
 
 .card:hover img {
+  /* Dim the image */
   filter: brightness(0.9);
 }
 
+/* Image */
 .image-container {
-    position: relative;
+  position: relative;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.8rem 0.8rem 0 0;
+  /* top corners only */
+}
+
+/* Badges */
+.image-badge-text {
+  color: var(--text-color-secondary);
+  margin: 4px;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .image-badge-organizer {
-    position: absolute;
-    bottom: 5%;
-    min-width: 30%;
-    left: -2px;
-    background-color: #6cb872;
+  position: absolute;
+  bottom: 5%;
+  min-width: 30%;
+  left: -2px;
+  background-color: #6cb872;
 }
 
 .image-badge-cancelled {
-    position: absolute;
-    top: 5%;
-    min-width: 30%;
-    right: -2px;
+  position: absolute;
+  top: 5%;
+  min-width: 30%;
+  right: -2px;
 }
 
-.event-detail-img-wrapper {
-    position: relative;
-    width: 100%;
-    height: 400px;  /* fixed height */
-    overflow: hidden; /* crop overflow */
-}
-
-.event-detail-cancelled-badge {
-    position: absolute;
-    top: 10px;    /* distance from top */
-    right: 10px;  /* distance from right */
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-}
-
-.event-detail-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* scales and crops while filling the box */
-    display: block;
-}
-
-.event-info-card {
-    border-left: 5px solid #172f55; /* accent stripe */
-    background: #f8f9fa; /* light gray background */
-    border-radius: 1rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.profile-image {
-    width: 75%;
-}
-
-.scale {
-    width: 100%;
-    height: auto;
-}
-
-.image-badge-text {
-    color: white;
-    margin: 4px;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-/* 
-.btn-check:checked + .btn-outline-primary {
-    background-color: #f30a44; /* change to your primary color 
-    color: white;
-} 
-*/
-
-.card-img-top {
-    height: 200px;      /* or any value you like */
-    object-fit: cover;  /* crop while keeping aspect ratio */
-}
-
-
-
-.masthead {
-    margin-top: 10px;
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    height: 33vh;
-    width: 100%;
-}
-
-.masthead-text {
-    background-color: #445261;
-    color: white;
-    position: relative;
-}
-
-.masthead-image {
-    position: relative;
-    overflow: hidden;
-}
-
-.masthead-image:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 90%;
-    height: 100%;
-    width: 150%;
-    background: #445261;
-    -webkit-transform: skew(15deg);
-    -moz-transform: skew(15deg);
-    transform: skew(15deg);
-    z-index: 100;
-}
-
+/* Card Body */
 .event-link {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: var(--text-color-primary);
 }
 
 .event-link:hover {
-    color: black;
+  color: var(--text-color-primary);
 }
 
-/* Toast positioning */
-.alert-toast {
-    position: fixed;
-    top: 40px;
-    right: 20px;
-    z-index: 2000;
-    min-width: 300px;
+/* ------------------ event_list.hmtl ------------------ */
+/* Filter Form Layout */
+.event-filter-form {
+  padding: 1rem;
 }
 
-.post-title {
-    margin-top: 10%;
-    margin-left: 5%;
+.filter-group {
+  margin-bottom: 1rem;
 }
 
-.post-subtitle {
-    margin-left: 5%;
-    color: lightgray;
-}
-
-/* Pagination wrapper */
-.pagination {
-    margin-top: 2rem; /* spacing from cards */
+@media (min-width: 768px) {
+  .event-filter-form {
     display: flex;
-    justify-content: center;
-    gap: 0.5rem; /* space between buttons */
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .filter-group {
+    /* 4-column layout */
+    flex: 1 1 calc(25% - 1.5rem);
+  }
 }
 
-.pagination .page-link {
-    padding: 0.5rem 1rem;
-    background-color: #fff; /* match card background */
-    border: 1px solid #ddd;
-    border-radius: 0.3rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    color: #333;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-    margin: 0 0.25rem;
+.filter-actions .btn {
+  border-radius: 0.8rem;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 2px;
 }
 
-.pagination .page-link:hover {
-    background-color: #f8f9fa;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    text-decoration: none;
+/* Custom checkbox color */
+.form-check-input:checked {
+    background-color: var(--text-color-primary);
+    border-color: var(--text-color-primary);
 }
 
-.pagination .active .page-link {
-    background-color: #0d6efd; /* primary color */
-    color: white;
-    border-color: #0d6efd;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+/* Filter Headings */
+.event-filter-form .form-label {
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
+/* ------------------ event_detail.hmtl ------------------ */
+/* Image */
+.event-detail-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  /* fixed height */
+  overflow: hidden;
+  /* crop overflow */
+}
 
-.btn-signup,
-.btn-edit {
-    background-color: #188181;
-    color: #fff;
+.event-detail-cancelled-badge {
+  position: absolute;
+  top: 10px;
+  /* distance from top */
+  right: 10px;
+  /* distance from right */
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.event-detail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* scales and crops while filling the box */
+  display: block;
+}
+
+/* Info card */
+.event-info-card {
+  border-left: 5px solid var(--background-color-secondary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ------------------ profile.hmtl ------------------ */ 
+#past-events-profile h2 {
+  color: var(--text-color-secondary);
+}
+
+/* slightly offset dark background */
+#past-events-profile .list-group-item {
+    background-color: #1a1a1a; 
+    color: var(--text-color-secondary);           
+    border-color: #333333;     
+}
+
+#past-events-profile .event-link {
+  color: var(--text-color-secondary);
+}
+
+#past-events-profile .event-link:hover {
+  color: var(--text-color-secondary);
+}
+
+/* Login/Signup */
+.link {
+  color: var(--text-color-primary);
+}
+
+.btn-signup {
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-secondary);
 }
 
 .btn-signup:hover,
 .btn-signup:active {
-    background-color: #fff;
-    color: #23BBBB;
-}
-
-.link {
-    color: #23BBBB;
-    text-decoration: none;
-}
-
-.link:hover,
-.link:active {
-    color: #445261;
-    text-decoration: underline;
-}
-
-.btn-like {
-    color: #E84610;
-    border: none;
-    background: transparent;
-}
-
-.btn-delete {
-    color: #fff;
-    background: #E84610;
-}
-
-.btn-like:hover,
-.btn-like:active {
-    color: #E84610;
-    background: transparent;
-    border: none;
-}
-
-.faded {
-    color: rgb(172, 175, 175);
-}
-
-.approval {
-    color: rgb(222, 146, 168);
+  background-color: var(--background-color-secondary-transparent);
+  color: var(--text-color-secondary);
 }
