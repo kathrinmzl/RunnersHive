@@ -19,10 +19,16 @@ class TodaysEventsListView(ListView):
     context_object_name = "todays_events"
     paginate_by = 6
 
-    # Return only todays events, ordered by start_time
-    queryset = Event.objects.filter(
-        date=timezone.localdate()
-        ).order_by("start_time")
+    # Return only todays and upcoming events, ordered by start_time    
+    def get_queryset(self):
+        # Fetch all events of today
+        todays_events = Event.objects.filter(
+            date=timezone.localdate()
+            ).order_by("start_time")
+        # Filter only upcoming events
+        todays_upcoming_events = [e for e in todays_events if not e.is_past]
+
+        return todays_upcoming_events
 
 
 class EventListView(ListView):
