@@ -131,6 +131,43 @@ h2 {
   margin-bottom: 0;
 }
 
+/* Pagination of event lists */
+/* Pagination wrapper */
+.pagination {
+  margin-top: 2rem;
+  /* spacing from cards */
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  /* space between buttons */
+}
+
+.pagination .page-link {
+  padding: 0.5rem 1rem;
+  background-color: var(--background-color-secondary);
+  border: 1px solid var(--background-color-secondary);
+  border-radius: 0.3rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: var(--text-color-secondary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  margin: 0 0.25rem;
+}
+
+.pagination .page-link:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.pagination .active .page-link {
+  background-color: #0d6efd;
+  /* primary color */
+  color: white;
+  border-color: #0d6efd;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
 
 /* ------------------ base.hmtl ------------------ */
 
@@ -415,19 +452,7 @@ h2 {
 }
 
 /* ------------------ event_detail.hmtl ------------------ */
-
-
-
-
-
-
-
-
-
-
-
-
-/* Event details */
+/* Image */
 .event-detail-img-wrapper {
   position: relative;
   width: 100%;
@@ -455,64 +480,10 @@ h2 {
   display: block;
 }
 
+/* Info card */
 .event-info-card {
-  border-left: 5px solid #172f55;
-  /* accent stripe */
-  background: #f8f9fa;
-  /* light gray background */
-  border-radius: 1rem;
+  border-left: 5px solid var(--background-color-secondary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Events general */
-
-
-.post-title {
-  margin-top: 10%;
-  margin-left: 5%;
-}
-
-.post-subtitle {
-  margin-left: 5%;
-  color: lightgray;
-}
-
-/* Pagination wrapper */
-.pagination {
-  margin-top: 2rem;
-  /* spacing from cards */
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  /* space between buttons */
-}
-
-.pagination .page-link {
-  padding: 0.5rem 1rem;
-  background-color: #fff;
-  /* match card background */
-  border: 1px solid #ddd;
-  border-radius: 0.3rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  color: #333;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  margin: 0 0.25rem;
-}
-
-.pagination .page-link:hover {
-  background-color: #f8f9fa;
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  text-decoration: none;
-}
-
-.pagination .active .page-link {
-  background-color: #0d6efd;
-  /* primary color */
-  color: white;
-  border-color: #0d6efd;
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ------------------ profile.hmtl ------------------ */ 
@@ -534,8 +505,6 @@ h2 {
 #past-events-profile .event-link:hover {
   color: var(--text-color-secondary);
 }
-
-
 
 /* Login/Signup */
 .link {
