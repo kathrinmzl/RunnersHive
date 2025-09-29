@@ -3,6 +3,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils import timezone
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from datetime import date, timedelta, datetime
 from .models import Event
@@ -20,8 +21,8 @@ class TodaysEventsListView(ListView):
 
     # Return only todays events, ordered by start_time
     queryset = Event.objects.filter(
-        date=date.today()
-    ).order_by("start_time")
+        date=timezone.localdate()
+        ).order_by("start_time")
 
 
 class EventListView(ListView):
