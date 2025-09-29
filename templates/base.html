@@ -60,9 +60,9 @@
                             <a class="nav-link {% if request.path == events_url %}active{% endif %}"
                                 href="{% url 'events' %}">Events</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link {% if request.path == about_url %}active{% endif %}" href="#">About</a>
-                        </li>
+                        </li> -->
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == profile_url %}active{% endif %}"
