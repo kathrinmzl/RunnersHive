@@ -132,14 +132,11 @@ h2 {
 }
 
 /* Pagination of event lists */
-/* Pagination wrapper */
 .pagination {
   margin-top: 2rem;
-  /* spacing from cards */
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  /* space between buttons */
 }
 
 .pagination .page-link {
@@ -154,16 +151,18 @@ h2 {
 }
 
 .pagination .page-link:hover {
-  background-color: #f8f9fa;
+  background-color: transparent;
+  color: var(--text-color-primary);
+  border-color: var(--text-color-primary);
+  transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
 
 .pagination .active .page-link {
-  background-color: #0d6efd;
-  /* primary color */
-  color: white;
-  border-color: #0d6efd;
+  background-color: transparent;
+  color: var(--text-color-primary);
+  border-color: var(--text-color-primary);
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
