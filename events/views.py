@@ -204,18 +204,22 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
         return reverse("profile")
 
 
-class EventDeleteView(LoginRequiredMixin, DeleteView):
-    model = Event
-    success_url = reverse_lazy("profile")  # redirect to profile
-    context_object_name = "event"
+@login_required
+def event_delete(request, slug):
+    """
+    Delete a single event belonging to the logged-in user.
+    Shows a success or error message using Django messages.
+    """
+    event = get_object_or_404(Event, slug=slug, author=request.user)
 
-    def get_queryset(self):
-        # Users can only delete their own events
-        return Event.objects.filter(author=self.request.user)
+    if request.method == "POST":
+        event.delete()
+        messages.success(request, f"Event '{event.title}' deleted successfully!")
+        return redirect("profile")  # redirect back to profile after deletion
 
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, "Event deleted successfully!")
-        return super().delete(request, *args, **kwargs)
+    # Redirect to profile if GET request or any other method
+    messages.error(request, "Invalid request method. Event not deleted.")
+    return redirect("profile")
 
 
 @login_required

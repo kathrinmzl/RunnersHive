@@ -33,11 +33,12 @@
                         {% endif %}
                     </form>
                     <!-- Delete -->
-                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-event-title="{{ event.title }}"
-                        data-delete-url="{% url 'event_delete' event.slug %}" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal">
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal" data-event-title="{{ event.title }}"
+                        data-event-date="{{ event.date }}" data-delete-url="{% url 'event_delete' event.slug %}">
                         Delete
                     </button>
+
                 </div>
             </div>
 
@@ -82,12 +83,12 @@
                         {{ event.date }} {{ event.start_time }}
                     </div>
                     <div>
-                        <button type="button" class="btn btn-sm btn-danger delete-btn"
-                            data-event-title="{{ event.title }}" data-event-date="{{ event.date }}"
-                            data-delete-url="{% url 'event_delete' event.slug %}" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal">
+                        <button type="button" class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal" data-event-title="{{ event.title }}"
+                            data-event-date="{{ event.date }}" data-delete-url="{% url 'event_delete' event.slug %}">
                             Delete
                         </button>
+
                     </div>
                 </div>
                 {% endfor %}
@@ -109,12 +110,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete "<span id="modalEventTitle"></span>" on <span
-                    id="modalEventDate"></span>?
+                Are you sure you want to delete "<span id="modalEventTitle"></span>" on <span id="modalEventDate"></span>?
                 This action cannot be undone.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <!-- Form will POST to delete view -->
                 <form id="deleteForm" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -123,6 +124,8 @@
         </div>
     </div>
 </div>
+
+
 
 {% endblock %}
 
