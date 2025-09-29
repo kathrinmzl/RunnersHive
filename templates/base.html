@@ -1,5 +1,6 @@
 <!-- Load static directory -->
 {% load static %}
+{% load tz %}
 <!-- URLs -->
 {% url 'home' as home_url %}
 {% url 'events' as events_url %}
@@ -113,11 +114,18 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3 dark-bg">
-        <p class="m-0 text-center text-white">
-            &copy; {{ now|date:"Y" }} RunnersHive. All rights reserved.
-        </p>
-    </footer>
+     <footer class="footer mt-auto py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center text-center text-md-start">
+        <!-- Copyright -->
+        <span class="text-dark mb-2 mb-md-0">&copy; {% now "Y" %} RunnersHive. All rights reserved.</span>
+
+        <!-- GitHub-->
+        <a href="https://github.com/kathrinmzl/RunnersHive" target="_blank" class="text-dark text-decoration-none">
+            Developed by kathrinmzl <i class="fab fa-github fa-lg ms-2"></i>
+        </a>
+    </div>
+</footer>
+
 
     <!-- Load Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
