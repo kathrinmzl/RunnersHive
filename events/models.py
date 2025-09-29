@@ -64,9 +64,9 @@ class Event(models.Model):
 
     @property
     def is_past(self):
-        """Returns True if the event's date and start_time are in the past."""
-        # combine date + time
-        event_dt = datetime.combine(self.date, self.start_time)
+        """Returns True if the event's date and end_time are in the past."""
+        # combine date + end_time
+        event_dt = datetime.combine(self.date, self.end_time)
         # make it timezone-aware using Django's current timezone
         event_dt = timezone.make_aware(event_dt, timezone.get_current_timezone())
         return event_dt < timezone.localtime()
