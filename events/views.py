@@ -141,7 +141,6 @@ class EventCreateView(LoginRequiredMixin, CreateView):
     model = Event
     form_class = EventForm
     template_name = "events/event_form.html"
-    success_url = reverse_lazy("events")
 
     def form_valid(self, form):
         # assign logged-in user as author
@@ -168,6 +167,10 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         )
         # Call parent to re-render the form with errors
         return super().form_invalid(form)
+
+    # show event detail page after event creation
+    def get_success_url(self):
+        return reverse("event_detail", args=[self.object.slug])
 
 
 class ProfileView(LoginRequiredMixin, ListView):
@@ -230,9 +233,9 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
         # Call parent to re-render the form with errors
         return super().form_invalid(form)
 
+    # show event detail page after event update
     def get_success_url(self):
-        # Redirect to event detail page
-        return reverse("profile")
+        return reverse("event_detail", args=[self.object.slug])
 
 
 @login_required
