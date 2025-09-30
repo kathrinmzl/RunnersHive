@@ -79,7 +79,7 @@ class EventForm(forms.ModelForm):
                     "An event cannot start in the past.\
                         Please check your chosen date and start time."
                 )
-        
+
         # make sure the start time is before the end time
         if start_time and end_time:
             if start_time > end_time:

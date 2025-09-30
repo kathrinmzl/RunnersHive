@@ -16,7 +16,7 @@ import os
 import dj_database_url
 # env.py needs to be imported to be accessible
 if os.path.isfile('env.py'):
-    import env
+    import env  # noqa
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +29,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     # text editor
     'django_summernote',
-    'cloudinary', # cloudinary
+    'cloudinary',
     'widget_tweaks',
     # own apps
     'events',
@@ -62,7 +62,7 @@ INSTALLED_APPS = [
 
 # for allauth
 SITE_ID = 1
-# after we've logged in or logged out, 
+# after we've logged in or logged out,
 # the site will automatically redirect us to the home page
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -71,10 +71,10 @@ LOGOUT_REDIRECT_URL = '/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+# https://github.com/lqez/django-summernote
 SUMMERNOTE_CONFIG = {
-    # You can put custom Summernote settings
+    # Custom Summernote settings
     'summernote': {
-        # Change editor attributes
         'width': '100%',
         'height': '480',
         'toolbar': [
@@ -153,16 +153,16 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 

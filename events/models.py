@@ -44,7 +44,7 @@ class Event(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    # One event can have many categories, and a category can belong to 
+    # One event can have many categories, and a category can belong to
     # many events
     category = models.ManyToManyField(
         Category, related_name="events"
@@ -64,7 +64,7 @@ class Event(models.Model):
         )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         ordering = ["date", "start_time"]
 
@@ -77,9 +77,11 @@ class Event(models.Model):
         # combine date + end_time
         event_dt = datetime.combine(self.date, self.end_time)
         # make it timezone-aware using Django's current timezone
-        event_dt = timezone.make_aware(event_dt, timezone.get_current_timezone())
+        event_dt = timezone.make_aware(
+            event_dt, timezone.get_current_timezone()
+            )
         return event_dt < timezone.localtime()
-    
+
     # Automatically generate a slug for the model when you save it using a form
     def save(self, *args, **kwargs):
         if not self.slug:
