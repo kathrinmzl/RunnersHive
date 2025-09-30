@@ -292,7 +292,7 @@ h2 {
 
 }
 /* Create Event Section */
-#create-event-section .container {
+.create-event-section .container {
   padding-top: 70px;
   padding-bottom: 35px;
 }
@@ -408,6 +408,14 @@ h2 {
   color: var(--text-color-primary);
 }
 
+/* Stack only between 768px and 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+  .event-actions .d-flex {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+}
+
 /* ------------------ event_list.hmtl ------------------ */
 /* Filter Form Layout */
 .event-filter-form {
@@ -453,6 +461,7 @@ h2 {
 
 /* ------------------ event_detail.html ------------------ */
 /* Image */
+/* HEIGHT STIMMT NICHT */
 .event-detail-img-wrapper {
   position: relative;
   width: 100%;
@@ -468,6 +477,14 @@ h2 {
   }
 }
 
+.event-detail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* scales and crops while filling the box */
+  display: block;
+}
+
 .event-detail-cancelled-badge {
   position: absolute;
   top: 10px;
@@ -478,13 +495,6 @@ h2 {
   padding: 0.5rem 1rem;
 }
 
-.event-detail-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* scales and crops while filling the box */
-  display: block;
-}
 
 /* Info card */
 .event-info-card {

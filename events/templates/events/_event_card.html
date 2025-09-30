@@ -3,63 +3,95 @@
 <div class="col">
     <!-- h-100 to ensure all cards have the same height -->
     <article class="card h-100 shadow-sm">
-        <!-- Featured Image + Organizer / Cancelled Badge -->
-        <div class="image-container position-relative">
-            <!-- Post image -->
-            {% if "placeholder" in event.featured_image.url %}
+        <!-- Make sure the stretched link doesnt cover the card-footer -->
+        <div class="stretched-link-wrapper" style="transform: rotate(0);">
+            <!-- Featured Image + Organizer / Cancelled Badge -->
+            <div class="image-container position-relative">
+                <!-- Post image -->
+                {% if "placeholder" in event.featured_image.url %}
                 <img class="card-img-top" src="{% static 'images/default_event_img.jpg' %}" alt="placeholder image">
-            {% else %}
+                {% else %}
                 <img class="card-img-top" src="{{ event.featured_image.url }}" alt="{{ event.title }}">
-            {% endif %}
+                {% endif %}
 
-            <!-- Organizer Badge -->
-            <div class="badge image-badge-organizer">
-                <p class="image-badge-text">{{ event.organizer }}</p>
-            </div>
+                <!-- Organizer Badge -->
+                <div class="badge image-badge-organizer">
+                    <p class="image-badge-text">{{ event.organizer }}</p>
+                </div>
 
-            <!-- Cancelled Badge -->
-            {% if event.cancelled %}
+                <!-- Cancelled Badge -->
+                {% if event.cancelled %}
                 <div class="badge bg-danger image-badge-cancelled">
                     <p class="image-badge-text">Cancelled</p>
                 </div>
-            {% endif %}
-        </div>
+                {% endif %}
+            </div>
 
-        <!-- Card Body -->
-        <div class="card-body">
-            <!-- Event Title -->
-            <!-- See: https://getbootstrap.com/docs/4.4/utilities/stretched-link/ -->
-            <a href="{% url 'event_detail' event.slug %}" class="stretched-link event-link">
-                <h3 class="card-title h5 mb-2">{{ event.title }}</h3>
-            </a>
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Event Title -->
+                <!-- See: https://getbootstrap.com/docs/4.4/utilities/stretched-link/ -->
+                <a href="{% url 'event_detail' event.slug %}" class="stretched-link event-link">
+                    <h3 class="card-title h5 mb-2">{{ event.title }}</h3>
+                </a>
 
-            <!-- Date & Time -->
-            <p class="card-text mb-2">
-                <strong>Date:</strong> {{ event.date }}<br>
-                <strong>Time:</strong> {{ event.start_time }} - {{ event.end_time }}
-            </p>
+                <!-- Date & Time -->
+                <p class="card-text mb-2">
+                    <strong>Date:</strong> {{ event.date }}<br>
+                    <strong>Time:</strong> {{ event.start_time }} - {{ event.end_time }}
+                </p>
 
-            <!-- Difficulty -->
-            <p class="card-text mb-2">
-                <strong>Difficulty:</strong>
-                <span class="badge 
+                <!-- Difficulty -->
+                <p class="card-text mb-2">
+                    <strong>Difficulty:</strong>
+                    <span class="badge 
                     {% if event.difficulty == 'BEGINNER' %} bg-success 
                     {% elif event.difficulty == 'INTERMEDIATE' %} bg-warning text-dark 
                     {% elif event.difficulty == 'ADVANCED' %} bg-danger 
                     {% endif %}">
-                    {{ event.get_difficulty_display }}
-                </span>
-            </p>
+                        {{ event.get_difficulty_display }}
+                    </span>
+                </p>
 
-            <!-- Categories -->
-            <p class="card-text mb-0">
-                <strong>Categories:</strong>
-                {% for category in event.category.all %}
+                <!-- Categories -->
+                <p class="card-text mb-0">
+                    <strong>Categories:</strong>
+                    {% for category in event.category.all %}
                     <span class="badge bg-secondary">{{ category.name }}</span>
-                {% empty %}
+                    {% empty %}
                     <span class="text-muted">No category</span>
-                {% endfor %}
-            </p>
+                    {% endfor %}
+                </p>
+            </div>
         </div>
+
+        <!-- Card Footer -->
+        {% if show_buttons %}
+            <!-- Event actions -->
+            <div class="mt-2 text-end card-footer mt-auto" role="group" aria-label="Event actions">
+                <div class="d-flex justify-content-end gap-2">
+                    <!-- Edit -->
+                    <a href="{% url 'event_edit' event.slug %}" class="btn btn-sm btn-dark">Edit</a>
+
+                    <!-- Cancel / Uncancel -->
+                    <form method="post" action="{% url 'event_cancel' event.slug %}" class="d-inline">
+                        {% csrf_token %}
+                        {% if event.cancelled %}
+                            <button type="submit" class="btn btn-sm btn-success">Uncancel</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-sm btn-secondary">Cancel</button>
+                        {% endif %}
+                    </form>
+
+                    <!-- Delete -->
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal" data-event-title="{{ event.title }}"
+                        data-event-date="{{ event.date }}" data-delete-url="{% url 'event_delete' event.slug %}">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+
     </article>
 </div>
