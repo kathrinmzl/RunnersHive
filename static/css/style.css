@@ -51,11 +51,12 @@ h2 {
 
 .btn-dark-big:hover {
   background-color: var(--background-color-secondary-transparent);
+  color: var(--text-color-secondary);
 }
 
 /* Dark outline */
 .btn-dark-big-outline {
-  border: 1px solid var(--background-color-secondary);
+  border: 2px solid var(--background-color-secondary);
   color: var(--text-color-primary);
   border-radius: 0.8rem;
   padding: 10px;
