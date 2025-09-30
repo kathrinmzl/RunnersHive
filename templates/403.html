@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Access Denied | Runners Hive{% endblock %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <h1 class="display-4 mb-3">Access Denied 💥🚧</h1>
+    <p class="lead mb-4">Whoa there, speedy! You’re trying to enter a restricted zone. Authorized runners only.</p>
+
+    <a href="{% url 'home' %}" class="btn btn-dark">Retreat to Safety</a>
+</div>
+{% endblock %}

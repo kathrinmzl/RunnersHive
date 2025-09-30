@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error | Runners Hive{% endblock %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <h1 class="display-4 mb-3">Uh Oh! Something Broke 💥🚧</h1>
+    <p class="lead mb-4">Our server tripped over its shoelaces. We're working on it!</p>
+
+    <a href="{% url 'home' %}" class="btn btn-dark">Back to Safety</a>
+</div>
+{% endblock %}
