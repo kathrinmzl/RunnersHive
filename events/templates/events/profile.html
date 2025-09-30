@@ -1,63 +1,69 @@
 {% extends "base.html" %}
 
-{% block title %}Profile | RunnersHive{% endblock %}
+{% load static %}
+
+{% block title %}Profile | Runners Hive{% endblock %}
 
 {% block content %}
 
-{% load static %}
-
 <div class="container py-4">
-    <h1 class="mb-4 text-center">Hello {{user}}!</h1>
+
+    <!-- Page Title -->
+    <h1 class="mb-4 text-center">Hello {{ user }}!</h1>
     <p class="mb-4 text-center lead">Here you find all the events that you registered with us</p>
 
-    <!-- Upcoming Events -->
-    <section id="upcoming-events-profile">
-        <h2>Upcoming Events</h2>
-        {% if upcoming_events %}
-        <!-- One col on small screens, 3 cols on medium or larger screens -->
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for event in upcoming_events %}
-            <div>
-                <!-- Event card -->
-                {% include "events/_event_card.html" %}
-                <div class="mt-2 text-end">
-                    <!-- Edit -->
-                    <a href="{% url 'event_edit' event.slug %}" class="btn btn-sm btn-dark">Edit</a>
-                    <!-- Cancel -->
-                    <form method="post" action="{% url 'event_cancel' event.slug %}" class="d-inline">
-                        {% csrf_token %}
-                        {% if event.cancelled %}
-                        <button type="submit" class="btn btn-sm btn-success">Uncancel</button>
-                        {% else %}
-                        <button type="submit" class="btn btn-sm btn-secondary">Cancel</button>
-                        {% endif %}
-                    </form>
-                    <!-- Delete -->
-                    <button type="button" class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal" data-event-title="{{ event.title }}"
-                        data-event-date="{{ event.date }}" data-delete-url="{% url 'event_delete' event.slug %}">
-                        Delete
-                    </button>
+    <!-- Upcoming Events Section -->
+    <section id="upcoming-events-profile" aria-labelledby="upcoming-events-title">
+        <h2 id="upcoming-events-title">Upcoming Events</h2>
 
-                </div>
+        {% if upcoming_events %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for event in upcoming_events %}
+                    <div>
+                        <!-- Event card -->
+                        {% include "events/_event_card.html" %}
+
+                        <!-- Event actions -->
+                        <div class="mt-2 text-end" role="group" aria-label="Event actions">
+                            <!-- Edit -->
+                            <a href="{% url 'event_edit' event.slug %}" class="btn btn-sm btn-dark">Edit</a>
+
+                            <!-- Cancel / Uncancel -->
+                            <form method="post" action="{% url 'event_cancel' event.slug %}" class="d-inline">
+                                {% csrf_token %}
+                                {% if event.cancelled %}
+                                    <button type="submit" class="btn btn-sm btn-success">Uncancel</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-sm btn-secondary">Cancel</button>
+                                {% endif %}
+                            </form>
+
+                            <!-- Delete -->
+                            <button type="button" class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal" data-event-title="{{ event.title }}"
+                                    data-event-date="{{ event.date }}" data-delete-url="{% url 'event_delete' event.slug %}">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
 
-            {% endfor %}
-        </div>
-        {% if is_paginated %}
-        {% include "events/_page_navigation.html" %}
-        {% endif %}
+            {% if is_paginated %}
+                {% include "events/_page_navigation.html" %}
+            {% endif %}
 
         {% else %}
-        <p class="lead">No upcoming events found :(</p>
+            <p class="lead">No upcoming events found :(</p>
         {% endif %}
     </section>
 
 </div>
 
+<!-- Shapedivider -->
 <div class="shapedivider">
-    <!-- https://www.shapedivider.app/ -->
-    <!-- https://www.youtube.com/watch?v=0QTzTOJCzLY -->
+    <!-- See: https://www.shapedivider.app/ -->
+    <!-- See: https://www.youtube.com/watch?v=0QTzTOJCzLY -->
     <div class="custom-shape-divider-top-1759053598">
         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path
@@ -66,52 +72,47 @@
         </svg>
     </div>
 
-    <!-- Past Events Section -->
-    <div class="container py-4">
-        <section id="past-events-profile">
 
-            <h2 class="mt-5">Past Events</h2>
-            <!-- Table -->
-            {% if past_events %}
-            <div class="list-group">
-                {% for event in past_events %}
-                <div class="list-group-item d-flex justify-content-between align-items-center">
+<!-- Past Events Section -->
+<section id="past-events-profile" aria-labelledby="past-events-title" class="container py-4">
+    <h2 id="past-events-title" class="mt-5">Past Events</h2>
+
+    {% if past_events %}
+        <ul class="list-group">
+            {% for event in past_events %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
                         <a href="{% url 'event_detail' event.slug %}" class="event-link">
                             <strong>{{ event.title }}</strong>
                         </a><br>
                         {{ event.date }} {{ event.start_time }}
                     </div>
-                    <div>
+                    <div role="group" aria-label="Event actions">
                         <button type="button" class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal" data-event-title="{{ event.title }}"
-                            data-event-date="{{ event.date }}" data-delete-url="{% url 'event_delete' event.slug %}">
+                                data-bs-target="#deleteModal" data-event-title="{{ event.title }}"
+                                data-event-date="{{ event.date }}" data-delete-url="{% url 'event_delete' event.slug %}">
                             Delete
                         </button>
-
                     </div>
-                </div>
-                {% endfor %}
-            </div>
-            {% else %}
-            <p class="lead text-white">No past events found.</p>
-            {% endif %}
-    </div>
-    </section>
-
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="lead text-white">No past events found.</p>
+    {% endif %}
+</section>
 </div>
 
 <!-- Delete confirmation modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-describedby="deleteModalBody" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalLabel">Delete Event?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                Are you sure you want to delete "<span id="modalEventTitle"></span>" on <span id="modalEventDate"></span>?
-                This action cannot be undone.
+            <div class="modal-body" id="deleteModalBody">
+                Are you sure you want to delete "<span id="modalEventTitle"></span>" on <span id="modalEventDate"></span>? This action cannot be undone.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -124,8 +125,6 @@
         </div>
     </div>
 </div>
-
-
 
 {% endblock %}
 

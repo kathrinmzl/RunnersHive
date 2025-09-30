@@ -1,33 +1,34 @@
 {% extends "base.html" %}
 
-<!-- {% load widget_tweaks %} -->
-
-{% url 'events' as events_url %}
-
-{% block title %}Upcoming Events | RunnersHive{% endblock %}
-
-{% block content %}
-
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="container my-4">
-    <h1 class="mb-4 text-center">Upcoming Events</h1>
-    <p class="mb-4 text-center lead">Browse upcoming events and join our local running communities!</p>
+{% url 'events' as events_url %}
 
+{% block title %}Upcoming Events | Runners Hive{% endblock %}
+
+{% block content %}
+
+<!-- Upcoming Events Section -->
+<section id="upcoming-events" aria-labelledby="upcoming-events-title" class="container my-4">
+    <h1 id="upcoming-events-title" class="mb-4 text-center">Upcoming Events</h1>
+    <p class="mb-4 text-center lead">
+        Browse upcoming events and join our local running communities!
+    </p>
 
     <!-- Filter Form -->
-    <!-- https://getbootstrap.com/docs/5.0/components/collapse/ -->
-
-    <!-- Toggle Button -->
+     
+    <!-- Toggle Button for Collapsible Filters -->
+    <!-- See: https://getbootstrap.com/docs/5.0/components/collapse/ -->
     <button class="btn btn-dark-big-outline mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#eventFilters"
-        aria-expanded="false" aria-controls="eventFilters">
+            aria-expanded="false" aria-controls="eventFilters">
         Filter Events ▾
     </button>
 
-    <!-- Collapsible Area -->
+    <!-- Collapsible Filter Area -->
     <div class="collapse" id="eventFilters">
-        <form method="get" class="mb-4 event-filter-form">
+        <form method="get" class="mb-4 event-filter-form" aria-label="Event filter form">
+
             <div class="filter-group">
                 {{ form.category|as_crispy_field }}
             </div>
@@ -48,21 +49,22 @@
         </form>
     </div>
 
-
-    <!-- Events list -->
+    <!-- Events List -->
     {% if events %}
-    <!-- One col on small screens, 3 cols on medium or larger screens -->
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for event in events %}
-        {% include "events/_event_card.html" %}
-        {% endfor %}
-    </div>
-    {% if is_paginated %}
-    {% include "events/_page_navigation.html" %}
-    {% endif %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for event in events %}
+                {% include "events/_event_card.html" %}
+            {% endfor %}
+        </div>
 
+        {% if is_paginated %}
+            {% include "events/_page_navigation.html" %}
+        {% endif %}
+
+    <!-- No Events Message -->
     {% else %}
-    <p class="text-center lead">No upcoming events found :(</p>
+        <p class="text-center lead" role="status">No upcoming events found :(</p>
     {% endif %}
-</div>
+</section>
+
 {% endblock %}
