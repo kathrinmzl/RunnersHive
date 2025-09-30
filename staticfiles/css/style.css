@@ -7,46 +7,38 @@
   --secondary-font: "Alfa Slab One", serif;
 
   --background-color-primary: #FFC700;
-  /*  */
   --background-color-secondary: #000000;
-  /*  */
   --background-color-secondary-transparent: rgba(0, 0, 0, 0.75);
-
   --background-color-light: #FFFFFF;
-  /*  */
   --background-color-light-transparent: rgba(255, 255, 255, 0.75);
-  /*  */
-  --background-color-forms: #EAE8E2;
-  /*  */
+  --background-color-modal: #EAE8E2;
   --background-color-cards: rgba(255, 255, 255, 0.2);
-  /*  */
-  --text-color-primary: #000000;
-  /* dark text color for lighter background */
-  --text-color-secondary: #FFFFFF;
-  /* light text color for darker background */
+  --background-color-organizer-badge: #6cb872;
 
-  --highlight-color: #FAD536;
-  --highlight-color-dark: #FFB40C;
+  --text-color-primary: #000000;
+  --text-color-secondary: #FFFFFF;
+
+  /* Breakpoints */
+  --screen-xs: 480px;
+  --screen-sm: 768px;
+  --screen-md: 992px;
+  --screen-lg: 1200px;
 }
 
-/* General Styles */
-/* * {
-  margin: 0;
-  padding: 0;
-} */
+/* General styles */
 body {
   font-family: var(--primary-font);
   background-color: var(--background-color-primary);
   color: var(--text-color-primary);
 }
 
-h1,
-h2 {
+h1, h2 {
   font-family: var(--secondary-font);
   line-height: 1.5em;
 }
 
 /* Buttons */
+/* Dark big buttons */
 .btn-dark-big {
   background-color: var(--background-color-secondary);
   color: var(--text-color-secondary);
@@ -55,25 +47,23 @@ h2 {
   padding: 12px;
   margin: 10px;
 }
-
 .btn-dark-big:hover {
   background-color: var(--background-color-secondary-transparent);
-  color: var(--text-color-secondary);
 }
 
+/* Dark outline */
 .btn-dark-big-outline {
-  border: solid, var(--background-color-secondary);
+  border: 1px solid var(--background-color-secondary);
   color: var(--text-color-primary);
   border-radius: 0.8rem;
   padding: 10px;
 }
-
 .btn-dark-big-outline:hover {
   background-color: var(--background-color-secondary);
-  border: solid, var(--background-color-secondary);
   color: var(--text-color-secondary);
 }
 
+/* Light big buttons */
 .btn-light-big {
   background-color: var(--background-color-light);
   color: var(--text-color-primary);
@@ -82,20 +72,35 @@ h2 {
   padding: 12px;
   margin: 10px;
 }
-
 .btn-light-big:hover {
   background-color: var(--background-color-light-transparent);
-  color: var(--text-color-primary);
 }
 
+/* Standard dark button */
+.btn-dark {
+  background-color: var(--background-color-secondary);
+}
 .btn-dark:hover {
   background-color: var(--background-color-secondary-transparent);
   color: var(--text-color-secondary);
 }
 
-/* Page seperator wave */
-/* https://www.shapedivider.app/ */
-/* https://www.youtube.com/watch?v=0QTzTOJCzLY */
+/* Signup button */
+.btn-signup {
+  background-color: var(--background-color-secondary);
+  color: var(--text-color-secondary);
+}
+.btn-signup:hover,
+.btn-signup:active {
+  background-color: var(--background-color-secondary-transparent);
+}
+
+/* Links */
+.link { color: var(--text-color-primary); }
+
+/* Shapedivider */
+/* See: https://www.shapedivider.app/ */
+/* See: https://www.youtube.com/watch?v=0QTzTOJCzLY */
 .custom-shape-divider-top-1759053598 {
   position: absolute;
   top: 0;
@@ -116,14 +121,14 @@ h2 {
   fill: var(--background-color-primary);
 }
 
-/** For mobile devices **/
-@media (max-width: 767px) {
+@media (max-width: var(--screen-sm)) {
   .custom-shape-divider-top-1759053598 svg {
     width: calc(100% + 1.3px);
     height: 41px;
   }
 }
 
+/* Shapedivider background */
 .shapedivider {
   position: relative;
   background-color: var(--background-color-secondary);
@@ -131,7 +136,7 @@ h2 {
   margin-bottom: 0;
 }
 
-/* Pagination of event lists */
+/* Pagination */
 .pagination {
   margin-top: 2rem;
   display: flex;
@@ -144,74 +149,57 @@ h2 {
   background-color: var(--background-color-secondary);
   border: 1px solid var(--background-color-secondary);
   border-radius: 0.3rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   color: var(--text-color-secondary);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
   margin: 0 0.25rem;
 }
 
-.pagination .page-link:hover {
-  background-color: transparent;
-  color: var(--text-color-primary);
-  border-color: var(--text-color-primary);
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  text-decoration: none;
-}
-
+.pagination .page-link:hover,
 .pagination .active .page-link {
   background-color: transparent;
   color: var(--text-color-primary);
   border-color: var(--text-color-primary);
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  text-decoration: none;
 }
 
-
 /* ------------------ base.hmtl ------------------ */
-
 /* Navbar */
 .navbar-brand {
   font-family: var(--secondary-font);
   font-size: 1.5rem;
 }
 
-/* Small screens and up: larger Brandtext */
 @media (min-width: 375px) {
   .navbar-brand {
     font-size: 1.8rem;
   }
 }
 
-.navbar-brand .logo {
-  display: block;
-}
+.navbar-brand .logo { display: block; }
 
 .navbar-nav {
   font-size: 1.3rem;
   font-weight: 600;
   display: flex;
-  /* vertically center links + button */
   align-items: center;
-  /* spacing between nav items */
   gap: 0.5rem;
 }
 
 /* Toasts */
 .alert-toast {
   position: fixed;
-  top: 70px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
-  /* centers it */
   z-index: 2000;
   width: calc(100% - 20px);
-  /* 10px margin each side */
   max-width: 500px;
 }
 
-/* Medium screens and up: stick to the right */
-@media (min-width: 768px) {
+@media (min-width: var(--screen-sm)) {
   .alert-toast {
     left: auto;
     right: 20px;
@@ -220,12 +208,7 @@ h2 {
   }
 }
 
-/* Footer */
-
-
-
 /* ------------------ index.hmtl ------------------ */
-
 /* Hero section */
 .hero-image {
   width: 100%;
@@ -239,48 +222,27 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* black overlay, 40% opacity */
-  background-color: rgba(0, 0, 0, 0.4);
-
+  background-color: rgba(0,0,0,0.4);
   color: white;
   text-align: center;
   padding: 20px;
 }
 
-/* Responsive font and button sizes */
-.hero-overlay h1 {
-  font-size: 3rem;
+.hero-overlay h1 { font-size: 3rem; }
+.hero-overlay p { font-size: 1.75rem; }
+
+@media (max-width: var(--screen-sm)) {
+  .hero-overlay h1 { font-size: 1.75rem; }
+  .hero-overlay p { font-size: 1rem; }
 }
 
-.hero-overlay p {
-  font-size: 1.75rem;
-}
-
-/* Smaller screens */
-@media (max-width: 768px) {
-  .hero-overlay h1 {
-    font-size: 1.75rem;
-  }
-
-  .hero-overlay p {
-    font-size: 1rem;
-  }
-}
-
-/* Extra small screens */
-@media (max-width: 480px) {
-  .hero-overlay h1 {
-    font-size: 1.4rem;
-  }
-
-  .hero-overlay p {
-    font-size: 0.9rem;
-  }
+@media (max-width: var(--screen-xs)) {
+  .hero-overlay h1 { font-size: 1.4rem; }
+  .hero-overlay p { font-size: 0.9rem; }
 }
 
 /* Create Event Section */
@@ -289,10 +251,7 @@ h2 {
   padding-bottom: 35px;
 }
 
-.create-event-img {
-  min-height: 260px;
-}
-
+.create-event-img { min-height: 260px; }
 .create-event-img img {
   display: block;
   width: 100%;
@@ -305,41 +264,19 @@ h2 {
   color: var(--text-color-secondary);
   max-width: 420px;
   width: 100%;
-  /* vertical centering of content */
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 1rem 1.5rem;
 }
 
-
-/* Optional: avoid the card touching footer by reducing overlap on very small viewports */
-/* @media (max-width: 420px) {
-  .create-event-text {
-    transform: translateY(-12%);
-  }
-
-  .create-event-img {
-    min-height: 220px;
-  }
-} */
-
-
-/* Use ?? */
-/* .light-bg {
-    background-color: #fff;
+@media (max-width: var(--screen-sm)) {
+  #create-event-section .btn-light-big { font-size: 1.1rem; }
+  #todays-events .btn-dark-big { font-size: 1.1rem; }
 }
-
-.dark-bg {
-    background-color: #445261;
-}
-
-.main-bg {
-    background-color: #F9FAFC;
-} */
 
 /* ------------------ _event_card.hmtl ------------------ */
-/* General styles */
+/* Event card general styles */
 .card {
   border: none;
   background-color: var(--background-color-cards);
@@ -349,29 +286,21 @@ h2 {
 }
 
 .card:hover {
-  /* Zoom in */
   transform: scale(1.03);
-  /* Shadow for depth */
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-  /* Show above other cards if overlapping */
   z-index: 10;
 }
 
 .card:hover img {
-  /* Dim the image */
   filter: brightness(0.9);
 }
 
-/* Image */
-.image-container {
-  position: relative;
-}
-
+/* Image container */
+.image-container { position: relative; }
 .card-img-top {
   height: 200px;
   object-fit: cover;
   border-radius: 0.8rem 0.8rem 0 0;
-  /* top corners only */
 }
 
 /* Badges */
@@ -381,15 +310,13 @@ h2 {
   text-transform: uppercase;
   text-align: center;
 }
-
 .image-badge-organizer {
   position: absolute;
   bottom: 5%;
   min-width: 30%;
   left: -2px;
-  background-color: #6cb872;
+  background-color: var(--background-color-organizer-badge);
 }
-
 .image-badge-cancelled {
   position: absolute;
   top: 5%;
@@ -397,27 +324,29 @@ h2 {
   right: -2px;
 }
 
-/* Card Body */
+/* Card body links */
 .event-link {
   text-decoration: none;
   color: var(--text-color-primary);
 }
-
 .event-link:hover {
   color: var(--text-color-primary);
 }
 
+/* Stack buttons only for medium screens */
+@media (min-width: var(--screen-sm)) and (max-width: calc(var(--screen-md) - 1px)) {
+  .event-actions .d-flex {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+}
+
 /* ------------------ event_list.hmtl ------------------ */
-/* Filter Form Layout */
-.event-filter-form {
-  padding: 1rem;
-}
+/* Filter form layout */
+.event-filter-form { padding: 1rem; }
+.filter-group { margin-bottom: 1rem; }
 
-.filter-group {
-  margin-bottom: 1rem;
-}
-
-@media (min-width: 768px) {
+@media (min-width: var(--screen-sm)) {
   .event-filter-form {
     display: flex;
     flex-wrap: wrap;
@@ -426,11 +355,11 @@ h2 {
   }
 
   .filter-group {
-    /* 4-column layout */
     flex: 1 1 calc(25% - 1.5rem);
   }
 }
 
+/* Filter buttons */
 .filter-actions .btn {
   border-radius: 0.8rem;
   padding: 10px;
@@ -438,45 +367,46 @@ h2 {
   margin: 2px;
 }
 
-/* Custom checkbox color */
+/* Custom checkbox */
 .form-check-input:checked {
-    background-color: var(--text-color-primary);
-    border-color: var(--text-color-primary);
+  background-color: var(--text-color-primary);
+  border-color: var(--text-color-primary);
 }
 
-/* Filter Headings */
+/* Filter headings */
 .event-filter-form .form-label {
-    font-weight: 600;
-    font-size: 1.1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
-/* ------------------ event_detail.hmtl ------------------ */
-/* Image */
+
+/* ------------------ event_detail.html ------------------ */
+/* Event detail image */
 .event-detail-img-wrapper {
   position: relative;
   width: 100%;
-  height: 400px;
-  /* fixed height */
+  height: 300px;
   overflow: hidden;
-  /* crop overflow */
 }
 
-.event-detail-cancelled-badge {
-  position: absolute;
-  top: 10px;
-  /* distance from top */
-  right: 10px;
-  /* distance from right */
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
+@media (min-width: var(--screen-sm)) {
+  .event-detail-img-wrapper { height: 400px; }
 }
 
 .event-detail-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* scales and crops while filling the box */
   display: block;
+}
+
+/* Cancelled badge */
+.event-detail-cancelled-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 /* Info card */
@@ -490,33 +420,18 @@ h2 {
   color: var(--text-color-secondary);
 }
 
-/* slightly offset dark background */
 #past-events-profile .list-group-item {
-    background-color: #1a1a1a; 
-    color: var(--text-color-secondary);           
-    border-color: #333333;     
+  background-color: #1a1a1a;
+  color: var(--text-color-secondary);
+  border-color: #333333;
 }
 
 #past-events-profile .event-link {
   color: var(--text-color-secondary);
 }
-
 #past-events-profile .event-link:hover {
   color: var(--text-color-secondary);
 }
 
-/* Login/Signup */
-.link {
-  color: var(--text-color-primary);
-}
-
-.btn-signup {
-  background-color: var(--background-color-secondary);
-  color: var(--text-color-secondary);
-}
-
-.btn-signup:hover,
-.btn-signup:active {
-  background-color: var(--background-color-secondary-transparent);
-  color: var(--text-color-secondary);
-}
+/* Modals */
+.modal-content { background-color: var(--background-color-modal); }
