@@ -15,6 +15,13 @@ class Category(models.Model):
     by the admin.
     """
     name = models.CharField(max_length=50)
+    sort_order = models.PositiveIntegerField(
+        default=0, blank=False, null=False
+        )
+
+    class Meta:
+        # first by sort_order, then name as fallback
+        ordering = ['sort_order', 'name']
 
     def __str__(self):
         return self.name
@@ -48,7 +55,9 @@ class Event(models.Model):
     location = models.CharField(max_length=200)
     # Link and featured_image can be left blank
     link = models.URLField(blank=True, null=True)
-    featured_image = CloudinaryField('image', default='placeholder', blank=True, null=True)
+    featured_image = CloudinaryField(
+        'image', default='placeholder', blank=True, null=True
+        )
     cancelled = models.BooleanField(default=False)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="events"
