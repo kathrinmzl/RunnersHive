@@ -1,28 +1,56 @@
+"""
+Django admin configuration for the events app.
+Registers Event and Category models with custom admin settings.
+"""
+
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from .models import Event, Category
 
 
-# Register your models here.
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'sort_order',)  # name first
-    list_editable = ('sort_order',)         # sort_order editable
-    list_display_links = ('name',)          # name clickable
+    """
+    Admin configuration for Category model.
+
+    Allows managing categories in the admin with:
+    - Editable sort_order field for manual ordering
+    - Name as the clickable link to edit the category
+    """
+    # Fields displayed in admin list
+    list_display = ('name', 'sort_order')
+
+    # Allow editing of sort_order directly
+    list_editable = ('sort_order',)
+
+    # Name field clickable for editing
+    list_display_links = ('name',)
+
+    # Default ordering in admin list
     ordering = ('sort_order',)
 
 
 @admin.register(Event)
 class EventAdmin(SummernoteModelAdmin):
-    # Columns displayed in the Posts list page
+    """
+    Admin configuration for Event model.
+
+    Uses Summernote rich text editor for description.
+    Provides search, filtering and list display features.
+    """
+    # Columns displayed in the admin list page
     list_display = (
         'title', 'organizer', 'date', 'start_time', 'is_past', 'cancelled'
-        )
-    # Fields to enable fast search
+    )
+
+    # Fields that can be searched quickly
     search_fields = ('title', 'organizer', 'location', 'description')
-    # Sidebar filter for status
+
+    # Sidebar filters for easy filtering
     list_filter = ('cancelled', 'date', 'difficulty', 'category')
-    # Rich text only for description
+
+    # Rich text editor for description
     summernote_fields = ('description',)
-    # hide slug from admin form because it's auto generated in the model
+
+    # Exclude auto-generated slug from admin form
     exclude = ('slug',)

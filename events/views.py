@@ -1,37 +1,69 @@
+"""
+Views for the events app.
+
+Includes:
+- Class-based views for listing, creating, updating, and deleting events
+- Function-based views for event detail, deletion, and toggling cancel status
+- Context and filtering logic for events
+"""
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from datetime import date, timedelta, datetime
+from django.views.generic import ListView, CreateView, UpdateView
+from datetime import timedelta, datetime
 from .models import Event
 from .forms import EventFilterForm, EventForm
 
 
-# https://bastakiss.com/blog/django-6/enhancing-django-listview-with-dynamic-filtering-a-step-by-step-guide-403
-
-
 class TodaysEventsListView(ListView):
+    """
+    Display today's upcoming events on the homepage.
+
+    **Context:**
+
+    ``todays_events``
+        List of Event instances happening today and not past yet.
+
+    **Template:** :template:`index.html`
+    """
     model = Event
     template_name = "index.html"
     context_object_name = "todays_events"
     paginate_by = 6
 
-    # Return only todays and upcoming events, ordered by start_time    
     def get_queryset(self):
-        # Fetch all events of today
+        """
+        Return events happening today that have not already ended.
+        """
         todays_events = Event.objects.filter(
             date=timezone.localdate()
-            ).order_by("start_time")
-        # Filter only upcoming events
+        ).order_by("start_time")
         todays_upcoming_events = [e for e in todays_events if not e.is_past]
-
         return todays_upcoming_events
 
 
+# Extending ListView for Filtering see:
+# https://bastakiss.com/blog/django-6/enhancing-django-listview-with-dynamic-
+# filtering-a-step-by-step-guide-403
 class EventListView(ListView):
+    """
+    Display a paginated list of future events with filter options.
+
+    **Context:**
+
+    ``events``
+        List of future Event instances filtered by GET params.
+    ``form``
+        Instance of EventFilterForm to render filter inputs.
+    ``query_string``
+        URL-encoded GET parameters for preserving filters in pagination.
+
+    **Template:** :template:`events/event_list.html`
+    """
     model = Event
     template_name = "events/event_list.html"
     context_object_name = "events"
@@ -39,12 +71,10 @@ class EventListView(ListView):
 
     def get_queryset(self):
         """
-        Return only future events (date >= today), ordered by date and
-        start_time, filtered by category and difficulty if selected.
+        Return future events filtered by category, difficulty, date,
+        and cancellation status. Excludes events already in the past.
         """
-        # timezone-aware "today"
         today = timezone.localdate()
-
         queryset = Event.objects.filter(
             date__gte=today
         ).order_by("date", "start_time")
@@ -58,7 +88,7 @@ class EventListView(ListView):
             categories = self.form.cleaned_data.get("category")
             if categories:
                 queryset = queryset.filter(category__in=categories).distinct()
-            
+
             # Difficulty
             difficulties = self.form.cleaned_data.get("difficulty")
             if difficulties:
@@ -84,15 +114,13 @@ class EventListView(ListView):
             if exclude_cancelled:
                 queryset = queryset.filter(cancelled=False)
 
-        # Filter out events that are past using the is_past property
+        # Exclude events that are already past
         queryset = [e for e in queryset if not e.is_past]
-
         return queryset
 
     def get_context_data(self, **kwargs):
         """
-        Add all categories and difficulties to the context,
-        so we can render filter options in the template.
+        Add the filter form and preserved GET parameters to the context.
         """
         context = super().get_context_data(**kwargs)
         context["form"] = self.form
@@ -108,133 +136,149 @@ class EventListView(ListView):
 
 def event_detail(request, slug):
     """
-    Display an individual :model:`events.Event`.
+    Display a single :model:`events.Event` by slug.
 
-    **Context**
+    **Context:**
 
     ``event``
-        An instance of :model:`events.Event`.
+        Instance of Event corresponding to the slug.
 
-    **Template:**
-
-    :template:`events/event_detail.html`
+    **Template:** :template:`events/event_detail.html`
     """
-    queryset = queryset = Event.objects
-    # queryset = queryset = Event.objects.filter(
-    #         date__gte=date.today()
-    #     )
-    # get one post returned with that unique slug or an error message if slug doesnt exist
+    queryset = Event.objects
     event = get_object_or_404(queryset, slug=slug)
 
-    # print("About to render template")
-    return render(  # returns an HttpResponse
+    return render(
         request,
         "events/event_detail.html",
-        {
-            "event": event
-        },  # dict with the data -> available for use in the
-        # template as the DTL variable e.g. {{ event }}
+        {"event": event},
     )
 
 
 class EventCreateView(LoginRequiredMixin, CreateView):
+    """
+    Allow logged-in users to create a new event.
+
+    **Template:** :template:`events/event_form.html`
+    """
     model = Event
     form_class = EventForm
     template_name = "events/event_form.html"
 
     def form_valid(self, form):
-        # assign logged-in user as author
+        """
+        Set the logged-in user as author of the event and display a success
+        message.
+        """
         form.instance.author = self.request.user
-
-        # call parent first to ensure validation runs
         response = super().form_valid(form)
-
-        # Success message
-        messages.success(self.request, 
-                         f"Event '{form.instance.title}' created successfully!"
-                         )
-
+        messages.success(
+            self.request,
+            f"Event '{form.instance.title}' created successfully!"
+        )
         return response
 
     def form_invalid(self, form):
-        # Get the title from form data
-        title = form.cleaned_data.get('title') if 'title' in form.cleaned_data else 'Untitled Event'
-        # Show error message if validation fails
+        """
+        Display an error message if event creation fails.
+        """
+        # Get the title from form data if it's available
+        title = (
+            form.cleaned_data.get('title')
+            if 'title' in form.cleaned_data
+            else 'Untitled Event'
+        )
         messages.error(
             self.request,
-            f"Could not create event '{title}'.\
-                Please check your input."
+            f"Could not create event '{title}'. Please check your input."
         )
-        # Call parent to re-render the form with errors
         return super().form_invalid(form)
 
-    # show event detail page after event creation
     def get_success_url(self):
+        """Return the URL of the newly created event's detail page."""
         return reverse("event_detail", args=[self.object.slug])
 
 
 class ProfileView(LoginRequiredMixin, ListView):
+    """
+    Display upcoming and past events of the logged-in user.
+
+    **Context:**
+
+    ``upcoming_events``
+        Paginated list of user's upcoming events.
+    ``past_events``
+        List of user's past events (not paginated).
+
+    **Template:** :template:`events/profile.html`
+    """
     template_name = "events/profile.html"
     paginate_by = 9
     context_object_name = 'upcoming_events'
 
     def get_queryset(self):
-        # Fetch all events of the user
+        """
+        Return a sorted list of upcoming events for the logged-in user.
+        """
         all_events = Event.objects.filter(author=self.request.user)
-        # Filter using the is_past property
         upcoming = [e for e in all_events if not e.is_past]
-        # Sort by date + start_time
         upcoming.sort(key=lambda e: datetime.combine(e.date, e.start_time))
         return upcoming
 
     def get_context_data(self, **kwargs):
+        """
+        Add past events to the context for display.
+        """
         context = super().get_context_data(**kwargs)
-
-        # Fetch past events for display (no pagination)
         all_events = Event.objects.filter(author=self.request.user)
         past_events = [e for e in all_events if e.is_past]
-        past_events.sort(key=lambda e:
-                         datetime.combine(e.date, e.start_time), reverse=True)
+        past_events.sort(
+            key=lambda e: datetime.combine(e.date, e.start_time),
+            reverse=True
+        )
         context['past_events'] = past_events
-
         return context
 
 
 class EventUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    Allow users to update their own events.
+
+    **Template:** :template:`events/event_form.html`
+    """
     model = Event
     form_class = EventForm
-    template_name = "events/event_form.html"  # same as create
+    template_name = "events/event_form.html"
     context_object_name = "event"
 
     def get_queryset(self):
-        # Only allow editing of events the user owns
+        """Return events belonging to the logged-in user."""
         return Event.objects.filter(author=self.request.user)
 
     def form_valid(self, form):
-        # call parent to ensure validation and saving
+        """Save updated event and show a success message."""
         response = super().form_valid(form)
-
-        # Show success message
-        messages.success(self.request, 
-                         f"Event '{form.instance.title}' updated successfully!"
-                         )
-
+        messages.success(
+            self.request,
+            f"Event '{form.instance.title}' updated successfully!"
+        )
         return response
 
     def form_invalid(self, form):
-        # Safely get the title from form data
-        title = form.cleaned_data.get('title') if 'title' in form.cleaned_data else 'Untitled Event'
-        # Show error message if validation fails
+        """Show an error message if update fails."""
+        title = (
+            form.cleaned_data.get('title')
+            if 'title' in form.cleaned_data
+            else 'Untitled Event'
+        )
         messages.error(
             self.request,
-            f"Could not update event '{title}'.\
-                Please check your input."
+            f"Could not update event '{title}'. Please check your input."
         )
-        # Call parent to re-render the form with errors
         return super().form_invalid(form)
 
-    # show event detail page after event update
     def get_success_url(self):
+        """Return the URL of the updated event's detail page."""
         return reverse("event_detail", args=[self.object.slug])
 
 
@@ -242,48 +286,54 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
 def event_delete(request, slug):
     """
     Delete a single event belonging to the logged-in user.
+
+    **Template:** Redirects to profile page
+
     Shows a success or error message using Django messages.
     """
     event = get_object_or_404(Event, slug=slug, author=request.user)
 
     if request.method == "POST":
         event.delete()
-        messages.success(request,
-                         f"Event '{event.title}' deleted successfully!"
-                         )
-        return redirect("profile")  # redirect back to profile after deletion
+        messages.success(
+            request, f"Event '{event.title}' deleted successfully!"
+        )
+        return redirect("profile")
 
     # Redirect to profile if GET request or any other method
-    messages.error(request,
-                   f"Event '{event.title}' could not be deleted.\
-                    Invalid request method."
-                   )
+    messages.error(
+        request,
+        f"Event '{event.title}' could not be deleted. Invalid request method."
+    )
     return redirect("profile")
 
 
 @login_required
 def toggle_event_cancel(request, slug):
-    # Fetch the event belonging to the logged-in user
+    """
+    Toggle the 'cancelled' status of an event belonging to the logged-in user.
+
+    **Template:** Redirects to profile page
+
+    Shows success or error messages depending on the action.
+    """
     event = get_object_or_404(Event, slug=slug, author=request.user)
 
-    # Only allow this action if its a POST request
     if request.method == "POST":
-        # Toggle the current "cancelled" state
         event.cancelled = not event.cancelled
         event.save()
-
-        # Success message depending on new status
         if event.cancelled:
-            messages.warning(request,
-                             f"Event '{event.title}' has been cancelled.")
+            messages.warning(
+                request, f"Event '{event.title}' has been cancelled."
+            )
         else:
-            messages.success(request,
-                             f"Event '{event.title}' is active again.")
+            messages.success(
+                request, f"Event '{event.title}' is active again."
+            )
         return redirect("profile")
 
-    # Redirect user back to profile
-    messages.error(request, 
-                   f"Cancellation status of event '{event.title}' could not be\
-                    changed. Invalid request method."
-                   )
+    messages.error(
+        request,
+        f"Cancellation status of event '{event.title}' could not be changed."
+    )
     return redirect("profile")

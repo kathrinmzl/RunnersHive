@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-# for postgreSQL database
+# For connecting to PostgreSQL on Heroku
 import dj_database_url
-# env.py needs to be imported to be accessible
+
+# Import environment variables from env.py if it exists
 if os.path.isfile('env.py'):
     import env  # noqa
 
@@ -29,51 +30,59 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
-
 INSTALLED_APPS = [
+    # Default Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',  # cloudinary
-    # allauth
+
+    # Cloudinary for media storage
+    'cloudinary_storage',
+    'cloudinary',
+
+    # Allauth for authentication
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # forms
+
+    # Crispy forms for bootstrap rendering
     'crispy_forms',
     'crispy_bootstrap5',
-    # text editor
+
+    # Rich text editor
     'django_summernote',
-    'cloudinary',
+
+    # Template tweaks for forms
     'widget_tweaks',
-    # own apps
+
+    # Custom apps
     'events',
 ]
 
-# for allauth
+# Allauth settings
 SITE_ID = 1
-# after we've logged in or logged out,
-# the site will automatically redirect us to the home page
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+# Disable email verification for simplicity
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-# for crispy forms: set bootstrap5 as default
+# Crispy forms settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-# https://github.com/lqez/django-summernote
+# Summernote rich text editor configuration
+# See: https://github.com/lqez/django-summernote
 SUMMERNOTE_CONFIG = {
-    # Custom Summernote settings
     'summernote': {
         'width': '100%',
         'height': '480',
@@ -102,7 +111,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # allauth
+
+    # Allauth middleware
     'allauth.account.middleware.AccountMiddleware',
 ]
 
@@ -111,7 +121,7 @@ ROOT_URLCONF = 'runnershive.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [TEMPLATES_DIR],  # Custom templates directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,22 +136,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'runnershive.wsgi.application'
 
 
-# Database
+# Database configuration
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# Connection to CI PostgreSQL Database
+# Use dj_database_url to parse DATABASE_URL from environment (Heroku)
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
-# Trusted origins for submitting forms
+# Trusted origins for submitting forms (CSRF protection)
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
     "https://*.herokuapp.com"
@@ -150,7 +153,6 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
@@ -166,31 +168,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# allauth
-# We are not using email verification in this project
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Berlin'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
