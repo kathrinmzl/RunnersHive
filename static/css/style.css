@@ -17,12 +17,6 @@
 
   --text-color-primary: #000000;
   --text-color-secondary: #FFFFFF;
-
-  /* Breakpoints */
-  --screen-xs: 480px;
-  --screen-sm: 768px;
-  --screen-md: 992px;
-  --screen-lg: 1200px;
 }
 
 /* General styles */
@@ -131,7 +125,7 @@ h2 {
   fill: var(--background-color-primary);
 }
 
-@media (max-width: var(--screen-sm)) {
+@media (max-width: 768px) {
   .custom-shape-divider-top-1759053598 svg {
     width: calc(100% + 1.3px);
     height: 41px;
@@ -211,7 +205,7 @@ h2 {
   max-width: 500px;
 }
 
-@media (min-width: var(--screen-sm)) {
+@media (min-width: 768px) {
   .alert-toast {
     left: auto;
     right: 20px;
@@ -252,7 +246,7 @@ h2 {
   font-size: 1.75rem;
 }
 
-@media (max-width: var(--screen-sm)) {
+@media (max-width: 768px) {
   .hero-overlay h1 {
     font-size: 1.75rem;
   }
@@ -262,7 +256,7 @@ h2 {
   }
 }
 
-@media (max-width: var(--screen-xs)) {
+@media (max-width: 480px) {
   .hero-overlay h1 {
     font-size: 1.4rem;
   }
@@ -300,7 +294,7 @@ h2 {
   padding: 1rem 1.5rem;
 }
 
-@media (max-width: var(--screen-sm)) {
+@media (max-width: 768px) {
   #create-event-section .btn-light-big {
     font-size: 1.1rem;
   }
@@ -375,7 +369,7 @@ h2 {
 }
 
 /* Stack buttons only for medium screens */
-@media (min-width: var(--screen-sm)) and (max-width: calc(var(--screen-md) - 1px)) {
+@media (min-width: 768px) and (max-width: 991px) {
   .event-actions .d-flex {
     flex-direction: column !important;
     align-items: stretch !important;
@@ -392,7 +386,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
-@media (min-width: var(--screen-sm)) {
+@media (min-width: 768px) {
   .event-filter-form {
     display: flex;
     flex-wrap: wrap;
@@ -435,7 +429,7 @@ h2 {
   overflow: hidden;
 }
 
-@media (min-width: var(--screen-sm)) {
+@media (min-width: 768px) {
   .event-detail-img-wrapper {
     height: 400px;
   }
