@@ -57,10 +57,10 @@ class Event(models.Model):
         INTERMEDIATE = "INTERMEDIATE", "Intermediate"
         ADVANCED = "ADVANCED", "Advanced"
 
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=100, unique=True)
     # Allow blank so save() can auto-generate the slug
     slug = models.SlugField(unique=True, blank=True)
-    organizer = models.CharField(max_length=200)
+    organizer = models.CharField(max_length=40)
     description = models.TextField()
     date = models.DateField()
     start_time = models.TimeField()
@@ -73,7 +73,7 @@ class Event(models.Model):
     difficulty = models.CharField(
         max_length=20, choices=Difficulty.choices, null=True
     )
-    location = models.CharField(max_length=200)
+    location = models.CharField(max_length=100)
 
     # Optional link to external event page
     link = models.URLField(blank=True, null=True)
