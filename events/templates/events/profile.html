@@ -17,7 +17,7 @@
         <h2 id="upcoming-events-title">Upcoming Events</h2>
 
         {% if upcoming_events %}
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 {% for event in upcoming_events %}
                     <!-- Event card -->
                     {% include "events/_event_card.html" with show_buttons=True %}

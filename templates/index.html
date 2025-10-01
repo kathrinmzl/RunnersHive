@@ -21,7 +21,7 @@
     <h2 id="todays-events-title" class="text-center mb-4">Today's Events</h2>
 
     {% if todays_events %}
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for event in todays_events %}
           {% include "events/_event_card.html" %}
         {% endfor %}
