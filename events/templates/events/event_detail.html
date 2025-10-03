@@ -35,8 +35,8 @@
     <section aria-labelledby="event-details-title" class="row mt-md-5">
         <!-- Left Column: Event Description -->
         <div class="col-md-8 order-2 order-md-1 mt-5 mt-md-0">
-            <h2 id="event-details-title h4">About this event</h2>
-            <p>{{ event.description|safe|linebreaks }}</p>
+            <h2 id="event-details-title" class="h4">About this event</h2>
+            {{ event.description|safe }}
         </div>
 
         <!-- Right Column: Event Info Card -->
