@@ -102,7 +102,7 @@
 
         <!-- Display Django messages as Bootstrap Toasts -->
         <!-- See: https://getbootstrap.com/docs/5.0/components/toasts/ -->
-        <section aria-live="assertive" aria-atomic="true">
+        <div aria-live="assertive" aria-atomic="true">
             {% for message in messages %}
                 <div class="toast alert-toast" role="alert"
                      data-bs-autohide="{% if message.tags == 'success' %}true{% else %}false{% endif %}"
@@ -118,7 +118,7 @@
                     </div>
                 </div>
             {% endfor %}
-        </section>
+            </div>
 
         <!-- Page-specific content -->
         {% block content %}
@@ -127,7 +127,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-4" role="contentinfo">
+    <footer class="footer mt-auto py-4">
         <div class="container d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center text-center text-md-start">
 
             <!-- Copyright -->
