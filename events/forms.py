@@ -44,7 +44,7 @@ class EventFilterForm(forms.Form):
             ('all', 'All')
         ],
         required=False,
-        widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
+        widget=forms.RadioSelect,
         initial='all'  # Preselect "All" by default
     )
 
