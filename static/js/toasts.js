@@ -1,3 +1,5 @@
+/* jshint esversion: 11 */
+
 document.addEventListener('DOMContentLoaded', function () {
     // Select all elements with the class 'toast'
     const toastElements = document.querySelectorAll('.toast');
