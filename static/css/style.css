@@ -337,7 +337,7 @@ h2 {
 
 /* Badges */
 .image-badge-text {
-  color: var(--text-color-secondary);
+  color: var(--text-color-primary);
   margin: 4px;
   text-transform: uppercase;
   text-align: center;
