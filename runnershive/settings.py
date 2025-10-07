@@ -30,10 +30,18 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
+# Trusted origins for submitting forms (CSRF protection)
+CSRF_TRUSTED_ORIGINS = []
+
+host = os.environ.get("HOST")
+
+if host:
+    ALLOWED_HOSTS.append(host)
+    CSRF_TRUSTED_ORIGINS.append(f"https://{host}")
 
 # Application definition
 INSTALLED_APPS = [
@@ -67,6 +75,7 @@ INSTALLED_APPS = [
 
     # Custom apps
     'events',
+    'runnershive',
 ]
 
 # Allauth settings
@@ -143,12 +152,6 @@ WSGI_APPLICATION = 'runnershive.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
-
-# Trusted origins for submitting forms (CSRF protection)
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.codeinstitute-ide.net/",
-    "https://*.herokuapp.com"
-]
 
 
 # Password validation
