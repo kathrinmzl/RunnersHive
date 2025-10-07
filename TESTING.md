@@ -250,7 +250,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | Authentication | Login should accept valid credentials and reject invalid ones. | Attempted login with wrong password. | Error message displayed. | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/login-invalid.mp4" type="video/mp4">Your browser does not support the video tag.</video> |
 | | Logout should remove access to restricted pages. | Logged out then accessed `/events/create/`. | Redirected to login. | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/logout-access.mp4" type="video/mp4">Your browser does not support the video tag.</video> |
 | URL Brute Force | Users should not access admin or restricted pages via URL. | Tried navigating to `/admin/` as standard user. | Access denied as expected. | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/brute-force-admin.mp4" type="video/mp4">Your browser does not support the video tag.</video>  |
-| 404 Error Page | Invalid URLs should show custom 404 page. | Navigated to `/nonexistent`. | Custom 404 page displayed. | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/404.mp4" type="video/mp4">Your browser does not support the video tag.</video> |
+| 404 Error Page | Invalid URLs should show custom 404 page. | Navigated to `/nonexistent`. | Custom 404 page displayed. | https://github.com/user-attachments/assets/437c8219-1418-4bf2-954c-666037bb3c6c |
 
 
 ## User Story Testing
