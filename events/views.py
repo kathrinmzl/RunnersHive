@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.contrib import messages
 from django.utils import timezone
 from django.views.generic import ListView, CreateView, UpdateView
@@ -254,6 +255,15 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         """Return events belonging to the logged-in user."""
         return Event.objects.filter(author=self.request.user)
+
+    def dispatch(self, request, *args, **kwargs):
+        """Prevent editing past events by raising 404."""
+        event = self.get_object()
+
+        if event.is_past:
+            return render(request, "404.html", status=404)
+
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         """Save updated event and show a success message."""
