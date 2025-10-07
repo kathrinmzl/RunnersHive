@@ -74,35 +74,22 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 
 ## Responsiveness
 
-⚠️ INSTRUCTIONS ⚠️
-
-Use this space to discuss testing the live/deployed site on various device sizes.
-
-The minimum requirement is to test the following 3 sizes:
-
-- Mobile
-- Tablet
-- Desktop
-
-**IMPORTANT**: You must provide screenshots of your results, to "prove" that you've actually tested them.
-
-Using the [amiresponsive](http://ami.responsivedesign.is) mockup images (*or similar*) does not meet the requirements. Consider using some of the built-in device sizes from the Developer Tools.
-
-If you have tested the project on your actual mobile phone or tablet, consider also including screenshots of these as well. It showcases a higher level of manual tests, and can be seen as a positive inclusion!
-
-⚠️ --- END --- ⚠️
-
 I've tested my deployed project to check for responsiveness issues.
+
+I've only documented the 404 error page, as the other error pages use the same layout and only differ in the displayed text, so the test results are the same.
 
 | Page | Mobile | Tablet | Desktop | Notes |
 | --- | --- | --- | --- | --- |
-| Register | ![screenshot](documentation/responsiveness/mobile-register.png) | ![screenshot](documentation/responsiveness/tablet-register.png) | ![screenshot](documentation/responsiveness/desktop-register.png) | Works as expected |
-| Login | ![screenshot](documentation/responsiveness/mobile-login.png) | ![screenshot](documentation/responsiveness/tablet-login.png) | ![screenshot](documentation/responsiveness/desktop-login.png) | Works as expected |
-| Home | ![screenshot](documentation/responsiveness/mobile-home.png) | ![screenshot](documentation/responsiveness/tablet-home.png) | ![screenshot](documentation/responsiveness/desktop-home.png) | Works as expected |
-| Add Blog | ![screenshot](documentation/responsiveness/mobile-add-blog.png) | ![screenshot](documentation/responsiveness/tablet-add-blog.png) | ![screenshot](documentation/responsiveness/desktop-add-blog.png) | Works as expected |
-| Edit Blog | ![screenshot](documentation/responsiveness/mobile-edit-blog.png) | ![screenshot](documentation/responsiveness/tablet-edit-blog.png) | ![screenshot](documentation/responsiveness/desktop-edit-blog.png) | Works as expected |
-| Blog Post | ![screenshot](documentation/responsiveness/mobile-blog-post.png) | ![screenshot](documentation/responsiveness/tablet-blog-post.png) | ![screenshot](documentation/responsiveness/desktop-blog-post.png) | Works as expected |
-| 404 | ![screenshot](documentation/responsiveness/mobile-404.png) | ![screenshot](documentation/responsiveness/tablet-404.png) | ![screenshot](documentation/responsiveness/desktop-404.png) | Works as expected |
+| Homepage | ![screenshot](docs/testing/responsiveness/mobile-homepage-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-homepage-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-homepage-resp.png) | Works as expected |
+| Events | ![screenshot](docs/testing/responsiveness/mobile-events-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-events-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-events-resp.png) | Works as expected |
+| Event Details | ![screenshot](docs/testing/responsiveness/mobile-event-details-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-event-details-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-event-details-resp.png) | Works as expected |
+| Profile | ![screenshot](docs/testing/responsiveness/mobile-profile-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-profile-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-profile-resp.png) | Works as expected |
+| Create Event | ![screenshot](docs/testing/responsiveness/mobile-create-event-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-create-event-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-create-event-resp.png) | Works as expected |
+| Login | ![screenshot](docs/testing/responsiveness/mobile-login-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-login-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-login-resp.png) | Works as expected |
+| Signup | ![screenshot](docs/testing/responsiveness/mobile-signup-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-signup-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-signup-resp.png) | Works as expected |
+| Logout | ![screenshot](docs/testing/responsiveness/mobile-logout-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-logout-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-logout-resp.png) | Works as expected |
+| Error pages 400, 403, 404, 500 (Example: 404) | ![screenshot](docs/testing/responsiveness/mobile-404-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-404-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-404-resp.png) | Works as expected |
+
 
 ## Browser Compatibility
 
