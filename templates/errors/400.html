@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Bad Request | Runners Hive{% endblock %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <h1 class="display-4 mb-3">Bad Request 💥🚧</h1>
+    <p class="lead mb-4">Oops! Looks like something went sideways. Make sure your request is valid before trying again.</p>
+
+    <a href="{% url 'home' %}" class="btn btn-dark">Retreat to Safety</a>
+</div>
+{% endblock %}
