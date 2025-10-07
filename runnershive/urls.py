@@ -18,6 +18,7 @@ Including another URLconf
 from events import views
 from django.contrib import admin
 from django.urls import path, include
+from .views import handler400, handler403, handler404, handler500
 
 # URL Paths ordered alphabetically
 urlpatterns = [
@@ -27,3 +28,8 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('', views.TodaysEventsListView.as_view(), name="home"),
 ]
+
+handler400 = "runnershive.views.handler400"
+handler403 = "runnershive.views.handler403"
+handler404 = "runnershive.views.handler404"
+handler500 = "runnershive.views.handler500"
