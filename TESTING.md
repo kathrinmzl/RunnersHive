@@ -74,7 +74,7 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 
 ## Responsiveness
 
-I've tested my deployed project to check for responsiveness issues.
+I've tested my deployed project for responsiveness across screen sizes and found no issues.
 
 I've only documented the 404 error page, as the other error pages use the same layout and only differ in the displayed text, so the test results are the same.
 
@@ -90,38 +90,23 @@ I've only documented the 404 error page, as the other error pages use the same l
 | Logout | ![screenshot](docs/testing/responsiveness/mobile-logout-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-logout-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-logout-resp.png) | Works as expected |
 | Error pages 400, 403, 404, 500 (Example: 404) | ![screenshot](docs/testing/responsiveness/mobile-404-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-404-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-404-resp.png) | Works as expected |
 
-
 ## Browser Compatibility
 
-⚠️ INSTRUCTIONS ⚠️
+I've tested my deployed project on multiple browsers to check for compatibility and found no issues. The results for the Safari browser were created using [Lambdatest](https://www.lambdatest.com/). Chrome and Edge are both installed on my own device.
 
-Use this space to discuss testing the live/deployed site on various browsers. Consider testing at least 3 different browsers, if available on your system. You DO NOT need to use all of the browsers below, just pick any 3 (minimum).
+I've only documented the 404 error page, as the other error pages use the same layout and only differ in the displayed text, so the test results are the same.
 
-Recommended browsers to consider:
-- [Chrome](https://www.google.com/chrome)
-- [Firefox (Developer Edition)](https://www.mozilla.org/firefox/developer)
-- [Edge](https://www.microsoft.com/edge)
-- [Safari](https://support.apple.com/downloads/safari)
-- [Brave](https://brave.com/download)
-- [Opera](https://www.opera.com/download)
-
-**IMPORTANT**: You must provide screenshots of the browsers you've tested, to "prove" that you've actually tested them.
-
-Please note, there are services out there that can test multiple browser compatibilities at the same time. Some of these are paid services, but some are free. If you use these, you must provide a link to the source used for attribution, and multiple screenshots of the results.
-
-⚠️ --- END --- ⚠️
-
-I've tested my deployed project on multiple browsers to check for compatibility issues.
-
-| Page | Chrome | Firefox | Safari | Notes |
+| Page | Chrome | Edge | Safari | Notes |
 | --- | --- | --- | --- | --- |
-| Register | ![screenshot](documentation/browsers/chrome-register.png) | ![screenshot](documentation/browsers/firefox-register.png) | ![screenshot](documentation/browsers/safari-register.png) | Works as expected |
-| Login | ![screenshot](documentation/browsers/chrome-login.png) | ![screenshot](documentation/browsers/firefox-login.png) | ![screenshot](documentation/browsers/safari-login.png) | Works as expected |
-| Home | ![screenshot](documentation/browsers/chrome-home.png) | ![screenshot](documentation/browsers/firefox-home.png) | ![screenshot](documentation/browsers/safari-home.png) | Works as expected |
-| Add Blog | ![screenshot](documentation/browsers/chrome-add-blog.png) | ![screenshot](documentation/browsers/firefox-add-blog.png) | ![screenshot](documentation/browsers/safari-add-blog.png) | Works as expected |
-| Edit Blog | ![screenshot](documentation/browsers/chrome-edit-blog.png) | ![screenshot](documentation/browsers/firefox-edit-blog.png) | ![screenshot](documentation/browsers/safari-edit-blog.png) | Works as expected |
-| Blog Post | ![screenshot](documentation/browsers/chrome-blog-post.png) | ![screenshot](documentation/browsers/firefox-blog-post.png) | ![screenshot](documentation/browsers/safari-blog-post.png) | Works as expected |
-| 404 | ![screenshot](documentation/browsers/chrome-404.png) | ![screenshot](documentation/browsers/firefox-404.png) | ![screenshot](documentation/browsers/safari-404.png) | Works as expected |
+| Homepage | ![screenshot](docs/testing/responsiveness/desktop-homepage-resp.png) | ![screenshot](docs/testing/browser/edge-homepage-browser.png) | ![screenshot](docs/testing/browser/safari-homepage-browser.png) | Works as expected |
+| Events | ![screenshot](docs/testing/responsiveness/desktop-events-resp.png) | ![screenshot](docs/testing/browser/edge-events-browser.png) | ![screenshot](docs/testing/browser/safari-events-browser.png) | Works as expected |
+| Event Details | ![screenshot](docs/testing/responsiveness/desktop-event-details-resp.png) | ![screenshot](docs/testing/browser/edge-event-details-browser.png) | ![screenshot](docs/testing/browser/safari-event-details-browser.png) | Works as expected |
+| Profile | ![screenshot](docs/testing/responsiveness/desktop-profile-resp.png) | ![screenshot](docs/testing/browser/edge-profile-browser.png) | ![screenshot](docs/testing/browser/safari-profile-browser.png) | Works as expected |
+| Create Event | ![screenshot](docs/testing/responsiveness/desktop-create-event-resp.png) | ![screenshot](docs/testing/browser/edge-create-event-browser.png) | ![screenshot](docs/testing/browser/safari-create-event-browser.png) | Works as expected |
+| Login | ![screenshot](docs/testing/responsiveness/desktop-login-resp.png) | ![screenshot](docs/testing/browser/edge-login-browser.png) | ![screenshot](docs/testing/browser/safari-login-browser.png) | Works as expected |
+| Signup | ![screenshot](docs/testing/responsiveness/desktop-signup-resp.png) | ![screenshot](docs/testing/browser/edge-signup-browser.png) | ![screenshot](docs/testing/browser/safari-signup-browser.png) | Works as expected |
+| Logout | ![screenshot](docs/testing/responsiveness/desktop-logout-resp.png) | ![screenshot](docs/testing/browser/edge-logout-browser.png) | ![screenshot](docs/testing/browser/safari-logout-browser.png) | Works as expected |
+| Error pages 400, 403, 404, 500 (Example: 404) | ![screenshot](docs/testing/responsiveness/desktop-404-resp.png) | ![screenshot](docs/testing/browser/edge-404-browser.png) | No screenshot available | Works as expected |
 
 ## Lighthouse Audit
 
@@ -141,10 +126,9 @@ I've only documented the 404 error page, as the other error pages use the same l
 | Logout | ![screenshot](docs/testing/lighthouse/mobile-logout.png) | ![screenshot](docs/testing/lighthouse/desktop-logout.png) |
 | Error pages 400, 403, 404, 500 (Example: 404) | ![screenshot](docs/testing/lighthouse/mobile-404.png) | ![screenshot](docs/testing/lighthouse/desktop-404.png) |
 
-
 ## Defensive Programming
 
-Defensive programming was manually tested with the below user acceptance testing:
+Defensive programming was manually tested with the user acceptance criteria below, all of which have been successfully fulfilled.
 
 | Page / Feature | Expectation | Test | Result | Screenshot |
 | --- | --- | --- | --- | --- |
@@ -169,9 +153,9 @@ Defensive programming was manually tested with the below user acceptance testing
 | URL Brute Force | Users should not access admin or restricted pages via URL. | Tried navigating to `/admin/` as standard user. | Access denied as expected. | ![screenshot](docs/testing/defensive_programming/brute-force-admin.gif) |
 | 404 Error Page | Invalid URLs should show custom 404 page. | Navigated to `/nonexistent`. | Custom 404 page displayed. | ![screenshot](docs/testing/defensive_programming/404.gif) |
 
-
-
 ## User Story Testing
+
+I've tested the must-have and should-have user stories to ensure they are correctly implemented, and all tests passed successfully.
 
 | Nr | Target | Expectation | Outcome | Screenshot | Test Result |
 | --- | --- | --- | --- | --- | --- |
