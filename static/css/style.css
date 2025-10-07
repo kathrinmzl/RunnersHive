@@ -32,6 +32,10 @@ h2 {
   line-height: 1.5em;
 }
 
+.text-muted {
+  color: #3b3b3b !important;
+}
+
 /* Buttons */
 /* Dark big buttons */
 .btn-dark-big {
