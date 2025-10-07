@@ -1,3 +1,5 @@
+/* jshint esversion: 11 */
+
 // Grab references to DOM elements 
 const deleteModal = document.getElementById('deleteModal'); 
 const modalTitle = document.getElementById('modalEventTitle'); 
