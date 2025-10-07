@@ -7,15 +7,14 @@ Includes:
 - Context and filtering logic for events
 """
 
+from datetime import timedelta, datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 from django.contrib import messages
 from django.utils import timezone
 from django.views.generic import ListView, CreateView, UpdateView
-from datetime import timedelta, datetime
 from .models import Event
 from .forms import EventFilterForm, EventForm
 
@@ -256,14 +255,34 @@ class EventUpdateView(LoginRequiredMixin, UpdateView):
         """Return events belonging to the logged-in user."""
         return Event.objects.filter(author=self.request.user)
 
-    def dispatch(self, request, *args, **kwargs):
-        """Prevent editing past events by raising 404."""
-        event = self.get_object()
+    def dispatch(self, *args, **kwargs):
+        """
+        Prevent editing past events or events not owned by the user.
+
+        If the event is in the past, an info message is shown and the user is
+        redirected to the previous page or to the profile page. If the event
+        does not belong to the logged-in user, an error message is shown and
+        the user is redirected similarly. Non-existent events also redirect
+        with an error message.
+        """
+        try:
+            event = Event.objects.get(slug=kwargs['slug'])
+        except Event.DoesNotExist:
+            messages.error(self.request, "Event not found.")
+            return redirect("profile")
+
+        if event.author != self.request.user:
+            messages.error(self.request,
+                           "You do not have permission to edit this event.")
+            return redirect(self.request.META.get('HTTP_REFERER', 'profile'))
 
         if event.is_past:
-            return render(request, "404.html", status=404)
+            messages.info(self.request,
+                          f"Event '{event.title}' is in the past! You cannot "
+                          "edit it anymore.")
+            return redirect(self.request.META.get('HTTP_REFERER', 'profile'))
 
-        return super().dispatch(request, *args, **kwargs)
+        return super().dispatch(self.request, *args, **kwargs)
 
     def form_valid(self, form):
         """Save updated event and show a success message."""
