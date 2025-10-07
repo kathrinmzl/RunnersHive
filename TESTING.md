@@ -242,6 +242,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | | Text fields should enforce maximum length. | Pasted excessively long string (e.g. 500+ chars) in text fields. -< no max length argument available for summernote field -> add manual validation in EventForm? | Validation prevented submission or trimmed input.| ![screenshot](docs/testing/defensive_programming/create-event-length.png) |
 | Event Editing | Users should only be able to edit *their own* events. | Logged in as User-A and accessed `/events/other-users-event/edit/` for User-B’s event. | Access denied as expected. / 404 displayed. | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/edit-unauthorized.mp4" type="video/mp4">Your browser does not support the video tag.</video> |
 | | Event owner should be able to edit their event. | Updated event title and saved. | Changes reflected correctly. | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/edit-authorized.mp4" type="video/mp4">Your browser does not support the video tag.</video>  |
+| | Event owner should *not* be able to edit their event, if it's in the past. | Tried to access `/events/users-past-event/edit/` | Access denied as expected. / 404 displayed. | TODO Add video  |
 | Event Deletion | Only event owners should be able to delete their events. | Tried deleting another user’s event via brute URL. | Access denied as expected. / 404 displayed.  | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/delete-unauthorized.mp4" type="video/mp4">Your browser does not support the video tag.</video> |
 | | Event owner should be able to delete their event. | Deleted my event via confirm button. | Event removed from database and UI. | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/delete-authorized.mp4" type="video/mp4">Your browser does not support the video tag.</video> |
 | Event Cancel / Uncancel | Event owner should be able to cancel their event. | Clicked "Cancel" button. | Event marked as "Cancelled" in UI. | <video width="320" height="240" controls><source src="docs/testing/defensive_programming/cancel-event.mp4" type="video/mp4">Your browser does not support the video tag.</video>  |
@@ -255,36 +256,24 @@ Defensive programming was manually tested with the below user acceptance testing
 
 ## User Story Testing
 
-⚠️ INSTRUCTIONS ⚠️
-
-Testing User Stories is actually quite simple, once you've already got the stories defined on your README.
-
-Most of your project's **Features** should already align with the **User Stories**, so this should be as simple as creating a table with the User Story, matching with the re-used screenshot from the respective Feature.
-
-⚠️ --- END --- ⚠️
-
-| Target | Expectation | Outcome | Screenshot |
-| --- | --- | --- | --- |
-| As a blog owner | I would like to create new blog posts with a title, featured image, and content | so that I can share my experiences with my audience. | ![screenshot](documentation/features/feature01.png) |
-| As a blog owner | I would like to update existing blog posts | so that I can correct or add new information to my previous stories. | ![screenshot](documentation/features/feature02.png) |
-| As a blog owner | I would like to delete blog posts | so that I can remove outdated or irrelevant content from my blog. | ![screenshot](documentation/features/feature03.png) |
-| As a blog owner | I would like to retrieve a list of all my published blog posts | so that I can manage them from a central dashboard. | ![screenshot](documentation/features/feature04.png) |
-| As a blog owner | I would like to preview a post as draft before publishing it | so that I can ensure formatting and content appear correctly. | ![screenshot](documentation/features/feature05.png) |
-| As a blog owner | I would like to review comments before they are published | so that I can filter out spam or inappropriate content. | ![screenshot](documentation/features/feature06.png) |
-| As a blog owner | I would like to approve or reject comments from users | so that I can maintain control over the discussion on my posts. | ![screenshot](documentation/features/feature07.png) |
-| As a blog owner | I would like to view a list of all comments (both approved and pending) | so that I can manage user engagement effectively. | ![screenshot](documentation/features/feature08.png) |
-| As a blog owner | I would like to edit or delete user comments | so that I can clean up or remove inappropriate responses after they've been posted. | ![screenshot](documentation/features/feature09.png) |
-| As a registered user | I would like to log in to the site | so that I can leave comments on blog posts. | ![screenshot](documentation/features/feature10.png) |
-| As a registered user | I would like to register for an account | so that I can become part of the community and engage with the blog. | ![screenshot](documentation/features/feature11.png) |
-| As a registered user | I would like to leave a comment on a blog post | so that I can share my thoughts or ask questions about the owner's experiences. | ![screenshot](documentation/features/feature12.png) |
-| As a registered user | I would like my comment to show my name and the timestamp | so that others can see who I am and when I left the comment. | ![screenshot](documentation/features/feature13.png) |
-| As a registered user | I would like to receive a notification or message saying my comment is pending approval | so that I understand it hasn't been posted immediately. | ![screenshot](documentation/features/feature14.png) |
-| As a registered user | I would like to edit or delete my own comments | so that I can fix mistakes or retract my statement. | ![screenshot](documentation/features/feature15.png) |
-| As a guest user | I would like to read blog posts without registering | so that I can enjoy the content without needing to log in. | ![screenshot](documentation/features/feature16.png) |
-| As a guest user | I would like to browse past posts | so that I can explore the blog's full content history. | ![screenshot](documentation/features/feature17.png) |
-| As a guest user | I would like to register for an account | so that I can participate in the community by leaving comments on posts. | ![screenshot](documentation/features/feature18.png) |
-| As a guest user | I would like to see the names of other commenters on posts | so that I can get a sense of community interaction before registering. | ![screenshot](documentation/features/feature19.png) |
-| As a user | I would like to see a 404 error page if I get lost | so that it's obvious that I've stumbled upon a page that doesn't exist. | ![screenshot](documentation/features/feature20.png) |
+| Nr | Target | Expectation | Outcome | Screenshot | Test Result |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 | As a runner | I can see a list of upcoming events | so that I can find runs to join. | ![screenshot](docs/features/events-list-tablet-desktop.png) | Pass |
+| 1.2 | As a runner | I can filter events by date (Today, This Week, This Month) | so that I can quickly find ones that fit my schedule. | ![screenshot](docs/features/filter-events-tablet-desktop.png) | Pass |
+| 1.3 | As a runner | I can filter events by category | so that I can find the type of event I prefer. | ![screenshot](docs/features/filter-events-tablet-desktop.png) | Pass |
+| 1.4 | As a runner | I can filter events by difficulty | so that I can find the type of event I prefer. | ![screenshot](docs/features/filter-events-tablet-desktop.png) | Pass |
+| 1.5 | As a runner | I can view details of a specific event | so that I can decide whether I want to participate. | ![screenshot](docs/features/event-details-tablet-desktop.png) | Pass |
+| 2.1 | As a logged-in user | I can not edit or delete another user’s events | so that data integrity is maintained. | edit-unauthorized Video | Pass |
+| 2.2 | As an organizer | I can create a new event | so that runners can find it. | create-event-valid Video | Pass |
+| 2.3 | As an organizer | I can edit my event | so that I can update details. | edit-authorized Video | Pass |
+| 2.4 | As an organizer | I can delete my event | so that I can remove it if I don't want to publish it anymore. | ![screenshot](docs/features/delete-event.png) | Pass |
+| 2.5 | As an organizer | I cannot edit past events | so that historical data is preserved. | edit-past Video | Pass |
+| 2.6 | As an organizer | I can cancel my event | so that I can tell visitors that the event is not happening anymore. | ![screenshot](docs/features/cancelled-event.png) | Pass |
+| 3.1 | As a logged-in user | I can view my profile page | so that I can see the events I’ve added. | ![screenshot](documentation/userstories/us3-1.png) | Pass |
+| 3.2 | As a logged-in user | I can update or delete my events from my profile | so that I can manage them easily. | ![screenshot](documentation/userstories/us3-2.png) | Pass |
+| 4.1 | As a new user | I can register for an account | so that I can add and manage my own events. | ![screenshot](documentation/userstories/us4-1.png) | Pass |
+| 4.2 | As a user | I can log in and log out | so that I can access my profile and event management. | ![screenshot](documentation/userstories/us4-2.png) | Pass |
+| 4.3 | As a visitor | I can use clear and simple navigation | so that I can find events, login, or register. | ![screenshot](documentation/userstories/us4-3.png) | Pass |
 
 ## Bugs
 
@@ -318,7 +307,7 @@ Any remaining open issues can be tracked [here](https://www.github.com/kathrinmz
 
 | Issue | Screenshot |
 | --- | --- |
-| On devices smaller than 375px, the page starts to have horizontal `overflow-x` scrolling. | ![screenshot](documentation/issues/overflow.png) |
+| On devices smaller than 375px, the page starts to have horizontal `overflow-x` scrolling. | ![screenshot](documentation/issues/overflow.png) check updated text |
 | When validating HTML with a semantic `<section>` element, the validator warns about lacking a header `h2-h6`. This is acceptable. | ![screenshot](documentation/issues/section-header.png) |
 | Validation errors on "signup.html" coming from the Django Allauth package. | ![screenshot](documentation/issues/allauth.png) |
 
