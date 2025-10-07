@@ -59,7 +59,7 @@ class Event(models.Model):
 
     title = models.CharField(max_length=100, unique=True)
     # Allow blank so save() can auto-generate the slug
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
     organizer = models.CharField(max_length=40)
     description = models.TextField()
     date = models.DateField()
