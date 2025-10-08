@@ -142,11 +142,11 @@ Defensive programming was manually tested with the user acceptance criteria belo
 | Event Editing | Users should only be able to edit *their own* events. | Logged in as User-A and accessed `/events/other-users-event/edit/` for User-B’s event. | Error message shown, redirect to profile page. | ![screenshot](docs/testing/defensive_programming/edit-unauthorized.gif) |
 |  | Event owner should be able to edit their event. | Updated event title and saved. | Changes reflected correctly. | ![screenshot](docs/testing/defensive_programming/edit-authorized.gif) |
 |  | Event owner should *not* be able to edit their event, if it's in the past. | Tried to access `/events/users-past-event/edit/`. | Info message shown, redirect to profile page. | ![screenshot](docs/testing/defensive_programming/edit-past.gif) |
-| Event Deletion | Only event owners should be able to delete their events. | Tried deleting another user’s event via brute URL. | Access denied as expected. / 404 displayed. | ![screenshot](docs/testing/defensive_programming/delete-unauthorized.gif) |
+| Event Deletion | Only event owners should be able to delete their events. | Tried deleting another user’s event via brute URL. | Error message shown, redirect to profile page. | ![screenshot](docs/testing/defensive_programming/delete-unauthorized.gif) |
 |  | Event owner should be able to delete their event. | Deleted my event via confirm button. | Event removed from database and UI. | ![screenshot](docs/testing/defensive_programming/delete-authorized.gif) |
 | Event Cancel / Uncancel | Event owner should be able to cancel their event. | Clicked "Cancel" button. | Event marked as "Cancelled" in UI. | ![screenshot](docs/testing/defensive_programming/cancel-event.gif) |
 |  | Event owner should be able to restore a cancelled event. | Clicked "Uncancel". | Event returned to "Active" status. | ![screenshot](docs/testing/defensive_programming/cancel-event.gif) |
-|  | Only event owners should be able to cancel/uncancel their events. | Tried cancelling another user’s event via brute URL. | Access denied as expected. / 404 displayed. | ![screenshot](docs/testing/defensive_programming/cancel-unauthorized.gif) |
+|  | Only event owners should be able to cancel/uncancel their events. | Tried cancelling another user’s event via brute URL. |  Error message shown, redirect to profile page. | ![screenshot](docs/testing/defensive_programming/cancel-unauthorized.gif) |
 |  | Event owner should *not* be able to cancel their event, if it's in the past. | Tried to access `/events/users-past-event/toggle_cancel/`. | Info message shown, redirect to profile page. | ![screenshot](docs/testing/defensive_programming/cancel-past.gif) |
 | Authentication | Login should accept valid credentials and reject invalid ones. | Attempted login with wrong password. | Error message displayed. | ![screenshot](docs/testing/defensive_programming/login-invalid.gif) |
 |  | Logout should remove access to restricted pages. | Logged out then accessed `/events/create/`. | Redirected to login. | ![screenshot](docs/testing/defensive_programming/logout-access.gif) |
@@ -173,8 +173,47 @@ I've tested the must-have and should-have user stories to ensure they are correc
 | 3.1 | As a logged-in user | I can view my profile page | so that I can see the events I’ve added. | Upcoming events: ![screenshot](docs/features/profile-upcoming-events.png) Past events: ![screenshot](docs/features/profile-past-events.png) | Pass |
 | 3.2 | As a logged-in user | I can update or delete my events from my profile | so that I can manage them easily. | Upcoming events: ![screenshot](docs/features/profile-upcoming-events.png) Past events: ![screenshot](docs/features/profile-past-events.png) | Pass |
 | 4.1 | As a new user | I can register for an account | so that I can add and manage my own events. | ![screenshot](docs/features/register.png)| Pass |
-| 4.2 | As a user | I can log in and log out | so that I can access my profile and event management. | Login: ![screenshot](docs/features/login.png) / Logout: ![screenshot](docs/features/logout.png)| Pass |
+| 4.2 | As a user | I can log in and log out | so that I can access my profile and event management. | Login: ![screenshot](docs/features/login.png)  Logout: ![screenshot](docs/features/logout.png)| Pass |
 | 4.3 | As a visitor | I can use clear and simple navigation | so that I can find events, login, or register. | ![navbar-logged-in-tablet-desktop](docs/features/navbar-not-logged-in-tablet-desktop.png) | Pass |
+
+## Automated Testing
+
+I have conducted a series of automated tests on my application.
+
+> [!NOTE]  
+> I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
+
+### Python (Unit Testing)
+
+I have used Django's built-in unit testing framework to test the application functionality. 
+
+I created unit tests for the events app views which cover the applications main functionalities. All tests passed successfully:
+
+![Test Results Screenshot](docs/testing/unit_tests_py/test-results.png)
+
+In order to run the tests, I ran the following command in the terminal each time:
+
+- `python3 manage.py test events`
+
+To create the coverage report, I would then run the following commands:
+
+- `pip3 install coverage`
+- `pip3 freeze --local > requirements.txt`
+- `coverage run --omit="*/site-packages/*,*/migrations/*,*/__init__.py,env.py,.env" manage.py test`
+- `coverage report`
+
+To see the HTML version of the reports, and find out whether some pieces of code were missing, I ran the following commands:
+
+- `coverage html`
+- `python3 -m http.server`
+
+Below are the results from the full coverage report on my application that I've tested:
+
+![screenshot](docs/testing/unit_tests_py/html-coverage.png)
+
+#### Unit Test Issues
+
+While writing the unit tests I realized that I was only redirecting to the 404 page when trying to edit, cancel or delete other users events or when trying to edit or cancel past events. To provide better feedback to the user I changed this to redirect to the profile page and show an info or error toast message instead, telling the user what went wrong.
 
 ## Bugs
 
@@ -182,13 +221,13 @@ I've tested the must-have and should-have user stories to ensure they are correc
 
 [![GitHub issue custom search](https://img.shields.io/github/issues-search/kathrinmzl/RunnersHive?query=is%3Aissue%20is%3Aclosed%20label%3Abug&label=Fixed%20Bugs&color=green)](https://www.github.com/kathrinmzl/RunnersHive/issues?q=is%3Aissue+is%3Aclosed+label%3Abug)
 
-I've used [GitHub Issues](https://www.github.com/kathrinmzl/RunnersHive/issues) to track and manage bugs and issues during the development stages of my project.
+I've used [GitHub Issues](https://www.github.com/kathrinmzl/RunnersHive/issues) to track and manage major bugs and issues during the development and testing stages of my project.
 
 All previously closed/fixed bugs can be tracked [here](https://www.github.com/kathrinmzl/RunnersHive/issues?q=is%3Aissue+is%3Aclosed+label%3Abug).
 
-![screenshot](documentation/bugs/gh-issues-closed.png)
+![screenshot](documentation/bugs/gh-issues-closed.png) TO DO!!
 
-### Unfixed Bugs
+### Unfixed Bugs TODO !! ( Are there any?)
 
 ⚠️ INSTRUCTIONS ⚠️
 
@@ -204,11 +243,11 @@ Any remaining open issues can be tracked [here](https://www.github.com/kathrinmz
 
 ![screenshot](documentation/bugs/gh-issues-open.png)
 
-### Known Issues
+### Known Issues TO DO Add screenshots/Update Issues
 
 | Issue | Screenshot |
 | --- | --- |
-| On devices smaller than 375px, the page starts to have horizontal `overflow-x` scrolling. | ![screenshot](documentation/issues/overflow.png) check updated text |
+| The project is designed to be responsive from `375px` and upwards, in line with the material taught on the course LMS. Minor layout inconsistencies may occur on extra-wide (e.g. 4k/8k monitors), or smart-display devices (e.g. Nest Hub, Smart Watches, Gameboy Color, etc.), as these resolutions are outside the project’s scope, as taught by Code Institute.. | ![screenshot](documentation/issues/overflow.png) check updated text |
 | When validating HTML with a semantic `<section>` element, the validator warns about lacking a header `h2-h6`. This is acceptable. | ![screenshot](documentation/issues/section-header.png) |
 | Validation errors on "signup.html" coming from the Django Allauth package. | ![screenshot](documentation/issues/allauth.png) |
 
