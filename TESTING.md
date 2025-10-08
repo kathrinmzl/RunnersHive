@@ -64,13 +64,12 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 | events | [admin.py](https://github.com/kathrinmzl/RunnersHive/blob/main/events/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/events/admin.py) | ![screenshot](docs/testing/validation_python/py-events-admin.png) | No Errors |
 | events | [forms.py](https://github.com/kathrinmzl/RunnersHive/blob/main/events/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/events/forms.py) | ![screenshot](docs/testing/validation_python/py-events-forms.png) | No Errors |
 | events | [models.py](https://github.com/kathrinmzl/RunnersHive/blob/main/events/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/events/models.py) | ![screenshot](docs/testing/validation_python/py-events-models.png) | No Errors |
-| events | [tests.py](https://github.com/kathrinmzl/RunnersHive/blob/main/events/tests.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/events/tests.py) | ![screenshot](docs/testing/validation_python/py-events-tests.png) | No Errors |
+| events | [test_views.py](https://github.com/kathrinmzl/RunnersHive/blob/main/events/tests/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/events/tests/test_views.py) | ![screenshot](docs/testing/validation_python/py-events-test_views.png) | No Errors |
 | events | [urls.py](https://github.com/kathrinmzl/RunnersHive/blob/main/events/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/events/urls.py) | ![screenshot](docs/testing/validation_python/py-events-urls.png) | No Errors |
 | events | [views.py](https://github.com/kathrinmzl/RunnersHive/blob/main/events/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/events/views.py) | ![screenshot](docs/testing/validation_python/py-events-views.png) | No Errors |
 | runnershive | [settings.py](https://github.com/kathrinmzl/RunnersHive/blob/main/runnershive/settings.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/runnershive/settings.py) | ![screenshot](docs/testing/validation_python/py-runnershive-settings.png) | No Errors |
 | runnershive | [urls.py](https://github.com/kathrinmzl/RunnersHive/blob/main/runnershive/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/runnershive/urls.py) | ![screenshot](docs/testing/validation_python/py-runnershive-urls.png) | No Errors |
 |  | [manage.py](https://github.com/kathrinmzl/RunnersHive/blob/main/manage.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/kathrinmzl/RunnersHive/main/manage.py) | ![screenshot](docs/testing/validation_python/py--manage.png) | No Errors |
-
 
 ## Responsiveness
 
@@ -225,31 +224,17 @@ I've used [GitHub Issues](https://www.github.com/kathrinmzl/RunnersHive/issues) 
 
 All previously closed/fixed bugs can be tracked [here](https://www.github.com/kathrinmzl/RunnersHive/issues?q=is%3Aissue+is%3Aclosed+label%3Abug).
 
-![screenshot](documentation/bugs/gh-issues-closed.png) TO DO!!
+![screenshot](docs/bugs/gh-issues-closed.png)
 
-### Unfixed Bugs TODO !! ( Are there any?)
+### Unfixed Bugs
 
-⚠️ INSTRUCTIONS ⚠️
+To this date, no known unfixed errors remain in the application, though, even after thorough testing, I cannot rule out the possibility.
 
-You will need to mention any unfixed bugs and why they are not fixed upon submission of your project. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed. Where possible, you must fix all outstanding bugs, unless outside of your control.
-
-If you've identified any unfixed bugs, no matter how small, be sure to list them here! It's better to be honest and list them, because if it's not documented and an assessor finds the issue, they need to know whether or not you're aware of them as well, and why you've not corrected/fixed them.
-
-⚠️ --- END --- ⚠️
-
-[![GitHub issue custom search](https://img.shields.io/github/issues-search/kathrinmzl/RunnersHive?query=is%3Aissue%2Bis%3Aopen%2Blabel%3Abug&label=Unfixed%20Bugs&color=red)](https://www.github.com/kathrinmzl/RunnersHive/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
-
-Any remaining open issues can be tracked [here](https://www.github.com/kathrinmzl/RunnersHive/issues?q=is%3Aissue+is%3Aopen+label%3Abug).
-
-![screenshot](documentation/bugs/gh-issues-open.png)
-
-### Known Issues TO DO Add screenshots/Update Issues
+### Known Issues
 
 | Issue | Screenshot |
 | --- | --- |
-| The project is designed to be responsive from `375px` and upwards, in line with the material taught on the course LMS. Minor layout inconsistencies may occur on extra-wide (e.g. 4k/8k monitors), or smart-display devices (e.g. Nest Hub, Smart Watches, Gameboy Color, etc.), as these resolutions are outside the project’s scope, as taught by Code Institute.. | ![screenshot](documentation/issues/overflow.png) check updated text |
-| When validating HTML with a semantic `<section>` element, the validator warns about lacking a header `h2-h6`. This is acceptable. | ![screenshot](documentation/issues/section-header.png) |
-| Validation errors on "signup.html" coming from the Django Allauth package. | ![screenshot](documentation/issues/allauth.png) |
+| The project is designed to be responsive from `320px` and upwards, in line with the material taught on the course LMS. Minor layout inconsistencies may occur on extra-wide (e.g. 4k/8k monitors), or smart-display devices (e.g. Nest Hub, Smart Watches, Gameboy Color, etc.), as these resolutions are outside the project’s scope, as taught by Code Institute. | ![screenshot](docs/bugs/know-issues-overflow.png) |
 
 > [!IMPORTANT]  
 > There are no remaining bugs that I am aware of, though, even after thorough testing, I cannot rule out the possibility.
