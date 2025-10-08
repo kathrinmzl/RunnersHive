@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 # For connecting to PostgreSQL on Heroku
 import dj_database_url
 
@@ -152,6 +153,10 @@ WSGI_APPLICATION = 'runnershive.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
+
+# Use SQLite database for running unittests
+if 'test' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 
 # Password validation
