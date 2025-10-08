@@ -320,7 +320,11 @@ def event_delete(request, slug):
 
     Shows a success or error message using Django messages.
     """
-    event = get_object_or_404(Event, slug=slug, author=request.user)
+    try:
+        event = Event.objects.get(slug=slug, author=request.user)
+    except Event.DoesNotExist:
+        messages.error(request, "You are not allowed to delete this event.")
+        return redirect("profile")
 
     if request.method == "POST":
         event.delete()
@@ -342,12 +346,34 @@ def toggle_event_cancel(request, slug):
     """
     Toggle the 'cancelled' status of an event belonging to the logged-in user.
 
+    - Only allows toggling for upcoming events owned by the user.
+    - Past events cannot be cancelled or reactivated.
+    - Only POST requests will trigger a status change; other methods
+    show an error.
+
     **Template:** Redirects to profile page
 
-    Shows success or error messages depending on the action.
+    Shows appropriate messages based on the action:
+    - info message for past events
+    - success/warning for toggling status
+    - error for invalid request methods
     """
-    event = get_object_or_404(Event, slug=slug, author=request.user)
+    try:
+        event = Event.objects.get(slug=slug, author=request.user)
+    except Event.DoesNotExist:
+        messages.error(request, "You are not allowed to cancel this event.")
+        return redirect("profile")
 
+    # Prevent cancelling past events
+    if event.is_past:
+        messages.info(
+            request,
+            f"Cannot change cancellation status for past event\
+                '{event.title}'."
+        )
+        return redirect("profile")
+
+    # Only POST requests toggle the status
     if request.method == "POST":
         event.cancelled = not event.cancelled
         event.save()
@@ -361,6 +387,7 @@ def toggle_event_cancel(request, slug):
             )
         return redirect("profile")
 
+    # Any non-POST request is invalid
     messages.error(
         request,
         f"Cancellation status of event '{event.title}' could not be changed."
