@@ -54,7 +54,7 @@ I have used the recommended [JShint Validator](https://jshint.com) to validate a
 | static | [profile.js](https://github.com/kathrinmzl/RunnersHive/blob/main/static/js/profile.js) |  | ![screenshot](docs/testing/validation_js/profile-validation-js.png) | No Errors |
 | static | [toasts.js](https://github.com/kathrinmzl/RunnersHive/blob/main/static/js/toasts.js) |  | ![screenshot](docs/testing/validation_js/toasts-validation-js.png) | Undefined variable 'Bootstrap' is acceptable because it's imported locally|
 | static | [date_limit.js](https://github.com/kathrinmzl/RunnersHive/blob/main/static/js/date_limit.js) |  | ![screenshot](docs/testing/validation_js/date-limit-validation-js.png) | No Errors |
-| static | [toggle_filter.js](https://github.com/kathrinmzl/RunnersHive/blob/main/static/js/toggle_filter.js) |  | ![screenshot](docs/testing/validation_js/toggle-filter-validation-js.png) | No Errors |
+| static | [toggle_filters.js](https://github.com/kathrinmzl/RunnersHive/blob/main/static/js/toggle_filters.js) |  | ![screenshot](docs/testing/validation_js/toggle-filter-validation-js.png) | No Errors |
 
 ### Python
 
