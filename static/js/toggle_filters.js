@@ -3,7 +3,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const collapseEl = document.getElementById("eventFilters");
     const button = document.getElementById("filterToggleBtn");
-    const bsCollapse = new bootstrap.Collapse(collapseEl, { toggle: false });
 
     // When the collapse opens
     collapseEl.addEventListener("show.bs.collapse", () => {
