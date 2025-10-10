@@ -20,7 +20,7 @@
      
     <!-- Toggle Button for Collapsible Filters -->
     <!-- See: https://getbootstrap.com/docs/5.0/components/collapse/ -->
-    <button class="btn btn-dark-big-outline mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#eventFilters"
+    <button id="filterToggleBtn" class="btn btn-dark-big-outline mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#eventFilters"
             aria-expanded="false" aria-controls="eventFilters">
         Filter Events ▾
     </button>
@@ -67,4 +67,8 @@
     {% endif %}
 </section>
 
+{% endblock %}
+
+{% block extras %}
+<script src="{% static 'js/toggle_filters.js' %}"></script>
 {% endblock %}
