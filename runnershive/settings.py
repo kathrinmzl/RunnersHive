@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     # Custom apps
+    'core',
     'events',
     'runnershive',
 ]

@@ -27,6 +27,7 @@ urlpatterns = [
     path('events/', include("events.urls")),
     path('summernote/', include('django_summernote.urls')),
     path('', views.TodaysEventsListView.as_view(), name="home"),
+    path('', include("core.urls")), 
 ]
 
 handler400 = "runnershive.views.handler400"

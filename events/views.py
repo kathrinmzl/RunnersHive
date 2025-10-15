@@ -28,10 +28,10 @@ class TodaysEventsListView(ListView):
     ``todays_events``
         List of Event instances happening today and not past yet.
 
-    **Template:** :template:`index.html`
+    **Template:** :template:`core/index.html`
     """
     model = Event
-    template_name = "index.html"
+    template_name = "core/index.html"
     context_object_name = "todays_events"
     paginate_by = 6
 

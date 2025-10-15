@@ -5,6 +5,7 @@
 <!-- URL variables for navigation -->
 {% url 'home' as home_url %}
 {% url 'events' as events_url %}
+{% url 'contact' as contact_url %}
 {% url 'profile' as profile_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
@@ -73,6 +74,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == events_url %}active{% endif %}" href="{% url 'events' %}">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == contact_url %}active{% endif %}" href="{% url 'contact' %}">Contact Us</a>
                         </li>
 
                         <!-- User Authentication Links -->

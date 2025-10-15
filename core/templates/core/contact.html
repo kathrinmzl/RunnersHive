@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h2 class="mb-4">Contact Us</h2>
+            <p class="mb-4">
+                Have questions, feedback, or want to get in touch? Fill out the form below
+                and we'll get back to you as soon as possible.
+            </p>
+
+            <form id="contactForm" method="post" class="needs-validation" novalidate>
+                {{ contact_form | crispy }}
+                {% csrf_token %}
+
+                <button id="submitButton" type="submit" class="btn btn-dark">
+                    Submit
+                </button>
+                <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

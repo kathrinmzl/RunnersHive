@@ -245,7 +245,7 @@ h2 {
   }
 }
 
-/* ------------------ index.hmtl ------------------ */
+/* ------------------ index.html ------------------ */
 /* Hero section */
 .hero-image {
   width: 100%;
@@ -307,17 +307,21 @@ h2 {
   }
 }
 
-/* Create Event Section */
-.create-event-section .container {
-  padding-top: 70px;
-  padding-bottom: 35px;
+/* Todays Events and Promo Section */
+#create-event-section .container,
+#about-section .container {
+    padding-bottom: 35px;
 }
 
-.create-event-img {
+#create-event-section .container {
+    padding-top: 70px;
+}
+
+.promo-img {
   min-height: 260px;
 }
 
-.create-event-img img {
+.promo-img img {
   display: block;
   width: 100%;
   height: 100%;
@@ -326,9 +330,9 @@ h2 {
   border-radius: 0.8rem;
 }
 
-.create-event-text .promo-inner {
+.promo-text .promo-inner {
   color: var(--text-color-secondary);
-  max-width: 420px;
+  max-width: 600px;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -344,7 +348,7 @@ h2 {
 }
 
 @media (max-width: 768px) {
-  #create-event-section .btn-light-big {
+  .promo-section .btn-light-big {
     font-size: 1.1rem;
   }
 

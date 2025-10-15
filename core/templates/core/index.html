@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Home | Runners Hive{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section: Main banner with title and subtitle -->
+<section class="hero position-relative text-white text-center" aria-label="Hero section">
+  <img src="{% static 'images/hero_img.jpg' %}" class="hero-image" alt="Hero Image">
+  <div class="hero-overlay">
+    <h1 class="display-2">Welcome to Runners Hive</h1>
+    <p class="lead">Find your next running adventure in Berlin</p>
+  </div>
+</section>
+
+<!-- Today's Events Section -->
+<section id="todays-events" aria-labelledby="todays-events-title">
+  <div class="container my-5">
+    <h2 id="todays-events-title" class="text-center mb-4">Today's Events</h2>
+
+    {% if todays_events %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for event in todays_events %}
+      {% include "events/_event_card.html" %}
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    {% include "events/_page_navigation.html" %}
+    {% endif %}
+    {% else %}
+    <p class="text-center lead">No upcoming events today :(</p>
+    {% endif %}
+
+    <div class="text-center mt-3">
+      <!-- Browse All Events Button -->
+      <a href="{% url 'events' %}" class="btn btn-dark-big mt-5">Browse All Events</a>
+    </div>
+  </div>
+</section>
+
+<!-- Promo Section -->
+<!-- Shape Divider (Decorative) -->
+<!-- See: https://www.shapedivider.app/ -->
+<!-- See: https://www.youtube.com/watch?v=0QTzTOJCzLY -->
+<div class="shapedivider">
+  <div class="custom-shape-divider-top-1759053598">
+    <svg aria-hidden="true" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+      preserveAspectRatio="none">
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <!-- Create Event Section -->
+  <section class="mt-3 promo-section" id="create-event-section" aria-labelledby="create-event-title">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-2 align-items-stretch g-3">
+
+        <!-- Image Column -->
+        <div class="promo-img col position-relative overflow-hidden rounded order-2 order-md-1">
+          <img src="{% static 'images/create_event_img.jpg' %}" alt="Group of people warming up for a run" class="img-fluid w-100 h-100">
+        </div>
+
+        <!-- Text Column -->
+        <div class="promo-text col d-flex align-items-center position-relative order-1 order-md-2">
+          <div class="promo-inner p-3 p-md-4 text-center text-md-start">
+            <h2 id="create-event-title" class="mb-4">Planning a running event yourself?</h2>
+            <p class="mb-2">
+              Sign up and create your own event with Runners Hive!
+              Share it with a growing community of passionate runners, boost participation,
+              and make your event unforgettable.
+            </p>
+            <p class="mb-4">
+              Click the button below to get started!
+            </p>
+            <a href="{% url 'event_create' %}" class="btn btn-light-big align-self-center align-self-md-start">Create Event</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About/Contact Section -->
+  <section class="mt-3 promo-section" id="about-section" aria-labelledby="about-title">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-2 align-items-stretch g-3">
+
+        <!-- Text Column -->
+        <div class="promo-text col d-flex align-items-center justify-content-start justify-content-md-end position-relative">
+          <div class="promo-inner p-3 p-md-4 text-center text-md-end">
+            <h2 id="about-title" class="mb-4">About Runners Hive</h2>
+            <p class="mb-2">
+              Hi, we are Kathrin and Sarah!
+            </p>
+            <p class="mb-2">
+              We created Runners Hive to connect passionate runners with the vibrant running community in Berlin.
+              The idea was inspired by the recent growth of run clubs and running events in the city. While the running
+              scene has become increasingly vibrant, it is also fragmented across different websites, social media
+              groups, and platforms, making it difficult for both organizers and runners to stay informed.
+              We built this platform to provide a unified space where organizers can promote their events, and runners
+              can easily discover and join them.  
+            </p>
+            <p class="mb-4">
+              Click the button below to share your feedback, ask questions or just get in touch with us directly.
+            </p>
+            <a href="{% url 'contact' %}" class="btn btn-light-big align-self-center align-self-md-end">Contact Us</a>
+          </div>
+        </div>
+
+        <!-- Image Column -->
+        <div class="promo-img col position-relative overflow-hidden rounded">
+          <img src="{% static 'images/about_img.jpg' %}" alt="Kathrin and Sarah from Runners Hive" class="img-fluid w-100 h-100">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% endblock %}
