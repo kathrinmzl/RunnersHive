@@ -90,6 +90,7 @@ I've only documented the 404 error page, as the other error pages use the same l
 | Homepage | ![screenshot](docs/testing/responsiveness/mobile-homepage-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-homepage-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-homepage-resp.png) | Works as expected |
 | Events | ![screenshot](docs/testing/responsiveness/mobile-events-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-events-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-events-resp.png) | Works as expected |
 | Event Details | ![screenshot](docs/testing/responsiveness/mobile-event-details-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-event-details-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-event-details-resp.png) | Works as expected |
+| Contact Us | ![screenshot](docs/testing/responsiveness/mobile-contact-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-contact-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-contact-resp.png) | Works as expected |
 | Profile | ![screenshot](docs/testing/responsiveness/mobile-profile-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-profile-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-profile-resp.png) | Works as expected |
 | Create Event | ![screenshot](docs/testing/responsiveness/mobile-create-event-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-create-event-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-create-event-resp.png) | Works as expected |
 | Login | ![screenshot](docs/testing/responsiveness/mobile-login-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-login-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-login-resp.png) | Works as expected |
@@ -126,6 +127,7 @@ I've only documented the 404 error page, as the other error pages use the same l
 | Homepage | ![screenshot](docs/testing/lighthouse/mobile-homepage.png) | ![screenshot](docs/testing/lighthouse/desktop-homepage.png) |
 | Events | ![screenshot](docs/testing/lighthouse/mobile-events.png) | ![screenshot](docs/testing/lighthouse/desktop-events.png) |
 | Event Details | ![screenshot](docs/testing/lighthouse/mobile-event-details.png) | ![screenshot](docs/testing/lighthouse/desktop-event-details.png) |
+| Contact Us | ![screenshot](docs/testing/lighthouse/mobile-contact.png) | ![screenshot](docs/testing/lighthouse/desktop-contact.png) |
 | Profile | ![screenshot](docs/testing/lighthouse/mobile-profile.png) | ![screenshot](docs/testing/lighthouse/desktop-profile.png) |
 | Create Event | ![screenshot](docs/testing/lighthouse/mobile-create-event.png) | ![screenshot](docs/testing/lighthouse/desktop-create-event.png) |
 | Login | ![screenshot](docs/testing/lighthouse/mobile-login.png) | ![screenshot](docs/testing/lighthouse/desktop-login.png) |
@@ -158,6 +160,11 @@ Defensive programming was manually tested with the user acceptance criteria belo
 | Authentication | Login should accept valid credentials and reject invalid ones. | Attempted login with wrong password. | Error message displayed. | ![screenshot](docs/testing/defensive_programming/login-invalid.gif) |
 |  | Logout should remove access to restricted pages. | Logged out then accessed `/events/create/`. | Redirected to login. | ![screenshot](docs/testing/defensive_programming/logout-access.gif) |
 | URL Brute Force | Users should not access admin or restricted pages via URL. | Tried navigating to `/admin/` as standard user. | Access denied as expected. | ![screenshot](docs/testing/defensive_programming/brute-force-admin.gif) |
+| Contact Form | All users can access the contact form. | Tried to access `/contact/` as a guest user. | Contact form opened as expected. | ![screenshot](docs/testing/defensive_programming/contact-guest.gif) |
+|  | Valid contact form submissions should save successfully. | Created a contact message with valid input fields. | Contact message was successfully sent and can be seen in admin panel. | ![screenshot](docs/testing/defensive_programming/contact-valid.gif) |
+|  | Empty fields should be rejected. | Submitted form with empty fields. | Validation errors displayed. | ![screenshot](docs/testing/defensive_programming/contact-empty.gif) |
+|  | Character fields (name, subject) should enforce maximum length. | Pasted excessively long string (e.g. 500+ chars) in character fields. | Trimmed input. | ![screenshot](docs/testing/defensive_programming/contact-length.gif) |
+|  | E-Mail field should only accept valid E-Mail addresses. | Pasted invalid address. | Validation prevented submission, validation error displayed. | ![screenshot](docs/testing/defensive_programming/contact-email.gif) |
 | 404 Error Page | Invalid URLs should show custom 404 page. | Navigated to `/nonexistent`. | Custom 404 page displayed. | ![screenshot](docs/testing/defensive_programming/404.gif) |
 
 ## User Story Testing
