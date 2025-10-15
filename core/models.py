@@ -1,9 +1,23 @@
+"""
+Models for the core app.
+
+Includes:
+- ContactMessage: Represents a message submitted via the contact form,
+  including sender information, message content, and read status.
+"""
+
 from django.db import models
 
 
 class ContactMessage(models.Model):
     """
-    Stores a single contact message
+    Represents a single message submitted through the contact form.
+
+    Stores basic contact details such as the sender's name and email,
+    as well as the subject and body of the message itself. Messages can be
+    marked as read in the admin interface to assist with inbox management.
+
+    This model is created via :view:`contact_view`.
     """
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -13,4 +27,5 @@ class ContactMessage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        """Return a readable label for the event."""
         return f"{self.name} - {self.subject}"

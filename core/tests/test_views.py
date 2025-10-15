@@ -1,3 +1,7 @@
+"""
+Tests for the core app views.
+"""
+
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.messages import get_messages

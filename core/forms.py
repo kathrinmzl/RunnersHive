@@ -1,10 +1,17 @@
+"""
+Forms for the core app.
+
+Includes:
+- ContactForm: Model form used to submit messages via the contact page.
+"""
+
 from django import forms
 from .models import ContactMessage
 
 
 class ContactForm(forms.ModelForm):
     """
-    Form class for users to send a contact message
+    Form used to collect and submit a contact message.
     """
     class Meta:
         model = ContactMessage
