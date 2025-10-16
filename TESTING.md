@@ -169,7 +169,7 @@ Defensive programming was manually tested with the user acceptance criteria belo
 
 ## User Story Testing
 
-I've tested the must-have and should-have user stories to ensure they are correctly implemented, and all tests passed successfully.
+I've tested all implemented **[user stories](#user-stories)** to ensure they are correctly implemented, and all tests passed successfully.
 
 | Nr | Target | Expectation | Outcome | Screenshot | Test Result |
 | --- | --- | --- | --- | --- | --- |
@@ -189,6 +189,7 @@ I've tested the must-have and should-have user stories to ensure they are correc
 | 4.1 | As a new user | I can register for an account | so that I can add and manage my own events. | ![screenshot](docs/features/register.png)| Pass |
 | 4.2 | As a user | I can log in and log out | so that I can access my profile and event management. | Login: ![screenshot](docs/features/login.png)  Logout: ![screenshot](docs/features/logout.png)| Pass |
 | 4.3 | As a visitor | I can use clear and simple navigation | so that I can find events, login, or register. | ![navbar-logged-in-tablet-desktop](docs/features/navbar-not-logged-in-tablet-desktop.png) | Pass |
+| 5.2 | As a visitor | I can contact the creator of the page | so that I can submit ideas for website improvements or ask further questions. | ![screenshot](docs/features/contact-form.png) | Pass |
 
 ## Automated Testing
 
@@ -201,13 +202,13 @@ I have conducted a series of automated tests on my application.
 
 I have used Django's built-in unit testing framework to test the application functionality. 
 
-I created unit tests for the events app views which cover the applications main functionalities. All tests passed successfully:
+I created unit tests for the "events" and "core" app views which cover the applications main functionalities. All tests passed successfully:
 
 ![Test Results Screenshot](docs/testing/unit_tests_py/test-results.png)
 
-In order to run the tests, I ran the following command in the terminal each time:
+In order to run the tests, I ran the following command in the terminal:
 
-- `python3 manage.py test events`
+- `python3 manage.py test`
 
 To create the coverage report, I would then run the following commands:
 
