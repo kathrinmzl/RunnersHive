@@ -75,17 +75,23 @@
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == events_url %}active{% endif %}" href="{% url 'events' %}">Events</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == contact_url %}active{% endif %}" href="{% url 'contact' %}">Contact Us</a>
-                        </li>
 
-                        <!-- User Authentication Links -->
+                        <!-- Profile -->
                         {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link {% if request.path == profile_url %}active{% endif %}" href="{% url 'profile' %}">
-                                    My Events | {{ user }}
+                                    My Events 
                                 </a>
                             </li>
+                        {% endif %}
+
+                        <!-- Contact -->
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == contact_url %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
+                        </li>
+
+                        <!-- Login/Logout -->
+                        {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                             </li>
