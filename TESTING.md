@@ -165,7 +165,8 @@ Defensive programming was manually tested with the user acceptance criteria belo
 |  | Valid contact form submissions should save successfully. | Created a contact message with valid input fields. | Contact message was successfully sent and can be seen in admin panel. | ![screenshot](docs/testing/defensive_programming/contact-valid.gif) |
 |  | Empty fields should be rejected. | Submitted form with empty fields. | Validation errors displayed. | ![screenshot](docs/testing/defensive_programming/contact-empty.gif) |
 |  | Character fields (name, subject) should enforce maximum length. | Pasted excessively long string (e.g. 500+ chars) in character fields. | Trimmed input. | ![screenshot](docs/testing/defensive_programming/contact-length.gif) |
-|  | E-Mail field should only accept valid E-Mail addresses. | Pasted invalid address. | Validation prevented submission, validation error displayed. | ![screenshot](docs/testing/defensive_programming/contact-email.gif) |
+|  | Email field should only accept valid email addresses. | Pasted invalid address. | Validation prevented submission, validation error displayed. | ![screenshot](docs/testing/defensive_programming/contact-email.gif) |
+|  | For a logged-in user that signed up providing an email address the contact form is prefilled with the email address. | Submit a contact message as a user with a connected email address. | Email field is prefilled as expected. | ![screenshot](docs/testing/defensive_programming/contact-email-prefilled.gif) |
 | 404 Error Page | Invalid URLs should show custom 404 page. | Navigated to `/nonexistent`. | Custom 404 page displayed. | ![screenshot](docs/testing/defensive_programming/404.gif) |
 
 ## User Story Testing
