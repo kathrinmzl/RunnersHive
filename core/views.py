@@ -17,7 +17,9 @@ def contact_view(request):
     Handles both GET and POST requests:
 
     - **GET request:**
-      Renders an empty `ContactForm` for the user to fill out.
+      Renders an empty `ContactForm` for the user to fill out. If the user is
+      logged in and an email address is connected to their account,
+      the email field is prefilled with the users email address.
 
     - **POST request:**
       Validates and saves the submitted message as a `ContactMessage`.
@@ -37,7 +39,10 @@ def contact_view(request):
     if request.method == "POST":
         contact_form = ContactForm(request.POST)
         if contact_form.is_valid():
-            contact_form.save()
+            contact_message = contact_form.save(commit=False)
+            if request.user.is_authenticated:
+                contact_message.user = request.user
+            contact_message.save()
             messages.success(request, "Thank you! Your message has been sent.")
             return redirect("home")  # Redirect to homepage after submission
         else:
@@ -46,6 +51,12 @@ def contact_view(request):
                 "Your message could not be sent. Please check your input."
             )
     else:
-        contact_form = ContactForm()
+        # Prefill email if user is authenticated and email address is available
+        if request.user.is_authenticated:
+            contact_form = ContactForm(initial={
+                "email": request.user.email
+            })
+        else:
+            contact_form = ContactForm()
 
     return render(request, "core/contact.html", {"contact_form": contact_form})

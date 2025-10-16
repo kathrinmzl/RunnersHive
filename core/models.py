@@ -7,6 +7,7 @@ Includes:
 """
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class ContactMessage(models.Model):
@@ -17,8 +18,19 @@ class ContactMessage(models.Model):
     as well as the subject and body of the message itself. Messages can be
     marked as read in the admin interface to assist with inbox management.
 
+    If submitted by an authenticated user, their account is stored in the
+    optional `user` field.
+
     This model is created via :view:`contact_view`.
     """
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="contact_messages"
+    )
+
     name = models.CharField(max_length=100)
     email = models.EmailField()
     subject = models.CharField(max_length=200)
