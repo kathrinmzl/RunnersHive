@@ -90,7 +90,7 @@ I've only documented the 404 error page, as the other error pages use the same l
 | Homepage | ![screenshot](docs/testing/responsiveness/mobile-homepage-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-homepage-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-homepage-resp.png) | Works as expected |
 | Events | ![screenshot](docs/testing/responsiveness/mobile-events-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-events-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-events-resp.png) | Works as expected |
 | Event Details | ![screenshot](docs/testing/responsiveness/mobile-event-details-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-event-details-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-event-details-resp.png) | Works as expected |
-| Contact Us | ![screenshot](docs/testing/responsiveness/mobile-contact-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-contact-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-contact-resp.png) | Works as expected |
+| Contact | ![screenshot](docs/testing/responsiveness/mobile-contact-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-contact-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-contact-resp.png) | Works as expected |
 | Profile | ![screenshot](docs/testing/responsiveness/mobile-profile-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-profile-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-profile-resp.png) | Works as expected |
 | Create Event | ![screenshot](docs/testing/responsiveness/mobile-create-event-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-create-event-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-create-event-resp.png) | Works as expected |
 | Login | ![screenshot](docs/testing/responsiveness/mobile-login-resp.png) | ![screenshot](docs/testing/responsiveness/tablet-login-resp.png) | ![screenshot](docs/testing/responsiveness/desktop-login-resp.png) | Works as expected |
@@ -109,6 +109,7 @@ I've only documented the 404 error page, as the other error pages use the same l
 | Homepage | ![screenshot](docs/testing/responsiveness/desktop-homepage-resp.png) | ![screenshot](docs/testing/browser/edge-homepage-browser.png) | ![screenshot](docs/testing/browser/safari-homepage-browser.png) | Works as expected |
 | Events | ![screenshot](docs/testing/responsiveness/desktop-events-resp.png) | ![screenshot](docs/testing/browser/edge-events-browser.png) | ![screenshot](docs/testing/browser/safari-events-browser.png) | Works as expected |
 | Event Details | ![screenshot](docs/testing/responsiveness/desktop-event-details-resp.png) | ![screenshot](docs/testing/browser/edge-event-details-browser.png) | ![screenshot](docs/testing/browser/safari-event-details-browser.png) | Works as expected |
+| Contact | ![screenshot](docs/testing/responsiveness/desktop-contact-resp.png) | ![screenshot](docs/testing/browser/edge-contact-browser.png) | ![screenshot](docs/testing/browser/safari-contact-browser.png) | Works as expected |
 | Profile | ![screenshot](docs/testing/responsiveness/desktop-profile-resp.png) | ![screenshot](docs/testing/browser/edge-profile-browser.png) | ![screenshot](docs/testing/browser/safari-profile-browser.png) | Works as expected |
 | Create Event | ![screenshot](docs/testing/responsiveness/desktop-create-event-resp.png) | ![screenshot](docs/testing/browser/edge-create-event-browser.png) | ![screenshot](docs/testing/browser/safari-create-event-browser.png) | Works as expected |
 | Login | ![screenshot](docs/testing/responsiveness/desktop-login-resp.png) | ![screenshot](docs/testing/browser/edge-login-browser.png) | ![screenshot](docs/testing/browser/safari-login-browser.png) | Works as expected |
@@ -127,7 +128,7 @@ I've only documented the 404 error page, as the other error pages use the same l
 | Homepage | ![screenshot](docs/testing/lighthouse/mobile-homepage.png) | ![screenshot](docs/testing/lighthouse/desktop-homepage.png) |
 | Events | ![screenshot](docs/testing/lighthouse/mobile-events.png) | ![screenshot](docs/testing/lighthouse/desktop-events.png) |
 | Event Details | ![screenshot](docs/testing/lighthouse/mobile-event-details.png) | ![screenshot](docs/testing/lighthouse/desktop-event-details.png) |
-| Contact Us | ![screenshot](docs/testing/lighthouse/mobile-contact.png) | ![screenshot](docs/testing/lighthouse/desktop-contact.png) |
+| Contact | ![screenshot](docs/testing/lighthouse/mobile-contact.png) | ![screenshot](docs/testing/lighthouse/desktop-contact.png) |
 | Profile | ![screenshot](docs/testing/lighthouse/mobile-profile.png) | ![screenshot](docs/testing/lighthouse/desktop-profile.png) |
 | Create Event | ![screenshot](docs/testing/lighthouse/mobile-create-event.png) | ![screenshot](docs/testing/lighthouse/desktop-create-event.png) |
 | Login | ![screenshot](docs/testing/lighthouse/mobile-login.png) | ![screenshot](docs/testing/lighthouse/desktop-login.png) |
